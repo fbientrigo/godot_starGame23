@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://m86e3pbea3kp"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_el75i"]
+animations = [{
+"frames": [],
+"loop": true,
+"name": &"damage_state",
+"speed": 5.0
+}]
+
+[node name="Spaceship_1" type="Node2D"]
+
+[node name="Sprite_BaseShip" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_el75i")
+animation = &"damage_state"
