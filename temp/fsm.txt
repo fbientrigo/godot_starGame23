@@ -1,0 +1,81 @@
+extends Node2D
+
+# Define the engine states
+enum EngineStates {
+	IDLE,
+	BASE_THRUST,
+	SUPER_THRUST
+}
+
+@export var spaceship_1_path: NodePath
+@export var idle_anim_path: NodePath
+@export var base_thrust_anim_path: NodePath
+@export var super_thrust_anim_path: NodePath
+
+var idle_anim = get_node(idle_anim_path)
+var base_thrust_anim = get_node(base_thrust_anim_path)
+var super_thrust_anim = get_node(super_thrust_anim_path)
+
+
+# Define the speed for each engine state
+var speed_map = {
+	EngineStates.IDLE: 50,
+	EngineStates.BASE_THRUST: 100,
+	EngineStates.SUPER_THRUST: 200
+}
+
+# Initialize the state machine with the idle state
+var state = EngineStates.IDLE
+
+func _ready():
+	# Connect to the input event
+	InputMap.add_action("engine_state", "u")
+	InputMap.add_action("engine_state", "i")
+	InputMap.add_action("engine_state", "o")
+	InputMap.action_add_event("engine_state", self, "_on_engine_state")
+
+	# Set the initial animation
+	_set_animation_state(state)
+
+	# Update the speed of the spaceship_1 character controller
+	_set_speed()
+
+func _on_engine_state(action, state):
+	# Change the state based on the input
+	if action == "engine_state":
+		if state == InputEvent.PRESSED:
+			if self.state == EngineStates.IDLE:
+				self.state = EngineStates.BASE_THRUST
+			elif self.state == EngineStates.BASE_THRUST:
+				self.state = EngineStates.SUPER_THRUST
+			elif self.state == EngineStates.SUPER_THRUST:
+				self.state = EngineStates.IDLE
+
+			# Update the animation state
+			_set_animation_state(self.state)
+
+			# Update the speed of the spaceship_1 character controller
+			_set_speed()
+
+func _set_animation_state(state):
+	# Set the animation state based on the current engine state
+	match state:
+		EngineStates.IDLE:
+			idle_anim.play()
+			base_thrust_anim.stop()
+			super_thrust_anim.stop()
+		EngineStates.BASE_THRUST:
+			idle_anim_path.stop()
+			base_thrust_anim_path.play()
+			super_thrust_anim_path.stop()
+		EngineStates.SUPER_THRUST:
+			idle_anim_path.stop()
+			base_thrust_anim_path.stop()
+			super_thrust_anim_path.play()
+
+func _set_speed():
+	# Update the speed of the spaceship_1 character controller based on the current engine state
+	if spaceship_1_path:
+		var spaceship_1 = get_node(spaceship_1_path)
+		spaceship_1.set_linear_velocity(spaceship_1.linear_velocity.normalized() * speed_map[state])
+
