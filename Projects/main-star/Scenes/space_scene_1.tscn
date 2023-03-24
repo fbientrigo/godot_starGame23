@@ -1,8 +1,25 @@
-[gd_scene load_steps=2 format=3 uid="uid://dlr7jk2d4hgov"]
+[gd_scene load_steps=7 format=3 uid="uid://dlr7jk2d4hgov"]
 
 [ext_resource type="PackedScene" uid="uid://m86e3pbea3kp" path="res://Characters/spaceship_1.tscn" id="1_6e418"]
+[ext_resource type="Texture2D" uid="uid://c2sux6idd8jfb" path="res://Assets/Tilemaps/tm_pink_nebulae.png" id="2_dqhtp"]
+[ext_resource type="Texture2D" uid="uid://cbxd3nlhsad37" path="res://Assets/Tilemaps/tm_blue_nebulae_dust.png" id="3_50hg0"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0ar4y"]
+texture = ExtResource("2_dqhtp")
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_4omy3"]
+texture = ExtResource("3_50hg0")
+texture_region_size = Vector2i(2000, 2000)
+
+[sub_resource type="TileSet" id="TileSet_p131o"]
+sources/1 = SubResource("TileSetAtlasSource_0ar4y")
+sources/2 = SubResource("TileSetAtlasSource_4omy3")
 
 [node name="Space_Scene_1" type="Node2D"]
 
 [node name="spaceship_1" parent="." instance=ExtResource("1_6e418")]
 position = Vector2(60, 35)
+
+[node name="TileMap" type="TileMap" parent="."]
+tile_set = SubResource("TileSet_p131o")
+format = 2
