@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://dlr7jk2d4hgov"]
+[gd_scene load_steps=8 format=3 uid="uid://dlr7jk2d4hgov"]
 
 [ext_resource type="PackedScene" uid="uid://m86e3pbea3kp" path="res://Characters/spaceship_1.tscn" id="1_6e418"]
 [ext_resource type="Texture2D" uid="uid://c2sux6idd8jfb" path="res://Assets/Tilemaps/tm_pink_nebulae.png" id="2_dqhtp"]
 [ext_resource type="Texture2D" uid="uid://cbxd3nlhsad37" path="res://Assets/Tilemaps/tm_blue_nebulae_dust.png" id="3_50hg0"]
+[ext_resource type="PackedScene" uid="uid://cqo7eogrw1xs5" path="res://Characters/star_turret.tscn" id="4_o7us1"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0ar4y"]
 texture = ExtResource("2_dqhtp")
@@ -20,6 +21,26 @@ sources/2 = SubResource("TileSetAtlasSource_4omy3")
 [node name="spaceship_1" parent="." instance=ExtResource("1_6e418")]
 position = Vector2(60, 35)
 
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="spaceship_1"]
+remote_path = NodePath("../../Camera2D")
+
 [node name="TileMap" type="TileMap" parent="."]
+visible = false
 tile_set = SubResource("TileSet_p131o")
 format = 2
+
+[node name="TmBlueNebulaeDust" type="Sprite2D" parent="."]
+z_index = -30
+position = Vector2(107, 271)
+texture = ExtResource("3_50hg0")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(60, 35)
+zoom = Vector2(1.5, 1.5)
+position_smoothing_enabled = true
+
+[node name="StarTurret" parent="." instance=ExtResource("4_o7us1")]
+position = Vector2(314, 134)
+
+[node name="StarTurret2" parent="." instance=ExtResource("4_o7us1")]
+position = Vector2(-61, 335)

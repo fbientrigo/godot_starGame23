@@ -216,7 +216,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"machine_gun",
-"speed": 5.0
+"speed": 20.0
 }]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_eudgf"]
@@ -241,6 +241,7 @@ animations = [{
 
 [node name="spaceship_1" type="CharacterBody2D"]
 script = ExtResource("1_mae57")
+animation_damage_sprites = NodePath("Base/damage_sprites")
 
 [node name="Equipment" type="Node2D" parent="."]
 script = ExtResource("1_fnhup")
@@ -253,7 +254,9 @@ animation = &"base_engine_idle"
 
 [node name="weapons_sprites" type="AnimatedSprite2D" parent="Equipment"]
 sprite_frames = SubResource("SpriteFrames_p24ij")
-animation = &"machine_gun"
+animation = &"BFG"
+frame = 3
+frame_progress = 0.656942
 
 [node name="Base" type="Node2D" parent="."]
 
@@ -266,3 +269,5 @@ visible = false
 position = Vector2(-1.84774e-06, -1.29007)
 scale = Vector2(1.1875, 1.10662)
 polygon = PackedVector2Array(0, -10, 10, 7, -10, 7)
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]

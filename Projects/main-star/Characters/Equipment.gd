@@ -28,11 +28,6 @@ func change_engine_state():
 		var old_state = current_engine_state
 		current_engine_state = EngineStates.BASE_THRUST
 		engine_state_changed.emit()
-		
-
-
-
-
 
 
 
@@ -43,9 +38,4 @@ func _process(_delta):
 		engine_anim.play("base_engine_idle")
 	else:
 		engine_anim.stop()
-
-
-
-
-
 
