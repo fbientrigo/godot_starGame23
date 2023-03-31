@@ -250,7 +250,8 @@ engine_anim_path = NodePath("engine_sprites")
 
 [node name="engine_sprites" type="AnimatedSprite2D" parent="Equipment"]
 sprite_frames = SubResource("SpriteFrames_mdhpf")
-animation = &"base_engine_idle"
+animation = &"base_engine_powering"
+frame_progress = 0.910143
 
 [node name="weapons_sprites" type="AnimatedSprite2D" parent="Equipment"]
 sprite_frames = SubResource("SpriteFrames_p24ij")

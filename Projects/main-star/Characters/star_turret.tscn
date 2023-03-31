@@ -1,8 +1,10 @@
-[gd_scene load_steps=165 format=3 uid="uid://cqo7eogrw1xs5"]
+[gd_scene load_steps=176 format=3 uid="uid://cqo7eogrw1xs5"]
 
 [ext_resource type="Script" path="res://Characters/star_turret.gd" id="1_5kl5w"]
 [ext_resource type="Texture2D" uid="uid://b8qeuhsvs4hkq" path="res://Assets/Stars/bh_blue.png" id="1_06nr5"]
 [ext_resource type="Texture2D" uid="uid://bpgq6gl181jml" path="res://Assets/Stars/s_morado_red_100.png" id="2_148l2"]
+[ext_resource type="Texture2D" uid="uid://cmivjwnddubbw" path="res://Assets/Ships/Main Ship - Weapons/Main Ship - Weapons - Auto Cannon.png" id="4_d8qcl"]
+[ext_resource type="Script" path="res://Characters/satelite_arma.gd" id="4_fq4uw"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_trb74"]
 atlas = ExtResource("1_06nr5")
@@ -1137,6 +1139,66 @@ animations = [{
 "speed": 20.0
 }]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_b12us"]
+atlas = ExtResource("4_d8qcl")
+region = Rect2(0, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lov6m"]
+atlas = ExtResource("4_d8qcl")
+region = Rect2(48, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4ie7m"]
+atlas = ExtResource("4_d8qcl")
+region = Rect2(96, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_edwxj"]
+atlas = ExtResource("4_d8qcl")
+region = Rect2(144, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_icpjy"]
+atlas = ExtResource("4_d8qcl")
+region = Rect2(192, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ic7iw"]
+atlas = ExtResource("4_d8qcl")
+region = Rect2(240, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yab2j"]
+atlas = ExtResource("4_d8qcl")
+region = Rect2(288, 0, 48, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_bw5hb"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b12us")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lov6m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4ie7m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_edwxj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_icpjy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ic7iw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yab2j")
+}],
+"loop": true,
+"name": &"pistolas",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_p4oku"]
+radius = 49.0102
+
 [node name="StarTurret" type="Node2D"]
 script = ExtResource("1_5kl5w")
 
@@ -1144,3 +1206,17 @@ script = ExtResource("1_5kl5w")
 sprite_frames = SubResource("SpriteFrames_b16im")
 animation = &"estrella_roja"
 frame_progress = 0.66583
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+
+[node name="Equipment" type="Node2D" parent="CharacterBody2D"]
+script = ExtResource("4_fq4uw")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CharacterBody2D/Equipment"]
+position = Vector2(0, -66)
+sprite_frames = SubResource("SpriteFrames_bw5hb")
+animation = &"pistolas"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+visible = false
+shape = SubResource("CircleShape2D_p4oku")
