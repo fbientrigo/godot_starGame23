@@ -240,6 +240,9 @@ animations = [{
 }]
 
 [node name="spaceship_1" type="CharacterBody2D"]
+rotation = 3.14159
+collision_layer = 2
+collision_mask = 2
 script = ExtResource("1_mae57")
 animation_damage_sprites = NodePath("Base/damage_sprites")
 
@@ -247,6 +250,7 @@ animation_damage_sprites = NodePath("Base/damage_sprites")
 script = ExtResource("1_fnhup")
 spaceship_1_path = NodePath("..")
 engine_anim_path = NodePath("engine_sprites")
+cooldown_weapon_time = 0.25
 
 [node name="engine_sprites" type="AnimatedSprite2D" parent="Equipment"]
 sprite_frames = SubResource("SpriteFrames_mdhpf")
@@ -258,6 +262,10 @@ sprite_frames = SubResource("SpriteFrames_p24ij")
 animation = &"BFG"
 frame = 3
 frame_progress = 0.656942
+
+[node name="cooldown_weapon" type="Timer" parent="Equipment"]
+wait_time = 2.0
+one_shot = true
 
 [node name="Base" type="Node2D" parent="."]
 
@@ -272,3 +280,6 @@ scale = Vector2(1.1875, 1.10662)
 polygon = PackedVector2Array(0, -10, 10, 7, -10, 7)
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+
+[connection signal="shoot" from="Equipment" to="." method="_on_equipment_shoot"]
+[connection signal="timeout" from="Equipment/cooldown_weapon" to="Equipment" method="_on_cooldown_weapon_timeout"]

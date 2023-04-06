@@ -33,7 +33,7 @@ func get_input_velocity_and_rotation():
 	la define con el mouse
 	"""
 	# rotar controlando el mouse
-	look_at(get_global_mouse_position())
+	rotation = get_global_mouse_position().angle_to_point(position) - PI/2
 	
 	# direccion de rotacion con teclas
 	# rotation_direction = Input.get_axis("a", "d")
@@ -41,10 +41,16 @@ func get_input_velocity_and_rotation():
 	# velocidad controlada con W puede usarse Input.get_axis("s", "w")
 	velocity = transform.y * (-1) * Input.get_action_strength("w") * velocidad_nave
 
+
 func _physics_process(delta):
 	get_input_actions()
 	get_input_velocity_and_rotation() 
 	# rotation += rotation_direction * rotation_speed * delta
 	move_and_slide()
 
+	
+signal shoot_pass_from_equipment(bullet, direction, location)
+
+func _on_equipment_shoot(bullet_, direction_, location_):
+	emit_signal("shoot_pass_from_equipment", bullet_, direction_, location_)
 	

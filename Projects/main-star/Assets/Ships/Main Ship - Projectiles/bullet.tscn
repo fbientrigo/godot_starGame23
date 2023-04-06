@@ -1,0 +1,65 @@
+[gd_scene load_steps=9 format=3 uid="uid://jq2scu5kixde"]
+
+[ext_resource type="Script" path="res://Assets/Ships/Main Ship - Projectiles/bullet.gd" id="1_njeh7"]
+[ext_resource type="Texture2D" uid="uid://2e8if06kb804" path="res://Assets/Ships/Main Ship - Projectiles/Main ship weapon - Projectile - Auto cannon bullet.png" id="3_ek21s"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_q6hfe"]
+size = Vector2(8, 9)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q5s1x"]
+atlas = ExtResource("3_ek21s")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qj53f"]
+atlas = ExtResource("3_ek21s")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_30mgq"]
+atlas = ExtResource("3_ek21s")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dl6cc"]
+atlas = ExtResource("3_ek21s")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_jy77s"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q5s1x")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qj53f")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_30mgq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dl6cc")
+}],
+"loop": true,
+"name": &"auto_cannon",
+"speed": 15.0
+}]
+
+[node name="bullet_root" type="Node2D"]
+z_index = -15
+script = ExtResource("1_njeh7")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, -1.5)
+shape = SubResource("RectangleShape2D_q6hfe")
+
+[node name="Animation" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_jy77s")
+animation = &"auto_cannon"
+frame_progress = 0.272705
+
+[node name="timer_destruction" type="Timer" parent="."]
+wait_time = 9.0
+autostart = true
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="timeout" from="timer_destruction" to="." method="_on_timer_timeout"]
