@@ -1,4 +1,4 @@
-extends CharacterBody2D
+extends RigidBody2D
 
 @export var velocidad_nave : float = 300
 
@@ -10,47 +10,54 @@ func _ready():
 
 func _on_EngineState_Changed(oldstate, newstate):
 	# controla el cambio de señales para dar aviso al padre
-	print(oldstate)
-	print(newstate)
+	# print(oldstate)
+	# print(newstate)
+	pass
 	
 
-@export var rotation_speed = 6
 
-var rotation_direction = 0
 
 func get_input_actions():
 	if Input.is_action_pressed("click"):
 		pass
 		# llamar funcion de disparo
-		
-
-#		_animated_sprite.frame += 1
 
 
-func get_input_velocity_and_rotation():
-	"""
-	obtiene el input de W, S y la rotacion
-	la define con el mouse
-	"""
-	# rotar controlando el mouse
-	rotation = get_global_mouse_position().angle_to_point(position) - PI/2
+
+# Seccion de fuerzas =======================================
+@export var torque_strength: float
+@export var propulsor_strength: float
+func _integrate_forces(state):
 	
-	# direccion de rotacion con teclas
-	# rotation_direction = Input.get_axis("a", "d")
+	# sigue la posicion del mouse, y calcula el torque
+	var mouse_position = get_global_mouse_position()
+	var difference = mouse_position - global_position
+	var angle_to_look = difference.angle_to(transform.y)
+	if abs(abs(angle_to_look) - PI) > 0.1:
+		# Calculate the torque to apply
+		var torque = angle_to_look * torque_strength
+		# Apply the torque to the spaceship
+		apply_torque(torque)
+	apply_force( - transform.y  * Input.get_action_strength("w") * propulsor_strength)
 	
-	# velocidad controlada con W puede usarse Input.get_axis("s", "w")
-	velocity = transform.y * (-1) * Input.get_action_strength("w") * velocidad_nave
+	
 
 
-func _physics_process(delta):
-	get_input_actions()
-	get_input_velocity_and_rotation() 
+#func _physics_process(delta):
+#	pass
+	# get_input_actions()
+	# get_input_velocity_and_rotation() 
 	# rotation += rotation_direction * rotation_speed * delta
-	move_and_slide()
+	# move_and_slide()
 
 	
 signal shoot_pass_from_equipment(bullet, direction, location)
 
+
+
+
+
 func _on_equipment_shoot(bullet_, direction_, location_):
 	emit_signal("shoot_pass_from_equipment", bullet_, direction_, location_)
-	
+
+

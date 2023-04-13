@@ -5,8 +5,6 @@ extends Node2D
 @onready var node_animation = $Animation
 var bullet_speed : float = 400
 
-var DESTRUCTION_TIME : float =  12
-
 var velocity = Vector2(0, -bullet_speed)
 
 #
@@ -17,14 +15,18 @@ func _physics_process(delta):
 	# no hay friccion
 	position += velocity * delta
 	
+	
+func bullet_destruction():
+	queue_free()
 
 
 func _on_timer_timeout():
-	queue_free()
-
+	print("el timer acabó, destruyendo bala:")
+	bullet_destruction()
 
 
 func _on_area_2d_body_entered(body):
-	print("contacto con un body")
-	print(body)
-	queue_free()
+	bullet_destruction()
+
+
+

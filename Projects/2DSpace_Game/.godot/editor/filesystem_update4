@@ -1,0 +1,5 @@
+res://default_env.tres
+res://UI/MainMenu.tscn
+res://VFX/Explosion/explosion_gradient_2.tres
+res://VFX/Explosion/scraps_gradient.tres
+res://Main/Game.tscn

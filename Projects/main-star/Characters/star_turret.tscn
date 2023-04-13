@@ -1136,7 +1136,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"estrella_roja",
-"speed": 20.0
+"speed": 15.0
 }]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_b12us"]

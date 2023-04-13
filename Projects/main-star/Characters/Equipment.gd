@@ -45,20 +45,16 @@ func change_engine_state():
 @export var cooldown_weapon_time : float
 
 func _process(_delta):
-	print(cooldown_weapon_timer.time_left)
-
 	if Input.is_action_pressed("w"):
 		engine_anim.play("base_engine_idle")
 	else:
 		engine_anim.stop()
-
 
 	if Input.is_action_pressed("click") and cooldown_weapon_timer.is_stopped():
 		cooldown_weapon_timer.start(cooldown_weapon_time)
 		emit_signal("shoot", bullet,  global_rotation, global_position)
 		
 	
-
 
 
 func _on_cooldown_weapon_timeout():

@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=3 uid="uid://m86e3pbea3kp"]
+[gd_scene load_steps=47 format=3 uid="uid://m86e3pbea3kp"]
 
 [ext_resource type="Texture2D" uid="uid://duwc830a5g8hq" path="res://Assets/Ships/Main Ship - Engine Effects/Main Ship - Engines - Base Engine - Idle.png" id="1_bnf45"]
 [ext_resource type="Script" path="res://Characters/Equipment.gd" id="1_fnhup"]
@@ -10,6 +10,8 @@
 [ext_resource type="Texture2D" uid="uid://ckfq0rny1s0ai" path="res://Assets/Ships/Main Ship - Bases/Main Ship - Base - Slight damage.png" id="6_iqelq"]
 [ext_resource type="Texture2D" uid="uid://dcg5520428m6v" path="res://Assets/Ships/Main Ship - Bases/Main Ship - Base - Damaged.png" id="7_5o1eb"]
 [ext_resource type="Texture2D" uid="uid://0xo55d1si0r7" path="res://Assets/Ships/Main Ship - Bases/Main Ship - Base - Very damaged.png" id="8_msb8d"]
+[ext_resource type="Script" path="res://Characters/Crosshair_onShip.gd" id="11_nynui"]
+[ext_resource type="Texture2D" uid="uid://bhpk0uq510jxj" path="res://Assets/UI/Crosshair/Crosshairs_Outline_Spritesheet.png" id="12_d6xbh"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vflbb"]
 atlas = ExtResource("1_bnf45")
@@ -239,12 +241,60 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="spaceship_1" type="CharacterBody2D"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_lvq76"]
+atlas = ExtResource("12_d6xbh")
+region = Rect2(68, 102, 17, 17)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_262ed"]
+atlas = ExtResource("12_d6xbh")
+region = Rect2(51, 102, 17, 17)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_phlso"]
+atlas = ExtResource("12_d6xbh")
+region = Rect2(34, 102, 17, 17)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gt6yn"]
+atlas = ExtResource("12_d6xbh")
+region = Rect2(17, 102, 17, 17)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_qrv2o"]
+animations = [{
+"frames": [],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lvq76")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_262ed")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_phlso")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gt6yn")
+}],
+"loop": true,
+"name": &"shooting",
+"speed": 9.0
+}]
+
+[node name="spaceship_1" type="RigidBody2D"]
 rotation = 3.14159
 collision_layer = 2
 collision_mask = 2
+inertia = 1.45
+gravity_scale = 0.0
+can_sleep = false
+linear_damp = 1.5
+angular_damp = 11.0
 script = ExtResource("1_mae57")
 animation_damage_sprites = NodePath("Base/damage_sprites")
+torque_strength = 35.0
+propulsor_strength = 350.0
 
 [node name="Equipment" type="Node2D" parent="."]
 script = ExtResource("1_fnhup")
@@ -280,6 +330,19 @@ scale = Vector2(1.1875, 1.10662)
 polygon = PackedVector2Array(0, -10, 10, 7, -10, 7)
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+attenuation = 0.90125
+
+[node name="Crosshair_onShip" type="Node2D" parent="." node_paths=PackedStringArray("animated_sprite")]
+position = Vector2(0, -30)
+script = ExtResource("11_nynui")
+player_spaceship = NodePath("..")
+animated_sprite = NodePath("AnimatedSprite2D")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Crosshair_onShip"]
+sprite_frames = SubResource("SpriteFrames_qrv2o")
+animation = &"shooting"
+frame_progress = 0.667211
 
 [connection signal="shoot" from="Equipment" to="." method="_on_equipment_shoot"]
+[connection signal="shoot" from="Equipment" to="Crosshair_onShip" method="_on_equipment_shoot"]
 [connection signal="timeout" from="Equipment/cooldown_weapon" to="Equipment" method="_on_cooldown_weapon_timeout"]
