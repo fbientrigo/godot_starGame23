@@ -1,5 +1,5 @@
 2a60927148abd1d33b818b535e306557
-::res://::1681266260
+::res://::1688228715
 default_bus_layout.tres::AudioBusLayout::-1::1681182706::0::1::::<><>::
 default_env.tres::Environment::4886248783828767544::1681182985::0::1::::<><>::
 icon.png::CompressedTexture2D::6414913196071040262::1603486683::1681182899::1::::<><>::
@@ -43,8 +43,8 @@ GSAISeparation.gd::GDScript::-1::1681182707::0::1::::GSAISeparation<>GSAIGroupBe
 GSAIInfiniteProximity.gd::GDScript::-1::1681182707::0::1::::GSAIInfiniteProximity<>GSAIProximity<>::
 GSAIProximity.gd::GDScript::-1::1681182707::0::1::::GSAIProximity<>RefCounted<>::
 GSAIRadiusProximity.gd::GDScript::-1::1681182707::0::1::::GSAIRadiusProximity<>GSAIProximity<>::
-::res://Libraries/StateMachine/::1603486683
-State.gd::GDScript::-1::1681182707::0::1::::State<>Node<>::
+::res://Libraries/StateMachine/::1681266849
+State.gd::GDScript::-1::1681266849::0::1::::State<>Node<>::
 StateMachine.gd::GDScript::-1::1681182707::0::1::::StateMachine<>Node<>::
 ::res://Main/::1681182985
 Game.tscn::PackedScene::8977969829676264969::1681182985::0::1::::<><>::res://World/Spawners/AsteroidSpawner.gd<>res://World/Spawners/StationSpawner.gd<>res://Ships/Enemies/Pirate/PirateShip.tscn<>res://World/DockingPoint/Station.tscn<>res://Ships/Player/PlayerShip.tscn<>res://UI/Minimap/MapView.tscn<>res://World/GameInitializer.gd<>res://VFX/BackgroundStars.tscn<>res://UI/Minimap/MapDisplay.tscn<>uid://dai2fgi1t1ke2<>res://World/ShakingCamera.tscn<>res://VFX/Shaders/distorted_view.gdshader<>res://World/GameWorld.gd<>res://World/Spawners/PirateSpawner.gd<>res://UI/Menus/Upgrades/UpgradeMenu.tscn<>res://UI/UI.gd<>res://UI/Menus/QuitMenu.tscn<>res://UI/ScreenFader.tscn<>res://VFX/DistortMaskView.tscn<>res://VFX/PostProcessGameView.gd<>res://UI/HUD/HUD.tscn

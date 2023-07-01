@@ -3,3 +3,9 @@ res://UI/MainMenu.tscn
 res://VFX/Explosion/explosion_gradient_2.tres
 res://VFX/Explosion/scraps_gradient.tres
 res://Main/Game.tscn
+res://VFX/DustEmitter.tscn
+res://Ships/Player/PlayerShip.tscn
+res://UI/MainScreen/MainScreen.tscn
+res://UI/MainMenuTexts.gd
+res://UI/MainMenu.gd
+res://UI/ScreenFader.gd

@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://dlr7jk2d4hgov"]
+[gd_scene load_steps=7 format=3 uid="uid://dlr7jk2d4hgov"]
 
 [ext_resource type="PackedScene" uid="uid://m86e3pbea3kp" path="res://Characters/spaceship_1.tscn" id="1_6e418"]
 [ext_resource type="Texture2D" uid="uid://cbxd3nlhsad37" path="res://Assets/Tilemaps/tm_blue_nebulae_dust.png" id="3_50hg0"]
 [ext_resource type="PackedScene" uid="uid://cqo7eogrw1xs5" path="res://Characters/star_turret.tscn" id="4_o7us1"]
 [ext_resource type="Script" path="res://Scenes/Camera_Controller.gd" id="5_g0qo3"]
+[ext_resource type="PackedScene" uid="uid://cquppndg8tskv" path="res://Characters/Enemies/Enemy.tscn" id="6_l6cjv"]
 [ext_resource type="Script" path="res://Scenes/root_balas.gd" id="6_yhlb2"]
 
 [node name="Space_Scene_1" type="Node2D"]
@@ -41,5 +42,15 @@ update_rotation = false
 
 [node name="root_balas" type="Node2D" parent="."]
 script = ExtResource("6_yhlb2")
+
+[node name="Enemy1" parent="." instance=ExtResource("6_l6cjv")]
+position = Vector2(-423, -145)
+
+[node name="Enemy2" parent="." instance=ExtResource("6_l6cjv")]
+position = Vector2(426, -255)
+
+[node name="Enemy3" parent="." instance=ExtResource("6_l6cjv")]
+position = Vector2(304, 415)
+distancia_vision = 500.0
 
 [connection signal="shoot_pass_from_equipment" from="spaceship_1" to="root_balas" method="_on_spaceship_1_shoot_pass_from_equipment"]

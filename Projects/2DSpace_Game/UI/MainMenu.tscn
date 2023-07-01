@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://cacdelfr4uu2g"]
 
-[ext_resource type="PackedScene" path="res://UI/MainScreen/MainScreen.tscn" id="1"]
+[ext_resource type="PackedScene" uid="uid://cjbr4ps7p7n08" path="res://UI/MainScreen/MainScreen.tscn" id="1"]
 [ext_resource type="PackedScene" path="res://UI/Menus/Sounds/MenuSoundPlayer.tscn" id="2"]
 [ext_resource type="Theme" path="res://UI/theme_main_menu.tres" id="3"]
 [ext_resource type="Texture2D" uid="uid://bkt0tvra3cipm" path="res://UI/MainScreen/gamepads/xbox_a_button.svg" id="4"]
@@ -15,6 +15,8 @@ layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 theme = ExtResource("3")
 script = ExtResource("8")
 
@@ -24,7 +26,9 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 
 [node name="MainScreen" parent="Background" instance=ExtResource("1")]
-anchors_preset = 0
+layout_mode = 1
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="Context" type="Control" parent="."]
 anchors_preset = 0
@@ -91,14 +95,6 @@ repeat = true
 playback/repeat = true
 script = null
 
-[node name="Tween" type="Tween" parent="."]
-_import_path = NodePath("")
-unique_name_in_owner = false
-process_mode = 0
-process_priority = 0
-editor_description = ""
-script = null
-
 [node name="FadeLayer" type="CanvasLayer" parent="."]
 layer = 3
 
@@ -108,3 +104,5 @@ expand_mode = 1
 duration_fade_out = 1.0
 
 [node name="MenuSoundPlayer" parent="." instance=ExtResource("2")]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]

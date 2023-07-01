@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://World/Spawners/StationSpawner.gd" id="2"]
 [ext_resource type="PackedScene" path="res://Ships/Enemies/Pirate/PirateShip.tscn" id="3"]
 [ext_resource type="PackedScene" path="res://World/DockingPoint/Station.tscn" id="4"]
-[ext_resource type="PackedScene" path="res://Ships/Player/PlayerShip.tscn" id="5"]
+[ext_resource type="PackedScene" uid="uid://bmabjyk6lgqb6" path="res://Ships/Player/PlayerShip.tscn" id="5"]
 [ext_resource type="PackedScene" path="res://UI/Minimap/MapView.tscn" id="6"]
 [ext_resource type="Script" path="res://World/GameInitializer.gd" id="7"]
 [ext_resource type="PackedScene" path="res://VFX/BackgroundStars.tscn" id="8"]
@@ -71,6 +71,8 @@ render_target_update_mode = 4
 
 [node name="BlackBackground" parent="MapView/SubViewport/CanvasLayer" index="0"]
 anchors_preset = 15
+grow_horizontal = 2
+grow_vertical = 2
 mouse_filter = 2
 expand_mode = 1
 
@@ -84,6 +86,8 @@ render_target_update_mode = 4
 
 [node name="BlackBackground" parent="DistortMaskView/SubViewport/CanvasLayer" index="0"]
 anchors_preset = 15
+grow_horizontal = 2
+grow_vertical = 2
 mouse_filter = 2
 expand_mode = 1
 
@@ -95,6 +99,8 @@ script = ExtResource("17")
 [node name="HUD" parent="UI" instance=ExtResource("22")]
 layout_mode = 3
 anchors_preset = 15
+grow_horizontal = 2
+grow_vertical = 2
 mouse_filter = 2
 
 [node name="MapDisplay" parent="UI" instance=ExtResource("10")]
@@ -108,6 +114,8 @@ flip_v = true
 visible = false
 layout_mode = 3
 anchors_preset = 15
+grow_horizontal = 2
+grow_vertical = 2
 mouse_filter = 2
 
 [node name="ScreenFader" parent="UI" instance=ExtResource("19")]

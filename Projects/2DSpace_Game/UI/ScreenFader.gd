@@ -9,7 +9,7 @@ signal animation_finished
 
 var is_playing := false
 
-@onready var tween := $Tween
+@onready var tween := get_tree().create_tween()
 
 
 func _ready() -> void:
@@ -18,14 +18,11 @@ func _ready() -> void:
 
 # Animate from the current modulate color until the node is fully transparent.
 func fade_in() -> void:
-	tween.interpolate_property(
+	tween.tween_property(
 		self,
 		"modulate",
-		modulate,
 		Color.TRANSPARENT,
-		duration_fade_in,
-		Tween.TRANS_LINEAR,
-		Tween.EASE_OUT
+		duration_fade_in
 	)
 	show()
 	tween.start()

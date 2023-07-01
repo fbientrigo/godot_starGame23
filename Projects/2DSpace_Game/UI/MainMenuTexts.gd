@@ -4,7 +4,7 @@ const EXPOSE_DURATION := 2.0
 const FADE_DURATION := 0.5
 
 @onready var container := $HBoxContainer/CenterContainer
-@onready var tween := $Tween
+@onready var tween := get_tree().create_tween()
 @onready var keyboard := container.get_node("AnyKey")
 @onready var xbox := container.get_node("XboxA")
 @onready var playstation := container.get_node("PlaystationX")
@@ -21,29 +21,21 @@ func _ready() -> void:
 	tween.start()
 
 
-func _fade_in(target: Control, total_time: float) -> float:
+func _fade_in(target: Control, _total_time: float) -> float:
 	tween.interpolate_property(
 		target,
 		"modulate",
-		Color.TRANSPARENT,
 		Color.WHITE,
-		FADE_DURATION,
-		Tween.TRANS_LINEAR,
-		Tween.EASE_OUT,
-		total_time
+		FADE_DURATION
 	)
 	return FADE_DURATION
 
 
-func _fade_out(target: Control, total_time: float) -> float:
-	tween.interpolate_property(
+func _fade_out(target: Control, _total_time: float) -> float:
+	tween.tween_property(
 		target,
 		"modulate",
-		Color.WHITE,
 		Color.TRANSPARENT,
-		FADE_DURATION,
-		Tween.TRANS_LINEAR,
-		Tween.EASE_OUT,
-		total_time + EXPOSE_DURATION
+		FADE_DURATION
 	)
 	return FADE_DURATION + EXPOSE_DURATION

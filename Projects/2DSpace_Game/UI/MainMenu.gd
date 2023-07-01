@@ -7,7 +7,6 @@ const FADE_OUT_TIME := 2.5
 
 @onready var screen_fader: TextureRect = $FadeLayer/ScreenFader
 @onready var main_screen := $Background/MainScreen
-
 @onready var menu_sounds: MenuSoundPlayer = $MenuSoundPlayer
 
 func _ready() -> void:
