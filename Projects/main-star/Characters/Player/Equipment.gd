@@ -8,8 +8,15 @@ signal engine_state_changed(old_value, new_value)
 enum EngineStates {
 	IDLE,
 	BASE_THRUST,
-	SUPER_THRUST
+	SUPER_THRUST,
+	MACHINE_GUN,
+	GRAV_GUN,
+	PICKAXE_GUN,
+	LASER_GUN,
+	TP_GUN,
+	EXTRA
 }
+
 
 @export var spaceship_1_path: NodePath
 @export var engine_anim_path: NodePath
@@ -21,8 +28,7 @@ var bullet = load("res://Assets/Ships/Main Ship - Projectiles/bullet.tscn")
 @onready var engine_anim = get_node(engine_anim_path)
 # @onready var bullet = get_node(bullet_path)
 
-
-
+# Estado default de engine
 var current_engine_state = EngineStates.IDLE
 
 func _ready():
@@ -37,6 +43,7 @@ func change_engine_state():
 		var old_state = current_engine_state
 		current_engine_state = EngineStates.BASE_THRUST
 		engine_state_changed.emit()
+		print("")
 
 
 

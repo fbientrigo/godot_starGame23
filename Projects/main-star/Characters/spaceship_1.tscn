@@ -1,8 +1,8 @@
-[gd_scene load_steps=49 format=3 uid="uid://m86e3pbea3kp"]
+[gd_scene load_steps=49 format=3 uid="uid://btwl6hk8hll0g"]
 
 [ext_resource type="Texture2D" uid="uid://duwc830a5g8hq" path="res://Assets/Ships/Main Ship - Engine Effects/Main Ship - Engines - Base Engine - Idle.png" id="1_bnf45"]
-[ext_resource type="Script" path="res://Characters/Equipment.gd" id="1_fnhup"]
-[ext_resource type="Script" path="res://Characters/spaceship_1.gd" id="1_mae57"]
+[ext_resource type="Script" path="res://Characters/Player/spaceship_1.gd" id="1_tg0bt"]
+[ext_resource type="Script" path="res://Characters/Player/Equipment.gd" id="2_2j75l"]
 [ext_resource type="Texture2D" uid="uid://buds5gwm6oca3" path="res://Assets/Ships/Main Ship - Engine Effects/Main Ship - Engines - Base Engine - Powering.png" id="2_u7sol"]
 [ext_resource type="Texture2D" uid="uid://bd0wiwpwl7r7o" path="res://Assets/Ships/Main Ship - Weapons/Main Ship - Weapons - Big Space Gun.png" id="3_kohgq"]
 [ext_resource type="Texture2D" uid="uid://cmivjwnddubbw" path="res://Assets/Ships/Main Ship - Weapons/Main Ship - Weapons - Auto Cannon.png" id="4_77sbv"]
@@ -10,7 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://ckfq0rny1s0ai" path="res://Assets/Ships/Main Ship - Bases/Main Ship - Base - Slight damage.png" id="6_iqelq"]
 [ext_resource type="Texture2D" uid="uid://dcg5520428m6v" path="res://Assets/Ships/Main Ship - Bases/Main Ship - Base - Damaged.png" id="7_5o1eb"]
 [ext_resource type="Texture2D" uid="uid://0xo55d1si0r7" path="res://Assets/Ships/Main Ship - Bases/Main Ship - Base - Very damaged.png" id="8_msb8d"]
-[ext_resource type="Script" path="res://Characters/Crosshair_onShip.gd" id="11_nynui"]
+[ext_resource type="Script" path="res://Characters/Player/Crosshair_onShip.gd" id="11_68jyh"]
 [ext_resource type="Texture2D" uid="uid://bhpk0uq510jxj" path="res://Assets/UI/Crosshair/Crosshairs_Outline_Spritesheet.png" id="12_d6xbh"]
 [ext_resource type="PackedScene" uid="uid://cgfuua2pxmajk" path="res://Metodos/HitboxComponent.tscn" id="13_ucr2d"]
 [ext_resource type="PackedScene" uid="uid://cial45nwktyf5" path="res://Metodos/HealthComponent.tscn" id="14_h5rrv"]
@@ -293,14 +293,14 @@ gravity_scale = 0.0
 can_sleep = false
 linear_damp = 1.5
 angular_damp = 11.0
-script = ExtResource("1_mae57")
+script = ExtResource("1_tg0bt")
 velocidad_nave = 280.0
 animation_damage_sprites = NodePath("Base/damage_sprites")
 torque_strength = 45.0
 propulsor_strength = 350.0
 
 [node name="Equipment" type="Node2D" parent="."]
-script = ExtResource("1_fnhup")
+script = ExtResource("2_2j75l")
 spaceship_1_path = NodePath("..")
 engine_anim_path = NodePath("engine_sprites")
 cooldown_weapon_time = 0.25
@@ -337,7 +337,7 @@ attenuation = 0.90125
 
 [node name="Crosshair_onShip" type="Node2D" parent="." node_paths=PackedStringArray("animated_sprite")]
 position = Vector2(0, -30)
-script = ExtResource("11_nynui")
+script = ExtResource("11_68jyh")
 player_spaceship = NodePath("..")
 animated_sprite = NodePath("AnimatedSprite2D")
 

@@ -53,10 +53,6 @@ func _integrate_forces(state):
 	
 signal shoot_pass_from_equipment(bullet, direction, location)
 
-
-
-
-
 func _on_equipment_shoot(bullet_, direction_, location_):
 	emit_signal("shoot_pass_from_equipment", bullet_, direction_, location_)
 

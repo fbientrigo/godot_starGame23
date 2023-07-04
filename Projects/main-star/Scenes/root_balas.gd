@@ -11,5 +11,5 @@ func _on_Player_shoot(Bullet_, direction_, location_):
 
 func _on_spaceship_1_shoot_pass_from_equipment(bullet_, direction_, location_):
 	print("llego al root de balas")
-	_on_Player_shoot(bullet_, direction_, location_)
+	_on_Player_shoot(bullet_, direction_,location_)
 	

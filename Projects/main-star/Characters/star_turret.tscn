@@ -1,10 +1,10 @@
-[gd_scene load_steps=176 format=3 uid="uid://cqo7eogrw1xs5"]
+[gd_scene load_steps=176 format=3 uid="uid://centcuuhl6pko"]
 
-[ext_resource type="Script" path="res://Characters/star_turret.gd" id="1_5kl5w"]
 [ext_resource type="Texture2D" uid="uid://b8qeuhsvs4hkq" path="res://Assets/Stars/bh_blue.png" id="1_06nr5"]
+[ext_resource type="Script" path="res://Characters/Star/star_turret.gd" id="1_kdyaq"]
 [ext_resource type="Texture2D" uid="uid://bpgq6gl181jml" path="res://Assets/Stars/s_morado_red_100.png" id="2_148l2"]
 [ext_resource type="Texture2D" uid="uid://cmivjwnddubbw" path="res://Assets/Ships/Main Ship - Weapons/Main Ship - Weapons - Auto Cannon.png" id="4_d8qcl"]
-[ext_resource type="Script" path="res://Characters/satelite_arma.gd" id="4_fq4uw"]
+[ext_resource type="Script" path="res://Characters/Scripts/satelite_arma.gd" id="4_ewsq5"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_trb74"]
 atlas = ExtResource("1_06nr5")
@@ -1200,7 +1200,7 @@ animations = [{
 radius = 49.0102
 
 [node name="StarTurret" type="Node2D"]
-script = ExtResource("1_5kl5w")
+script = ExtResource("1_kdyaq")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_b16im")
@@ -1212,7 +1212,7 @@ collision_layer = 3
 collision_mask = 3
 
 [node name="Equipment" type="Node2D" parent="CharacterBody2D"]
-script = ExtResource("4_fq4uw")
+script = ExtResource("4_ewsq5")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CharacterBody2D/Equipment"]
 position = Vector2(0, -66)

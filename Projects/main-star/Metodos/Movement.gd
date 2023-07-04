@@ -11,8 +11,8 @@ func setup(character2D: CharacterBody2D):
 
 # mueve tipos characterBody2D
 # se eligio esto para los enemigos para calcular menos fuerzas
-func move(input_vector: Vector2):
-	character.velocity = (input_vector.normalized() * speed)
+func move(input_vector: Vector2, _speed:float = speed):
+	character.velocity = (input_vector.normalized() * _speed)
 	character.move_and_slide()
 	
 func stop_movement():
