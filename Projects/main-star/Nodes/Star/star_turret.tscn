@@ -1,0 +1,196 @@
+[gd_scene load_steps=30 format=3 uid="uid://bqab1a0i6m4h7"]
+
+[ext_resource type="Script" path="res://Nodes/Star/star_turret.gd" id="1_kdyaq"]
+[ext_resource type="Texture2D" uid="uid://cmivjwnddubbw" path="res://Assets/Ships/Main Ship - Weapons/Main Ship - Weapons - Auto Cannon.png" id="4_d8qcl"]
+[ext_resource type="Script" path="res://Nodes/Scripts/satelite_arma.gd" id="4_ewsq5"]
+[ext_resource type="Shape2D" uid="uid://i2mqwyrb56qv" path="res://Nodes/Star/collision_A.tres" id="7_72mde"]
+[ext_resource type="PackedScene" uid="uid://1vrkeeswwdnw" path="res://Metodos/HealthComponent.tscn" id="7_pfqkg"]
+[ext_resource type="PackedScene" uid="uid://djle2nd60gt" path="res://Metodos/StarStates/animaciones.tscn" id="7_qfwb1"]
+[ext_resource type="Script" path="res://Nodes/Star/TipoG.gd" id="8_1upmp"]
+[ext_resource type="Script" path="res://Nodes/Star/TipoGas.gd" id="8_gicie"]
+[ext_resource type="PackedScene" uid="uid://byrncwn5e2g0y" path="res://Metodos/Sensor.tscn" id="8_jtdk8"]
+[ext_resource type="PackedScene" uid="uid://dyuvy1275lb7g" path="res://Metodos/States/StateMachine.tscn" id="8_nsgwv"]
+[ext_resource type="Script" path="res://Nodes/Star/TipoO.gd" id="9_3eyw6"]
+[ext_resource type="Script" path="res://Nodes/Star/TipoB.gd" id="10_3tjds"]
+[ext_resource type="Script" path="res://Nodes/Star/TipoA.gd" id="11_83wjl"]
+[ext_resource type="Script" path="res://Nodes/Star/TipoF.gd" id="12_m2pnu"]
+[ext_resource type="Script" path="res://Nodes/Star/TipoK.gd" id="13_n53u3"]
+[ext_resource type="Script" path="res://Nodes/Star/TipoM.gd" id="14_ivsea"]
+[ext_resource type="Script" path="res://Nodes/Star/TipoWD.gd" id="15_dww2m"]
+[ext_resource type="Script" path="res://Nodes/Star/TipoRG.gd" id="16_0ddt4"]
+[ext_resource type="Script" path="res://Nodes/Star/TipoSRG.gd" id="17_3bnc0"]
+[ext_resource type="Script" path="res://Nodes/Star/CommunicationBus.gd" id="20_8vmcm"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b12us"]
+atlas = ExtResource("4_d8qcl")
+region = Rect2(0, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lov6m"]
+atlas = ExtResource("4_d8qcl")
+region = Rect2(48, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4ie7m"]
+atlas = ExtResource("4_d8qcl")
+region = Rect2(96, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_edwxj"]
+atlas = ExtResource("4_d8qcl")
+region = Rect2(144, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_icpjy"]
+atlas = ExtResource("4_d8qcl")
+region = Rect2(192, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ic7iw"]
+atlas = ExtResource("4_d8qcl")
+region = Rect2(240, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yab2j"]
+atlas = ExtResource("4_d8qcl")
+region = Rect2(288, 0, 48, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_bw5hb"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b12us")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lov6m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4ie7m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_edwxj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_icpjy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ic7iw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yab2j")
+}],
+"loop": true,
+"name": &"pistolas",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_p4oku"]
+radius = 49.0102
+
+[node name="StarTurret" type="Node2D" node_paths=PackedStringArray("statemachine")]
+script = ExtResource("1_kdyaq")
+statemachine = NodePath("StateMachine")
+tipo_estrella = "TipoM"
+
+[node name="Sensor" parent="." instance=ExtResource("8_jtdk8")]
+collision_layer = 0
+collision_mask = 6
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+visible = false
+collision_layer = 8
+collision_mask = 6
+
+[node name="Equipment" type="Node2D" parent="CharacterBody2D"]
+script = ExtResource("4_ewsq5")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CharacterBody2D/Equipment"]
+position = Vector2(0, -66)
+sprite_frames = SubResource("SpriteFrames_bw5hb")
+animation = &"pistolas"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+shape = SubResource("CircleShape2D_p4oku")
+disabled = true
+
+[node name="Animaciones" parent="." instance=ExtResource("7_qfwb1")]
+animation = &"A"
+
+[node name="HealthComponent" parent="." instance=ExtResource("7_pfqkg")]
+collision_layer = 8
+collision_mask = 30
+DeadType = 1
+
+[node name="CollisionShape2D" parent="HealthComponent" index="0"]
+shape = ExtResource("7_72mde")
+
+[node name="StateMachine" parent="." node_paths=PackedStringArray("initial_state") instance=ExtResource("8_nsgwv")]
+initial_state = NodePath("")
+
+[node name="TipoGas" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("animacion", "healthcomponent", "statemachine")]
+script = ExtResource("8_gicie")
+animacion = NodePath("../../Animaciones")
+healthcomponent = NodePath("../../HealthComponent")
+statemachine = NodePath("..")
+
+[node name="TipoA" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("animacion", "healthcomponent", "statemachine")]
+script = ExtResource("11_83wjl")
+animacion = NodePath("../../Animaciones")
+healthcomponent = NodePath("../../HealthComponent")
+statemachine = NodePath("..")
+
+[node name="TipoB" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("animacion", "healthcomponent", "statemachine")]
+script = ExtResource("10_3tjds")
+animacion = NodePath("../../Animaciones")
+healthcomponent = NodePath("../../HealthComponent")
+statemachine = NodePath("..")
+
+[node name="TipoF" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("animacion", "healthcomponent", "statemachine")]
+script = ExtResource("12_m2pnu")
+animacion = NodePath("../../Animaciones")
+healthcomponent = NodePath("../../HealthComponent")
+statemachine = NodePath("..")
+
+[node name="TipoG" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("animacion", "healthcomponent", "statemachine")]
+script = ExtResource("8_1upmp")
+animacion = NodePath("../../Animaciones")
+healthcomponent = NodePath("../../HealthComponent")
+statemachine = NodePath("..")
+
+[node name="TipoO" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("animacion", "healthcomponent", "statemachine")]
+script = ExtResource("9_3eyw6")
+animacion = NodePath("../../Animaciones")
+healthcomponent = NodePath("../../HealthComponent")
+statemachine = NodePath("..")
+
+[node name="TipoK" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("animacion", "healthcomponent", "statemachine")]
+script = ExtResource("13_n53u3")
+animacion = NodePath("../../Animaciones")
+healthcomponent = NodePath("../../HealthComponent")
+statemachine = NodePath("..")
+
+[node name="TipoM" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("animacion", "healthcomponent", "statemachine")]
+script = ExtResource("14_ivsea")
+animacion = NodePath("../../Animaciones")
+healthcomponent = NodePath("../../HealthComponent")
+statemachine = NodePath("..")
+
+[node name="TipoWD" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("animacion", "healthcomponent", "statemachine")]
+script = ExtResource("15_dww2m")
+animacion = NodePath("../../Animaciones")
+healthcomponent = NodePath("../../HealthComponent")
+statemachine = NodePath("..")
+
+[node name="TipoRG" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("animacion", "healthcomponent", "statemachine")]
+script = ExtResource("16_0ddt4")
+animacion = NodePath("../../Animaciones")
+healthcomponent = NodePath("../../HealthComponent")
+statemachine = NodePath("..")
+
+[node name="TipoSRG" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("animacion", "healthcomponent", "statemachine")]
+script = ExtResource("17_3bnc0")
+animacion = NodePath("../../Animaciones")
+healthcomponent = NodePath("../../HealthComponent")
+statemachine = NodePath("..")
+
+[node name="CommunicationBus" type="Node2D" parent="."]
+script = ExtResource("20_8vmcm")
+
+[connection signal="area_entered" from="Sensor" to="." method="_on_sensor_area_entered"]
+[connection signal="area_exited" from="Sensor" to="." method="_on_sensor_area_exited"]
+
+[editable path="HealthComponent"]

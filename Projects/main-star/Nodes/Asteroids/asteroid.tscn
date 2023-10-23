@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://oyq543cw78gg"]
+
+[ext_resource type="Texture2D" uid="uid://dg3gyvkdgo0u6" path="res://Assets/Asteroids/small/asteroid_lvl0dying.png" id="1_26li0"]
+[ext_resource type="Script" path="res://Nodes/Asteroids/asteroid.gd" id="1_ixrpp"]
+[ext_resource type="Shape2D" uid="uid://dtx1vpwtq3bvq" path="res://Nodes/Asteroids/collision_asteroid_lvl0.tres" id="3_dbdh6"]
+
+[node name="asteroid" type="Area2D"]
+script = ExtResource("1_ixrpp")
+size = 1
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_26li0")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(4, -4)
+rotation = 1.10596
+shape = ExtResource("3_dbdh6")

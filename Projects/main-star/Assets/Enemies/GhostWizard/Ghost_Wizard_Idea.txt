@@ -1,0 +1,2 @@
+Cuando el personaje muere, se crea un ghost wizard en su posiciónque debe vencer para recuperar las estrellas
+su nivel de pelea es 10% del jugador al morir

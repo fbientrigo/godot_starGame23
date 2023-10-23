@@ -1,0 +1,114 @@
+[gd_scene load_steps=17 format=3]
+
+[ext_resource type="Script" path="res://Nodes/Star/star_turret.gd" id="1_qxca5"]
+[ext_resource type="PackedScene" uid="uid://byrncwn5e2g0y" path="res://Metodos/Sensor.tscn" id="2_c0b2m"]
+[ext_resource type="Script" path="res://Nodes/Scripts/satelite_arma.gd" id="3_m4mvr"]
+[ext_resource type="Texture2D" uid="uid://cmivjwnddubbw" path="res://Assets/Ships/Main Ship - Weapons/Main Ship - Weapons - Auto Cannon.png" id="4_uiltn"]
+[ext_resource type="Script" path="res://Metodos/StarStates/StarState.gd" id="5_bwlnt"]
+[ext_resource type="PackedScene" uid="uid://djle2nd60gt" path="res://Metodos/StarStates/animaciones.tscn" id="6_tc8lv"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b12us"]
+atlas = ExtResource("4_uiltn")
+region = Rect2(0, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lov6m"]
+atlas = ExtResource("4_uiltn")
+region = Rect2(48, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4ie7m"]
+atlas = ExtResource("4_uiltn")
+region = Rect2(96, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_edwxj"]
+atlas = ExtResource("4_uiltn")
+region = Rect2(144, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_icpjy"]
+atlas = ExtResource("4_uiltn")
+region = Rect2(192, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ic7iw"]
+atlas = ExtResource("4_uiltn")
+region = Rect2(240, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yab2j"]
+atlas = ExtResource("4_uiltn")
+region = Rect2(288, 0, 48, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_bw5hb"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b12us")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lov6m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4ie7m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_edwxj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_icpjy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ic7iw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yab2j")
+}],
+"loop": true,
+"name": &"pistolas",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_p4oku"]
+radius = 49.0102
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_0eo4f"]
+radius = 26.0
+
+[node name="Nebula" type="Node2D" node_paths=PackedStringArray("animation_sprite")]
+script = ExtResource("1_qxca5")
+animation_sprite = NodePath("Animaciones")
+tipo_estrella = "Gas2"
+
+[node name="Sensor" parent="." instance=ExtResource("2_c0b2m")]
+visible = false
+collision_mask = 4
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+collision_layer = 9
+collision_mask = 15
+
+[node name="Equipment" type="Node2D" parent="CharacterBody2D"]
+visible = false
+script = ExtResource("3_m4mvr")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CharacterBody2D/Equipment"]
+position = Vector2(0, -66)
+sprite_frames = SubResource("SpriteFrames_bw5hb")
+animation = &"pistolas"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+shape = SubResource("CircleShape2D_p4oku")
+
+[node name="StateMachine@TipoA" type="Node" parent="."]
+script = ExtResource("5_bwlnt")
+
+[node name="Animaciones" parent="." instance=ExtResource("6_tc8lv")]
+scale = Vector2(3, 3)
+animation = &"Gas"
+frame = 18
+frame_progress = 0.89192
+speed_scale = 1.5
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_0eo4f")
+
+[connection signal="area_entered" from="Sensor" to="." method="_on_sensor_area_entered"]
+[connection signal="area_exited" from="Sensor" to="." method="_on_sensor_area_exited"]

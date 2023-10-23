@@ -1,77 +1,81 @@
-[gd_scene load_steps=10 format=3 uid="uid://c61ipx8c3qdmb"]
+[gd_scene load_steps=7 format=3 uid="uid://4jslef5iluqi"]
 
-[ext_resource type="PackedScene" uid="uid://btwl6hk8hll0g" path="res://Characters/spaceship_1.tscn" id="1_6e418"]
+[ext_resource type="PackedScene" uid="uid://me0wanq6rcss" path="res://Metodos/player.tscn" id="1_ln5gm"]
 [ext_resource type="Texture2D" uid="uid://cbxd3nlhsad37" path="res://Assets/Tilemaps/tm_blue_nebulae_dust.png" id="3_50hg0"]
-[ext_resource type="PackedScene" uid="uid://centcuuhl6pko" path="res://Characters/star_turret.tscn" id="4_o7us1"]
 [ext_resource type="Script" path="res://Scenes/Camera_Controller.gd" id="5_g0qo3"]
-[ext_resource type="PackedScene" uid="uid://bs15ct6lbrxdc" path="res://Characters/Enemies/Enemy.tscn" id="6_l6cjv"]
-[ext_resource type="Script" path="res://Scenes/root_balas.gd" id="6_yhlb2"]
-[ext_resource type="PackedScene" path="res://Metodos/States/StateMachine.tscn" id="7_2h6w5"]
-[ext_resource type="Script" path="res://Metodos/States/WanderingIdle.gd" id="8_xry58"]
-[ext_resource type="Script" path="res://Metodos/States/EnemyFollow.gd" id="9_ablnt"]
+[ext_resource type="PackedScene" uid="uid://ce8bfmrsk33n" path="res://Nodes/Enemies/spawner.tscn" id="6_6mp7b"]
+[ext_resource type="PackedScene" uid="uid://bhxlsbs7rvctp" path="res://Nodes/Enemies/Enemy.tscn" id="6_c70g1"]
+[ext_resource type="PackedScene" uid="uid://uxgaqqqjl0px" path="res://Nodes/Enemies/enemy_slime.tscn" id="7_jr6lv"]
 
-[node name="Space_Scene_1" type="Node2D"]
+[node name="Level" type="Node2D"]
+texture_repeat = 2
+
+[node name="Player" parent="." instance=ExtResource("1_ln5gm")]
 
 [node name="Entorno" type="Node" parent="."]
 
 [node name="TmBlueNebulaeDust" type="Sprite2D" parent="Entorno"]
 z_index = -30
-position = Vector2(107, 271)
-scale = Vector2(3, 3)
+texture_repeat = 2
+position = Vector2(-2000, -2000)
+scale = Vector2(2, 2)
 texture = ExtResource("3_50hg0")
 
-[node name="Camera2D" type="Camera2D" parent="Entorno"]
-zoom = Vector2(1.7, 1.7)
-position_smoothing_enabled = true
+[node name="TmBlueNebulaeDust2" type="Sprite2D" parent="Entorno"]
+z_index = -30
+texture_repeat = 2
+position = Vector2(2000, -2000)
+scale = Vector2(2, 2)
+texture = ExtResource("3_50hg0")
+
+[node name="TmBlueNebulaeDust3" type="Sprite2D" parent="Entorno"]
+z_index = -30
+texture_repeat = 2
+position = Vector2(-2000, 2000)
+scale = Vector2(2, 2)
+texture = ExtResource("3_50hg0")
+
+[node name="TmBlueNebulaeDust4" type="Sprite2D" parent="Entorno"]
+z_index = -30
+texture_repeat = 2
+position = Vector2(2000, 2000)
+scale = Vector2(2, 2)
+texture = ExtResource("3_50hg0")
 
 [node name="Camera_Controller" type="Node2D" parent="Entorno"]
 script = ExtResource("5_g0qo3")
 player_path = NodePath("../../Player/spaceship_1")
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="Entorno/Camera_Controller"]
-remote_path = NodePath("../../Camera2D")
+remote_path = NodePath("../../../Player/Camera2D")
 update_rotation = false
 
-[node name="Player" type="Node" parent="."]
+[node name="Enemy" parent="." instance=ExtResource("6_c70g1")]
+position = Vector2(-364, 259)
 
-[node name="root_balas" type="Node2D" parent="Player"]
-script = ExtResource("6_yhlb2")
+[node name="enemy_slime" parent="." instance=ExtResource("7_jr6lv")]
+position = Vector2(367, 199)
 
-[node name="spaceship_1" parent="Player" groups=["Player"] instance=ExtResource("1_6e418")]
-rotation = 0.0
-inertia = 2.5
-linear_damp = 1.6
-angular_damp = 10.0
-propulsor_strength = 330.0
+[node name="Enemy2" parent="." instance=ExtResource("6_c70g1")]
+position = Vector2(-1369, -413)
 
-[node name="StarTurret" parent="." instance=ExtResource("4_o7us1")]
-position = Vector2(314, 134)
+[node name="enemy_slime2" parent="." instance=ExtResource("7_jr6lv")]
+position = Vector2(-1183, -414)
 
-[node name="StarTurret2" parent="." instance=ExtResource("4_o7us1")]
-visible = false
-position = Vector2(-61, 335)
+[node name="Enemy3" parent="." instance=ExtResource("6_c70g1")]
+position = Vector2(169, -957)
 
-[node name="Enemy1" parent="." instance=ExtResource("6_l6cjv")]
-position = Vector2(-423, -145)
+[node name="enemy_slime3" parent="." instance=ExtResource("7_jr6lv")]
+position = Vector2(355, -958)
 
-[node name="StateMachine" parent="Enemy1" node_paths=PackedStringArray("initial_state") instance=ExtResource("7_2h6w5")]
-initial_state = NodePath("WanderingIdle")
+[node name="enemy_slime4" parent="." instance=ExtResource("7_jr6lv")]
+position = Vector2(104, -434)
 
-[node name="WanderingIdle" type="Node" parent="Enemy1/StateMachine" node_paths=PackedStringArray("object")]
-script = ExtResource("8_xry58")
-object = NodePath("../..")
+[node name="enemy_slime5" parent="." instance=ExtResource("7_jr6lv")]
+position = Vector2(-249, -342)
 
-[node name="EnemyFolow" type="Node" parent="Enemy1/StateMachine" node_paths=PackedStringArray("enemy")]
-script = ExtResource("9_ablnt")
-enemy = NodePath("../..")
+[node name="spawner" parent="." instance=ExtResource("6_6mp7b")]
+spawn_interval_min = 3.0
+spawn_radius = 900.0
 
-[node name="Enemy2" parent="." instance=ExtResource("6_l6cjv")]
-visible = false
-position = Vector2(426, -255)
-
-[node name="Enemy3" parent="." instance=ExtResource("6_l6cjv")]
-visible = false
-position = Vector2(304, 415)
-distancia_vision = 500.0
-
-[connection signal="shoot_pass_from_equipment" from="Player/spaceship_1" to="Player/root_balas" method="_on_spaceship_1_shoot_pass_from_equipment"]
+[editable path="Player"]

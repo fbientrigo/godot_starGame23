@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=3 uid="uid://c22difnwgpthx"]
+
+[ext_resource type="Script" path="res://Assets/Ships/Main Ship - Projectiles/bullet.gd" id="1_gl5fm"]
+[ext_resource type="Script" path="res://Assets/Ships/Main Ship - Projectiles/timer_destruction.gd" id="2_mgbe2"]
+[ext_resource type="PackedScene" uid="uid://cgfuua2pxmajk" path="res://Metodos/HitboxComponent.tscn" id="3_5hn6y"]
+[ext_resource type="SpriteFrames" uid="uid://dpnxrau4uq5kl" path="res://Nodes/Guns/Projectiles/bala9mm_animacion.tres" id="4_gknam"]
+
+[node name="bullet_heavy" type="Node2D"]
+z_index = -15
+script = ExtResource("1_gl5fm")
+
+[node name="timer_destruction" type="Timer" parent="."]
+wait_time = 9.0
+autostart = true
+script = ExtResource("2_mgbe2")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
+[node name="HitboxComponent" parent="." instance=ExtResource("3_5hn6y")]
+collision_layer = 0
+collision_mask = 29
+damage = 1
+
+[node name="Animation" type="AnimatedSprite2D" parent="."]
+sprite_frames = ExtResource("4_gknam")
+animation = &"bullet"
+
+[connection signal="timeout" from="timer_destruction" to="." method="_on_timer_timeout"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="timer_destruction" method="_on_visible_on_screen_notifier_2d_screen_exited"]
+[connection signal="area_entered" from="HitboxComponent" to="." method="_on_hitbox_component_area_entered"]
+
+[editable path="HitboxComponent"]

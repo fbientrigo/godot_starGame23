@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://b8vp8i0wxw24a"]
+
+[ext_resource type="Script" path="res://Metodos/WeaponComponent.gd" id="1_gk4xe"]
+
+[node name="weapon" type="Marker2D"]
+script = ExtResource("1_gk4xe")

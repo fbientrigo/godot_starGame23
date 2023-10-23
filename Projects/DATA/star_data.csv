@@ -1,0 +1,13 @@
+	Masa	Radio	Temperatura	AbundanciaPercent	TiempoVida Myrs
+O	50	10	40000	0.00001	10
+B	10	5	20000	0.1	100
+A	2	1.7	8500	0.7	1000
+F	1.5	1.3	6500	2	3000
+G	1	1	5700	3.5	10000
+K	0.7	0.8	4500	8	50000
+M	0.2	0.3	3200	80	200000
+WhiteDwarf	1.4	0.01	70000	5	-
+GiganteRoja	5	50	10000	0.4	1000
+SGiganteRoja	500	500	40000	0.0001	10
+Gas	1	0.5	3000		-
+Gas2	1	0.5	3000		-

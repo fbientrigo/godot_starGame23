@@ -10,10 +10,15 @@ config_version=5
 
 [application]
 
-config/name="Star-Evolution"
+config/name="SolariumDefense"
 run/main_scene="res://Scenes/space_scene_1.tscn"
 config/features=PackedStringArray("4.0", "Mobile")
 config/icon="res://icon.svg"
+
+[display]
+
+window/size/viewport_width=1280
+window/size/viewport_height=720
 
 [input]
 
