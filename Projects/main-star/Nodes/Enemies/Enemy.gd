@@ -24,35 +24,36 @@
 # - Detección del jugador utilizando un sensor de área.
 # - Capacidad para procesar la lógica de ataque (a implementar según sea necesario).
 # - Gestión de la salud y la lógica de muerte del enemigo.
-
-class_name Enemy # crea una clase
 extends CharacterBody2D
+class_name Enemy # crea una clase
+
 
 # Distancia de visión del enemigo para detectar al jugador.
 @export var distancia_vision: float
-
-# Distancia mínima a mantener entre el enemigo y el jugador.
+# Distania mínima a mantener entre el enemigo y el jugador.
 @export var distancia_minima: float
-
 # Indica si la visión del enemigo es eterna o no (siempre persigue al jugador).
 @export var vision_eterna: bool
-
 # Referencia al nodo de animación para controlar las animaciones del enemigo.
 @export var animation : AnimatedSprite2D 
-
-# Referencia al nodo de movimiento que permite al enemigo moverse.
+# Refeencia al nodo de movimiento que permite al enemigo moverse.
 @onready var movement = $Movement as Movement
-
 # Referencia al sensor del enemigo que detecta al jugador.
 @onready var sensor: Area2D = $Sensor
+
 
 # Referencia al jugador detectado por el sensor.
 var player
 var player_area
 
+# exp
+var exp_gem : PackedScene
+
 func _ready(): # Método llamado cuando el nodo está listo.
 	movement.setup(self) # Configura el movimiento del enemigo.
 	animation.play("base_anim") # Reproduce la animación base.
+	exp_gem = preload("res://Nodes/Objects/Object.tscn")
+	
 
 func _physics_process(_delta):
 	pass
@@ -81,5 +82,9 @@ func _on_sensor_area_exited(_area):
 
 # Función llamada cuando el componente de salud del enemigo alcanza una salud de 0.
 # Puede implementar acciones adicionales aquí, como cambiar la animación y eliminar al enemigo.
+
 func _on_health_component_on_dead():
-	pass
+	#print("dead of enemigo, spawning exp")
+	var gem = exp_gem.instantiate()  # C	rea una instancia del objeto de experiencia.
+	gem.global_position = self.global_position  # Coloca el objeto de experiencia en la posición del enemigo.
+	get_parent().add_child(gem)  # Añade el objeto de experiencia a la escena.

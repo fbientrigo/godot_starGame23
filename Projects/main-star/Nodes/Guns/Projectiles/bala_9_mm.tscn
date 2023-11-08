@@ -19,7 +19,7 @@ script = ExtResource("2_apf8q")
 
 [node name="HitboxComponent" parent="." instance=ExtResource("3_3rhb3")]
 collision_layer = 0
-collision_mask = 29
+collision_mask = 21
 damage = 1
 
 [node name="Animation" type="AnimatedSprite2D" parent="."]

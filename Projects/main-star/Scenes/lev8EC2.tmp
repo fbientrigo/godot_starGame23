@@ -1,0 +1,24 @@
+[gd_scene load_steps=3 format=3 uid="uid://b0t62rnhq0fdy"]
+
+[ext_resource type="PackedScene" uid="uid://me0wanq6rcss" path="res://Metodos/player.tscn" id="1_m6sh0"]
+[ext_resource type="PackedScene" uid="uid://ucfco31tegc1" path="res://Nodes/Objects/Object.tscn" id="2_xs3i6"]
+
+[node name="Level" type="Node2D" groups=["Level"]]
+
+[node name="Player" parent="." instance=ExtResource("1_m6sh0")]
+position = Vector2(0, 138)
+
+[node name="Object" parent="." instance=ExtResource("2_xs3i6")]
+position = Vector2(211, -52)
+
+[node name="Object2" parent="." instance=ExtResource("2_xs3i6")]
+position = Vector2(39, -139)
+
+[node name="Object3" parent="." instance=ExtResource("2_xs3i6")]
+position = Vector2(190, -351)
+
+[node name="Object4" parent="." instance=ExtResource("2_xs3i6")]
+position = Vector2(-224, -321)
+
+[node name="Object5" parent="." instance=ExtResource("2_xs3i6")]
+position = Vector2(-322, 32)

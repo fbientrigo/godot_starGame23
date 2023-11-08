@@ -9,7 +9,7 @@ var wander_time : float
 
 func randomize_wander():
 	move_direction = Vector2(randf_range(-1,1),randf_range(-1,1)).normalized()
-	wander_time = randf_range(1,4)
+	wander_time = randf_range(2,5)
 	
 func Enter():
 	randomize_wander()
@@ -22,5 +22,4 @@ func Update(delta:float):
 
 func Physics_Update(delta:float):
 	if object:
-		#object.movement.velocity = move_direction * move_speed
 		object.movement.move(move_direction, move_speed)

@@ -2,17 +2,20 @@
 extends Node2D
 
 # Conexión con otros nodos
-@export var statemachine : StateMachine
+
 # Controla el tipo de estrella mediante dropdown
 @export_enum("TipoGas","TipoA","TipoB","TipoF","TipoG","TipoO","TipoK","TipoM","TipoWD","TipoRG","TipoSRG") var tipo_estrella:String = "TipoGas"
 
 
+@onready var statemachine : StateMachine = $StateMachine
+@onready var weaponstatemachine: WeaponStateMachine = $BasicWeaponStateMachine
+
 func _ready():
 	# Sección de busquedo usando enum =============
 	var nodo_hijo = statemachine.get_node(tipo_estrella)
-	print(nodo_hijo)
+	#print(nodo_hijo)
 	if nodo_hijo:
-		print("nodo hijo encontrado")
+		#print("nodo hijo encontrado")
 		statemachine.initial_state = nodo_hijo
 		
 		statemachine.set_initial_state(nodo_hijo)
@@ -44,12 +47,17 @@ const DATA = {
 	Gas2 = ["Gas2",1,0.5,3000,99999], # Nebula
 }
 
-# @export_enum("A","B","F","G","Gas","Gas2","GiganteRoja","GiganteRojaK","K","M","O","WhiteDwarf") var tipo_estrella:String = "Gas"
+
 
 
 func _physics_process(delta):
+	#weaponstatemachine.current_state.fire(0, Vector2(0,0))
 	if enemies != []:
 		current_enemy = enemies[0]
+		weaponstatemachine.current_state.fire(global_rotation, current_enemy.global_position, PI)
+	
+	
+	
 
 
 func evolve_tower(new_tower):
@@ -65,9 +73,6 @@ func evolve_tower(new_tower):
 	evolved_tower.position = position
 	evolved_tower.name = name
 	queue_free()
-
-
-# Para disparar a los enemigos debe de hacerse un call por un medio
 
 
 

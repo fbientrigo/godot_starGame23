@@ -1,9 +1,10 @@
 extends Node2D
 
 # Declare properties
-@export var player_spaceship: NodePath
+@export var player_spaceship_path: NodePath
 @export var shooting_animation: String
 @export var animated_sprite: AnimatedSprite2D
+@onready var spaceship = get_node(player_spaceship_path)
 
 var shooting: bool = false
 var shooting_cooldown = 0
@@ -16,11 +17,25 @@ func _on_equipment_shoot(_direction, _location):
 	shooting = true
 	shooting_cooldown = 3
 
-	
-func _process(_delta):
 
+# control de joystick
+func get_joystick_position():
+	var vectorjoystick : Vector2 = Input.get_vector("joyx-", "joyx+", "joyy+", "joyy-")
+	return vectorjoystick
+
+@export var is_joystick: bool = true
+var last_joystick = Vector2(0,0)
+@export var dead_zone = 0.1
+func _process(_delta):
 	# sigue al mouse
-	global_position = get_global_mouse_position()
+	if is_joystick:
+		if get_joystick_position().length_squared() > dead_zone:
+			last_joystick = get_joystick_position()
+			global_position = spaceship.global_position +  100 * last_joystick
+		else: 
+			global_position = spaceship.global_position + 40 * last_joystick
+	else:
+		global_position = get_global_mouse_position()
 	
 	if shooting and (shooting_cooldown > 0):
 		animated_sprite.play(shooting_animation)

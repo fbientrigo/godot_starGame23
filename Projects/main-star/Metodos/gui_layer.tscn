@@ -1,0 +1,72 @@
+[gd_scene load_steps=3 format=3 uid="uid://bwfd1rqogx08v"]
+
+[ext_resource type="Texture2D" uid="uid://dt3mkpqwv8y27" path="res://Assets/UI/GUI/exp_background.png" id="1_20vlc"]
+[ext_resource type="Texture2D" uid="uid://btxmf0adt2cs5" path="res://Assets/UI/GUI/exp_progress.png" id="2_fkkw8"]
+
+[node name="GUILayer" type="CanvasLayer"]
+follow_viewport_enabled = true
+
+[node name="GUI" type="Control" parent="."]
+clip_contents = true
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="GUI"]
+clip_contents = true
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_right = -640.0
+offset_bottom = 26.0
+grow_horizontal = 2
+scale = Vector2(2, 2)
+
+[node name="ExperienceBar" type="TextureProgressBar" parent="GUI/MarginContainer"]
+unique_name_in_owner = true
+show_behind_parent = true
+clip_children = 2
+light_mask = 0
+clip_contents = true
+layout_mode = 2
+value = 90.0
+texture_under = ExtResource("1_20vlc")
+texture_progress = ExtResource("2_fkkw8")
+
+[node name="lbl_level" type="Label" parent="GUI/MarginContainer/ExperienceBar"]
+unique_name_in_owner = true
+light_mask = 0
+layout_mode = 2
+offset_right = 640.0
+offset_bottom = 26.0
+text = "Nivel: 1"
+
+[node name="LevelUpPanel" type="Panel" parent="GUI"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 170.0
+offset_top = 160.0
+offset_right = 1130.0
+offset_bottom = 570.0
+
+[node name="Label_LevelUp" type="Label" parent="GUI/LevelUpPanel"]
+layout_mode = 0
+offset_right = 960.0
+offset_bottom = 40.0
+theme_override_font_sizes/font_size = 25
+text = "Elige una mejora!"
+horizontal_alignment = 1
+
+[node name="UpgradeOptions" type="HBoxContainer" parent="GUI/LevelUpPanel"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 21.0
+offset_top = 40.0
+offset_right = 313.0
+offset_bottom = 390.0
+
+[node name="snd_levelup" type="AudioStreamPlayer" parent="GUI/LevelUpPanel"]
+unique_name_in_owner = true

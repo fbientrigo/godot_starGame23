@@ -3,7 +3,7 @@
 class_name PlayerState
 extends State
 
-var ship: PlayerShip
+var ship: Node2D
 
 
 func _ready() -> void:

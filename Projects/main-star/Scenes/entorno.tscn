@@ -1,0 +1,42 @@
+[gd_scene load_steps=3 format=3 uid="uid://csc6cyvaojn3c"]
+
+[ext_resource type="Texture2D" uid="uid://cbxd3nlhsad37" path="res://Assets/Tilemaps/tm_blue_nebulae_dust.png" id="1_iih2k"]
+[ext_resource type="Script" path="res://Scenes/Camera_Controller.gd" id="2_jib5c"]
+
+[node name="Entorno" type="Node2D"]
+
+[node name="TmBlueNebulaeDust" type="Sprite2D" parent="."]
+z_index = -30
+texture_repeat = 2
+position = Vector2(-2000, -2000)
+scale = Vector2(2, 2)
+texture = ExtResource("1_iih2k")
+
+[node name="TmBlueNebulaeDust2" type="Sprite2D" parent="."]
+z_index = -30
+texture_repeat = 2
+position = Vector2(2000, -2000)
+scale = Vector2(2, 2)
+texture = ExtResource("1_iih2k")
+
+[node name="TmBlueNebulaeDust3" type="Sprite2D" parent="."]
+z_index = -30
+texture_repeat = 2
+position = Vector2(-2000, 2000)
+scale = Vector2(2, 2)
+texture = ExtResource("1_iih2k")
+
+[node name="TmBlueNebulaeDust4" type="Sprite2D" parent="."]
+z_index = -30
+texture_repeat = 2
+position = Vector2(2000, 2000)
+scale = Vector2(2, 2)
+texture = ExtResource("1_iih2k")
+
+[node name="Camera_Controller" type="Node2D" parent="."]
+script = ExtResource("2_jib5c")
+player_path = NodePath("../../Player/spaceship_1")
+
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="Camera_Controller"]
+remote_path = NodePath("../../../Player/Camera2D")
+update_rotation = false

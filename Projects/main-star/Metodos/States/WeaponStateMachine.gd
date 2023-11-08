@@ -1,4 +1,5 @@
 extends StateMachine
+class_name WeaponStateMachine
 
 # Variables
 var state_names : Array = [] # Lista para almacenar los nombres de los estados
@@ -9,7 +10,7 @@ func _ready():
 	super._ready()
 	# Obtener los nombres de los estados del diccionario
 	state_names = states.keys()
-	print(state_names)
+	#print(state_names)
 
 func _process(_delta):
 	if Input.is_action_just_pressed("i"):
@@ -29,3 +30,4 @@ func _process(_delta):
 
 func _on_equipment_shoot(_rotation, _location):
 	current_state.fire(_rotation, _location)
+

@@ -1,0 +1,56 @@
+[gd_scene load_steps=8 format=3 uid="uid://g4t1hlsi4hj8"]
+
+[ext_resource type="Script" path="res://Nodes/Player/Crosshair_onShip.gd" id="1_k4i27"]
+[ext_resource type="Texture2D" uid="uid://bhpk0uq510jxj" path="res://Assets/UI/Crosshair/Crosshairs_Outline_Spritesheet.png" id="2_iw5ei"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lvq76"]
+atlas = ExtResource("2_iw5ei")
+region = Rect2(68, 102, 17, 17)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_262ed"]
+atlas = ExtResource("2_iw5ei")
+region = Rect2(51, 102, 17, 17)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_phlso"]
+atlas = ExtResource("2_iw5ei")
+region = Rect2(34, 102, 17, 17)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gt6yn"]
+atlas = ExtResource("2_iw5ei")
+region = Rect2(17, 102, 17, 17)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_qrv2o"]
+animations = [{
+"frames": [],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lvq76")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_262ed")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_phlso")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gt6yn")
+}],
+"loop": true,
+"name": &"shooting",
+"speed": 9.0
+}]
+
+[node name="Crosshair_onShip" type="Node2D" node_paths=PackedStringArray("animated_sprite")]
+position = Vector2(0, -30)
+script = ExtResource("1_k4i27")
+player_spaceship = NodePath("..")
+animated_sprite = NodePath("AnimatedSprite2D")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_qrv2o")
+animation = &"shooting"
+frame_progress = 0.667211

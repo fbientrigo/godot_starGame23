@@ -1,0 +1,23 @@
+[gd_scene load_steps=6 format=3 uid="uid://km12pyk2lnw8"]
+
+[ext_resource type="Script" path="res://Metodos/States/WeaponStateMachine.gd" id="1_f52jw"]
+[ext_resource type="PackedScene" uid="uid://b8vp8i0wxw24a" path="res://Metodos/weapon.tscn" id="2_swqjf"]
+[ext_resource type="Script" path="res://Metodos/weapon_9mm.gd" id="3_dotj1"]
+[ext_resource type="Script" path="res://Metodos/weapon_machinegun.gd" id="4_fo0l3"]
+[ext_resource type="Script" path="res://Metodos/weapon_heavy.gd" id="5_6solp"]
+
+[node name="BasicWeaponStateMachine" type="Node2D"]
+script = ExtResource("1_f52jw")
+
+[node name="9mm" parent="." instance=ExtResource("2_swqjf")]
+script = ExtResource("3_dotj1")
+cooldown = 25
+
+[node name="machinegun" parent="." instance=ExtResource("2_swqjf")]
+script = ExtResource("4_fo0l3")
+cooldown = 4.0
+max_recoil = 0.1309
+
+[node name="heavy" parent="." instance=ExtResource("2_swqjf")]
+script = ExtResource("5_6solp")
+cooldown = 10.0

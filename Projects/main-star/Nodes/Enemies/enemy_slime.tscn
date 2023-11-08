@@ -1,7 +1,6 @@
 [gd_scene load_steps=65 format=3 uid="uid://uxgaqqqjl0px"]
 
 [ext_resource type="Script" path="res://Nodes/Enemies/Enemy.gd" id="1_apl8o"]
-[ext_resource type="Script" path="res://Metodos/Movement.gd" id="2_d4w58"]
 [ext_resource type="Script" path="res://Nodes/Player/Equipment.gd" id="3_iyg5a"]
 [ext_resource type="Texture2D" uid="uid://duwc830a5g8hq" path="res://Assets/Ships/Main Ship - Engine Effects/Main Ship - Engines - Base Engine - Idle.png" id="4_balub"]
 [ext_resource type="Texture2D" uid="uid://buds5gwm6oca3" path="res://Assets/Ships/Main Ship - Engine Effects/Main Ship - Engines - Base Engine - Powering.png" id="5_p1qmy"]
@@ -13,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://cgfuua2pxmajk" path="res://Metodos/HitboxComponent.tscn" id="11_ctdx0"]
 [ext_resource type="PackedScene" uid="uid://1vrkeeswwdnw" path="res://Metodos/HealthComponent.tscn" id="12_6d24i"]
 [ext_resource type="PackedScene" uid="uid://byrncwn5e2g0y" path="res://Metodos/Sensor.tscn" id="13_pj13g"]
+[ext_resource type="Script" path="res://Nodes/Enemies/MovementSlime.gd" id="13_t422h"]
 [ext_resource type="PackedScene" uid="uid://dyuvy1275lb7g" path="res://Metodos/States/StateMachine.tscn" id="14_u7s4n"]
 [ext_resource type="Script" path="res://Metodos/States/IA/WanderingIdle.gd" id="15_qvu4u"]
 [ext_resource type="Script" path="res://Metodos/States/IA/EnemyFollow.gd" id="16_57tr5"]
@@ -394,7 +394,6 @@ rotation = 1.5708
 script = ExtResource("3_iyg5a")
 spaceship_1_path = NodePath("..")
 engine_anim_path = NodePath("engine_sprites")
-cooldown_weapon_time = 0.25
 
 [node name="engine_sprites" type="AnimatedSprite2D" parent="Equipment"]
 sprite_frames = SubResource("SpriteFrames_mdhpf")
@@ -417,7 +416,6 @@ animation = &"base_anim"
 frame_progress = 0.327154
 
 [node name="CollisionPoly" type="CollisionPolygon2D" parent="."]
-visible = false
 position = Vector2(-1.84774e-06, -1.29007)
 scale = Vector2(1.1875, 1.10662)
 polygon = PackedVector2Array(10.9474, -17.8109, 6.73687, -9.67804, 4.21051, 10.2023, 10.1052, 24.6608, -14.3159, 30.9863, -13.4736, -34.9804)
@@ -426,25 +424,22 @@ polygon = PackedVector2Array(10.9474, -17.8109, 6.73687, -9.67804, 4.21051, 10.2
 attenuation = 0.90125
 
 [node name="HitboxComponent" parent="." instance=ExtResource("11_ctdx0")]
-visible = false
 collision_layer = 0
 collision_mask = 2
 damage = 1
 
-[node name="HealthComponent" parent="." instance=ExtResource("12_6d24i")]
-visible = false
+[node name="HealthComponent" parent="." groups=["Enemy"] instance=ExtResource("12_6d24i")]
 collision_layer = 4
-collision_mask = 2
+collision_mask = 0
 max_health = 4
 HurtBoxType = 1
 
 [node name="Sensor" parent="." instance=ExtResource("13_pj13g")]
-visible = false
 scale = Vector2(2.103, 2.103)
 collision_layer = 0
 
 [node name="Movement" type="Node" parent="."]
-script = ExtResource("2_d4w58")
+script = ExtResource("13_t422h")
 speed = 120.0
 max_speed = 200.0
 
@@ -462,5 +457,8 @@ rango_vision_player = 800
 probabilidad_atacar_player = 1.0
 
 [node name="Weapon_StateMachine" parent="." instance=ExtResource("14_u7s4n")]
+
+[connection signal="onDead" from="HealthComponent" to="." method="_on_health_component_on_dead"]
+[connection signal="area_entered" from="Sensor" to="." method="_on_sensor_area_entered"]
 
 [editable path="HitboxComponent"]

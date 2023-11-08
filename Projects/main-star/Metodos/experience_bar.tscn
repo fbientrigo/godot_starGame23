@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://dqqaeq4d10eju"]
+
+[ext_resource type="Texture2D" uid="uid://dt3mkpqwv8y27" path="res://Assets/UI/GUI/exp_background.png" id="1_1bsi6"]
+[ext_resource type="Texture2D" uid="uid://btxmf0adt2cs5" path="res://Assets/UI/GUI/exp_progress.png" id="2_8m0w5"]
+
+[node name="ExperienceBar" type="TextureProgressBar"]
+rounded = true
+texture_under = ExtResource("1_1bsi6")
+texture_progress = ExtResource("2_8m0w5")
+
+[node name="lbl_level" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 5.0
+offset_top = -3.0
+offset_right = 160.0
+offset_bottom = 23.0
+text = "Level: 1"

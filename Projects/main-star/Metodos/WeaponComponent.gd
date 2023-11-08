@@ -6,32 +6,29 @@ class_name Weapon
 # mientras vamos a tenerlo ya agregado para pruebas
 # var bullet := preload("res://Nodes/Guns/Projectiles/bala_9_mm.tscn")
 
-@export var cooldown = 25
+# cada state se proecupa de su propio cooldown
 
-var last_shot = cooldown + 5 # cuando lastshoot es menor no dispara
+var last_shot = 0 # cuando lastshoot es menor no dispara
 var projectiles = []
 var bullet : PackedScene
 #var source_body = get_parent().position
 
 
 
-func fire(rotation, direction, hardpoint=self):
-	
-	if last_shot < cooldown: return
-	else: last_shot = 0
+func low_level_fire(rotation, direction, phase = 0.0,type='direction',hardpoint=self):
+
 
 	var projectile = bullet.instantiate()
-
-	var bullet_speed = projectile.bullet_speed
-	projectile.rotation = rotation
 	projectile.position = hardpoint.global_position
-	#projectile.add_collision_exception_with(s)
+	var bullet_speed = projectile.bullet_speed
+	if type == 'rotation':
+		projectile.rotation = rotation + phase
+	elif type == 'direction':
+		projectile.rotation = hardpoint.global_position.angle_to_point(direction) - PI/2 + phase
+	
+	var velocity = Vector2(bullet_speed,0).rotated(projectile.rotation)
+	
 	get_node("/root").add_child(projectile)
-	
-	
-	
-	
-	var velocity = Vector2(bullet_speed,0).rotated(rotation)
 	
 	projectiles.append({
 		"projectile": projectile,

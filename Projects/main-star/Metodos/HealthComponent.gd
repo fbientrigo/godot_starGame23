@@ -72,7 +72,7 @@ func _on_disable_timer_timeout():
 func set_health(value:int):
 	current_health += value
 	current_health = clamp(current_health, 0, max_health)
-	print("Vida actual:", current_health)
+	#print("Vida actual:", current_health)
 	if current_health <= 0:
 		dead()
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=55 format=3 uid="uid://brab36ph13h7o"]
+[gd_scene load_steps=48 format=3 uid="uid://brab36ph13h7o"]
 
 [ext_resource type="Script" path="res://Nodes/Player/spaceship_1.gd" id="1_qwja0"]
 [ext_resource type="Script" path="res://Nodes/Player/Equipment.gd" id="2_56e12"]
@@ -10,15 +10,11 @@
 [ext_resource type="Texture2D" uid="uid://ckfq0rny1s0ai" path="res://Assets/Ships/Main Ship - Bases/Main Ship - Base - Slight damage.png" id="8_oc67t"]
 [ext_resource type="Texture2D" uid="uid://dcg5520428m6v" path="res://Assets/Ships/Main Ship - Bases/Main Ship - Base - Damaged.png" id="9_d1b2u"]
 [ext_resource type="Texture2D" uid="uid://0xo55d1si0r7" path="res://Assets/Ships/Main Ship - Bases/Main Ship - Base - Very damaged.png" id="10_ra6fo"]
-[ext_resource type="Script" path="res://Nodes/Player/Crosshair_onShip.gd" id="11_4tdka"]
 [ext_resource type="AudioStream" uid="uid://bhyxrjhrnoitv" path="res://Nodes/Player/Thrust_Loop.wav" id="11_t5vvy"]
-[ext_resource type="Texture2D" uid="uid://bhpk0uq510jxj" path="res://Assets/UI/Crosshair/Crosshairs_Outline_Spritesheet.png" id="12_hgdcc"]
 [ext_resource type="PackedScene" uid="uid://1vrkeeswwdnw" path="res://Metodos/HealthComponent.tscn" id="13_eg23g"]
-[ext_resource type="PackedScene" uid="uid://b8vp8i0wxw24a" path="res://Metodos/weapon.tscn" id="15_c8bwd"]
-[ext_resource type="PackedScene" uid="uid://dyuvy1275lb7g" path="res://Metodos/States/StateMachine.tscn" id="15_laogf"]
-[ext_resource type="Script" path="res://Metodos/States/WeaponStateMachine.gd" id="16_jp184"]
-[ext_resource type="Script" path="res://Metodos/weapon_9mm.gd" id="18_3ss5v"]
-[ext_resource type="Script" path="res://Metodos/weapon_heavy.gd" id="19_u276p"]
+[ext_resource type="PackedScene" uid="uid://km12pyk2lnw8" path="res://Nodes/Guns/basic_weapon_state_machine.tscn" id="15_d4oj6"]
+[ext_resource type="Script" path="res://Nodes/Grabber.gd" id="16_4lyqk"]
+[ext_resource type="Script" path="res://Nodes/Picker.gd" id="17_tqhhl"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vflbb"]
 atlas = ExtResource("3_at3vc")
@@ -253,50 +249,15 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_lvq76"]
-atlas = ExtResource("12_hgdcc")
-region = Rect2(68, 102, 17, 17)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_262ed"]
-atlas = ExtResource("12_hgdcc")
-region = Rect2(51, 102, 17, 17)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_phlso"]
-atlas = ExtResource("12_hgdcc")
-region = Rect2(34, 102, 17, 17)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_gt6yn"]
-atlas = ExtResource("12_hgdcc")
-region = Rect2(17, 102, 17, 17)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_qrv2o"]
-animations = [{
-"frames": [],
-"loop": true,
-"name": &"default",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_lvq76")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_262ed")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_phlso")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_gt6yn")
-}],
-"loop": true,
-"name": &"shooting",
-"speed": 9.0
-}]
-
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_6b5gj"]
 radius = 5.0
 height = 24.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_o0jen"]
+radius = 82.27
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_x1me7"]
+radius = 18.1108
 
 [node name="spaceship_1" type="RigidBody2D" groups=["Player"]]
 rotation = 3.14159
@@ -345,18 +306,8 @@ stream = ExtResource("11_t5vvy")
 volume_db = -0.487
 attenuation = 0.594603
 
-[node name="Crosshair_onShip" type="Node2D" parent="." node_paths=PackedStringArray("animated_sprite")]
-position = Vector2(0, -30)
-script = ExtResource("11_4tdka")
-player_spaceship = NodePath("..")
-animated_sprite = NodePath("AnimatedSprite2D")
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Crosshair_onShip"]
-sprite_frames = SubResource("SpriteFrames_qrv2o")
-animation = &"shooting"
-frame_progress = 0.667211
-
 [node name="HealthComponent" parent="." instance=ExtResource("13_eg23g")]
+visible = false
 collision_layer = 2
 collision_mask = 29
 DeadType = 3
@@ -367,23 +318,29 @@ shape = SubResource("CapsuleShape2D_6b5gj")
 [node name="DisableTimer" parent="HealthComponent" index="1"]
 wait_time = 0.5
 
-[node name="WeaponStateMachine" parent="." node_paths=PackedStringArray("initial_state") instance=ExtResource("15_laogf")]
-script = ExtResource("16_jp184")
-initial_state = NodePath("heavymachinegun")
-
-[node name="9mm" parent="WeaponStateMachine" instance=ExtResource("15_c8bwd")]
+[node name="BasicWeaponStateMachine" parent="." node_paths=PackedStringArray("initial_state") instance=ExtResource("15_d4oj6")]
 position = Vector2(3.80277e-05, -15)
-script = ExtResource("18_3ss5v")
+initial_state = NodePath("heavy")
 
-[node name="machinegun" parent="WeaponStateMachine" instance=ExtResource("15_c8bwd")]
-position = Vector2(3.80277e-05, -15)
+[node name="Grabber" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 96
+script = ExtResource("16_4lyqk")
 
-[node name="heavymachinegun" parent="WeaponStateMachine" instance=ExtResource("15_c8bwd")]
-position = Vector2(3.80277e-05, -15)
-script = ExtResource("19_u276p")
-cooldown = 5
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Grabber"]
+shape = SubResource("CircleShape2D_o0jen")
 
-[connection signal="shoot" from="Equipment" to="Crosshair_onShip" method="_on_equipment_shoot"]
-[connection signal="shoot" from="Equipment" to="WeaponStateMachine" method="_on_equipment_shoot"]
+[node name="Picker" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 96
+script = ExtResource("17_tqhhl")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Picker"]
+shape = SubResource("CircleShape2D_x1me7")
+
+[connection signal="shoot" from="Equipment" to="BasicWeaponStateMachine" method="_on_equipment_shoot"]
+[connection signal="area_entered" from="Grabber" to="." method="_on_grabber_area_entered"]
+[connection signal="area_entered" from="Picker" to="." method="_on_picker_area_entered"]
 
 [editable path="HealthComponent"]
+[editable path="BasicWeaponStateMachine"]

@@ -10,12 +10,8 @@ var player_area : Area2D
 
 func _ready():
 	load_states()
-	print(states)
-	print("IA State Machine Extended")
-	print(current_state)
-
-	on_child_transition(current_state, "EnemyFollow")
-	print(current_state)
+	#on_child_transition(current_state, "EnemyFollow")
+	
 
 
 func _on_sensor_area_entered(area):

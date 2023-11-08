@@ -18,7 +18,7 @@ func _ready():
 func load_states():
 	# En el evento "ready," se recorren los hijos de la máquina en busca de nodos de tipo "State."
 	for child in get_children():
-		print("children:,", child)
+		#print("children:,", child)
 		if child is State:
 			states[child.name.to_lower()] = child  # Se actualiza el diccionario de estados.
 			# Se conecta la señal "Transitioned" de cada estado a la función "on_child_transition."
@@ -28,7 +28,7 @@ func load_states():
 		# Si se ha definido un estado inicial, se llama al método "Enter" de ese estado.
 		initial_state.Enter()
 		current_state = initial_state
-	print(states)
+	#print(states)
 
 
 func _process(delta):
@@ -65,6 +65,9 @@ func set_initial_state(new_initial_state: State):
 		initial_state.Enter()
 		current_state = initial_state
 	else:
+		print("Error en StateMachine.gd")
+		var parent_node = get_parent()
+		print("	nodo padre es: ", parent_node)
 		print("El nuevo estado inicial no está en la lista de estados disponibles.")
 
 # =------ señales:

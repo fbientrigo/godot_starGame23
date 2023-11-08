@@ -323,7 +323,6 @@ rotation = 1.5708
 script = ExtResource("3_epa8a")
 spaceship_1_path = NodePath("..")
 engine_anim_path = NodePath("engine_sprites")
-cooldown_weapon_time = 0.25
 
 [node name="engine_sprites" type="AnimatedSprite2D" parent="Equipment"]
 sprite_frames = SubResource("SpriteFrames_mdhpf")
@@ -360,13 +359,15 @@ collision_layer = 0
 collision_mask = 2
 damage = 1
 
-[node name="HealthComponent" parent="." instance=ExtResource("9_q8vln")]
+[node name="HealthComponent" parent="." groups=["Enemy"] instance=ExtResource("9_q8vln")]
 collision_layer = 4
 collision_mask = 2
 max_health = 4
 HurtBoxType = 1
 
 [node name="Sensor" parent="." instance=ExtResource("11_3jmin")]
+self_modulate = Color(1, 0.733333, 0.690196, 1)
+show_behind_parent = true
 collision_layer = 0
 
 [node name="Movement" type="Node" parent="."]
@@ -381,14 +382,13 @@ initial_state = NodePath("WanderingIdle")
 [node name="WanderingIdle" type="Node" parent="IA_StateMachine" node_paths=PackedStringArray("object")]
 script = ExtResource("13_gd583")
 object = NodePath("../..")
+move_speed = 80.0
 
 [node name="EnemyFollow" type="Node" parent="IA_StateMachine" node_paths=PackedStringArray("enemy")]
 script = ExtResource("15_bjrxe")
 enemy = NodePath("../..")
-rango_vision_player = 1500
+rango_vision_player = 2000
 probabilidad_atacar_player = 1.0
-
-[node name="Weapon_StateMachine" parent="." instance=ExtResource("12_pww30")]
 
 [connection signal="onDead" from="HealthComponent" to="." method="_on_health_component_on_dead"]
 [connection signal="area_entered" from="Sensor" to="IA_StateMachine" method="_on_sensor_area_entered"]

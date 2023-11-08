@@ -13,18 +13,6 @@ extends Node2D
 signal engine_state_changed(old_value, new_value)
 
 
-# Define the engine states
-enum EngineStates {
-	IDLE,
-	BASE_THRUST,
-	SUPER_THRUST,
-	MACHINE_GUN,
-	GRAV_GUN,
-	PICKAXE_GUN,
-	LASER_GUN,
-	TP_GUN,
-	EXTRA
-}
 
 # se usa para conectar con otros elementos
 @export var spaceship_1_path: NodePath
@@ -73,4 +61,19 @@ func _process(_delta):
 	if Input.is_action_pressed("click"):
 		emit_signal("shoot",  global_rotation, global_position)
 		
+		
+		
+# Define the engine states
+enum EngineStates {
+	IDLE,
+	BASE_THRUST,
+	SUPER_THRUST,
+	MACHINE_GUN,
+	GRAV_GUN,
+	PICKAXE_GUN,
+	LASER_GUN,
+	TP_GUN,
+	EXTRA
+}
+
 	

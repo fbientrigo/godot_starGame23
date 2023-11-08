@@ -1,34 +1,59 @@
-[gd_scene load_steps=3 format=3 uid="uid://xf25c6be7lxe"]
+[gd_scene load_steps=5 format=3 uid="uid://xf25c6be7lxe"]
 
 [ext_resource type="PackedScene" uid="uid://bqab1a0i6m4h7" path="res://Nodes/Star/star_turret.tscn" id="1_ormb0"]
 [ext_resource type="PackedScene" uid="uid://ce8bfmrsk33n" path="res://Nodes/Enemies/spawner.tscn" id="2_0dkel"]
+[ext_resource type="PackedScene" uid="uid://bhxlsbs7rvctp" path="res://Nodes/Enemies/Enemy.tscn" id="3_epjq3"]
+[ext_resource type="PackedScene" uid="uid://me0wanq6rcss" path="res://Metodos/player.tscn" id="4_os4li"]
 
 [node name="TestEstrellas" type="Node2D" groups=["Level"]]
 
-[node name="StarTurret" parent="." instance=ExtResource("1_ormb0")]
-position = Vector2(542, 153)
-tipo_estrella = "TipoB"
-
 [node name="StarTurret2" parent="." instance=ExtResource("1_ormb0")]
-position = Vector2(-105, 493)
-tipo_estrella = "TipoO"
+position = Vector2(143, 1501)
+tipo_estrella = "TipoRG"
 
 [node name="StarTurret3" parent="." instance=ExtResource("1_ormb0")]
-position = Vector2(72, 97)
-tipo_estrella = "TipoA"
+position = Vector2(1400, 1519)
+tipo_estrella = "TipoF"
 
 [node name="StarTurret4" parent="." instance=ExtResource("1_ormb0")]
-position = Vector2(306, 471)
-
-[node name="StarTurret5" parent="." instance=ExtResource("1_ormb0")]
-position = Vector2(693, 544)
+position = Vector2(559, -1128)
+tipo_estrella = "TipoB"
 
 [node name="StarTurret6" parent="." instance=ExtResource("1_ormb0")]
-position = Vector2(1207, 284)
+position = Vector2(1760, -713)
+tipo_estrella = "TipoA"
+
+[node name="StarTurret8" parent="." instance=ExtResource("1_ormb0")]
+position = Vector2(2262, 389)
+tipo_estrella = "TipoSRG"
+
+[node name="StarTurret5" parent="." instance=ExtResource("1_ormb0")]
+position = Vector2(592, 333)
 
 [node name="StarTurret7" parent="." instance=ExtResource("1_ormb0")]
-position = Vector2(1146, 667)
+position = Vector2(1245, 697)
 
-[node name="spawner" parent="." instance=ExtResource("2_0dkel")]
-position = Vector2(571, 331)
-spawn_radius = 1.0
+[node name="spawner2" parent="." instance=ExtResource("2_0dkel")]
+position = Vector2(467, 364)
+spawn_radius = 0.0
+
+[node name="spawner4" parent="." instance=ExtResource("2_0dkel")]
+position = Vector2(548, 112)
+spawn_radius = 0.0
+
+[node name="spawner3" parent="." instance=ExtResource("2_0dkel")]
+position = Vector2(270, 184)
+spawn_interval_min = 10.0
+spawn_interval_max = 30.0
+spawn_radius = 0.0
+
+[node name="Enemy" parent="." instance=ExtResource("3_epjq3")]
+position = Vector2(415, 243)
+
+[node name="Enemy2" parent="." instance=ExtResource("3_epjq3")]
+position = Vector2(716, 563)
+
+[node name="Enemy3" parent="." instance=ExtResource("3_epjq3")]
+position = Vector2(894, 203)
+
+[node name="Player" parent="." instance=ExtResource("4_os4li")]

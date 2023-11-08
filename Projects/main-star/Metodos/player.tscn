@@ -1,58 +1,81 @@
-[gd_scene load_steps=6 format=3 uid="uid://me0wanq6rcss"]
+[gd_scene load_steps=7 format=3 uid="uid://me0wanq6rcss"]
 
 [ext_resource type="PackedScene" uid="uid://brab36ph13h7o" path="res://Nodes/spaceship_1.tscn" id="1_q5dtn"]
+[ext_resource type="Script" path="res://Metodos/player.gd" id="1_tprph"]
 [ext_resource type="Script" path="res://Scenes/root_balas.gd" id="2_8mm4j"]
-[ext_resource type="Script" path="res://Metodos/BuiildModule.gd" id="3_vjiqo"]
-[ext_resource type="PackedScene" uid="uid://bqab1a0i6m4h7" path="res://Nodes/Star/star_turret.tscn" id="4_dyi20"]
-[ext_resource type="Script" path="res://Scenes/UI.gd" id="7_mffoc"]
+[ext_resource type="Script" path="res://Scenes/Camera_Controller.gd" id="3_1e071"]
+[ext_resource type="PackedScene" uid="uid://bwfd1rqogx08v" path="res://Metodos/gui_layer.tscn" id="4_g7kpv"]
+[ext_resource type="PackedScene" uid="uid://g4t1hlsi4hj8" path="res://Metodos/crosshair_on_ship.tscn" id="5_gxqnc"]
 
-[node name="Player" type="Node"]
+[node name="Player" type="Node2D" node_paths=PackedStringArray("expBar", "lbl_level", "spaceship", "crosshair", "levelPanel", "upgradeOptions", "sndLevelUp")]
+script = ExtResource("1_tprph")
+animation_damage_sprites = NodePath("spaceship_1/Base/damage_sprites")
+expBar = NodePath("GUILayer/GUI/MarginContainer/ExperienceBar")
+lbl_level = NodePath("GUILayer/GUI/MarginContainer/ExperienceBar/lbl_level")
+spaceship = NodePath("spaceship_1")
+crosshair = NodePath("Crosshair_onShip")
+levelPanel = NodePath("GUILayer/GUI/LevelUpPanel")
+upgradeOptions = NodePath("GUILayer/GUI/LevelUpPanel/UpgradeOptions")
+sndLevelUp = NodePath("GUILayer/GUI/LevelUpPanel/snd_levelup")
 
-[node name="spaceship_1" parent="." instance=ExtResource("1_q5dtn")]
-position = Vector2(1, 501)
+[node name="spaceship_1" parent="." node_paths=PackedStringArray("crosshair") instance=ExtResource("1_q5dtn")]
 rotation = 0.0
 collision_layer = 2
-inertia = 2.5
+inertia = 2.0
 linear_damp = 1.6
 angular_damp = 10.0
 velocidad_nave = 320.0
-torque_strength = 60.0
-propulsor_strength = 350.0
+torque_strength = 85.0
+propulsor_strength = 500.0
+crosshair = NodePath("../Crosshair_onShip")
 
 [node name="root_balas" type="Node2D" parent="."]
 script = ExtResource("2_8mm4j")
 
-[node name="BuiildModule" type="Node2D" parent="."]
-script = ExtResource("3_vjiqo")
-
-[node name="Sol" parent="BuiildModule" instance=ExtResource("4_dyi20")]
-position = Vector2(0, -7)
-tipo_estrella = "TipoG"
-
-[node name="Sol2" parent="BuiildModule" instance=ExtResource("4_dyi20")]
-position = Vector2(-346, -545)
-
-[node name="Sol3" parent="BuiildModule" instance=ExtResource("4_dyi20")]
-position = Vector2(639, -535)
+[node name="Crosshair_onShip" parent="." instance=ExtResource("5_gxqnc")]
+unique_name_in_owner = true
+position = Vector2(0, 1)
+player_spaceship_path = NodePath("../spaceship_1")
+is_joystick = false
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(1.7, 1.7)
 position_smoothing_enabled = true
+position_smoothing_speed = 6.0
+script = ExtResource("3_1e071")
+player_path = NodePath("../spaceship_1")
 
-[node name="UI" type="CanvasLayer" parent="Camera2D"]
-script = ExtResource("7_mffoc")
+[node name="GUILayer" parent="." instance=ExtResource("4_g7kpv")]
+unique_name_in_owner = true
+follow_viewport_enabled = false
 
-[node name="HUD" type="Control" parent="Camera2D/UI"]
-layout_mode = 3
+[node name="GUI" parent="GUILayer" index="0"]
+top_level = true
+clip_children = 2
+anchors_preset = -1
+
+[node name="MarginContainer" parent="GUILayer/GUI" index="0"]
+layout_mode = 0
 anchors_preset = 0
-offset_left = -339.0
-offset_top = -190.0
-offset_right = 341.0
-offset_bottom = 189.0
+anchor_right = 0.0
+offset_right = 651.0
+offset_bottom = 40.0
+grow_horizontal = 1
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Camera2D/UI/HUD"]
-layout_mode = 1
-offset_right = 175.0
-offset_bottom = 43.0
+[node name="LevelUpPanel" parent="GUILayer/GUI" index="1"]
+visible = false
+offset_top = 800.0
+offset_bottom = 1210.0
 
-[connection signal="shoot_pass_from_equipment" from="spaceship_1" to="root_balas" method="_on_spaceship_1_shoot_pass_from_equipment"]
+[node name="Label" type="Label" parent="GUILayer"]
+offset_left = 3.0
+offset_top = 28.0
+offset_right = 118.0
+offset_bottom = 54.0
+
+[connection signal="got_exp" from="spaceship_1" to="." method="_on_spaceship_1_got_exp"]
+
+[editable path="spaceship_1"]
+[editable path="spaceship_1/HealthComponent"]
+[editable path="spaceship_1/BasicWeaponStateMachine"]
+[editable path="GUILayer"]

@@ -1,0 +1,107 @@
+[gd_scene load_steps=4 format=3 uid="uid://b0t62rnhq0fdy"]
+
+[ext_resource type="PackedScene" uid="uid://me0wanq6rcss" path="res://Metodos/player.tscn" id="1_ldd6g"]
+[ext_resource type="PackedScene" uid="uid://ucfco31tegc1" path="res://Nodes/Objects/Object.tscn" id="2_1hbeg"]
+[ext_resource type="PackedScene" uid="uid://csc6cyvaojn3c" path="res://Scenes/entorno.tscn" id="3_cpwic"]
+
+[node name="Level" type="Node2D" groups=["Level"]]
+
+[node name="Player" parent="." instance=ExtResource("1_ldd6g")]
+position = Vector2(0, 138)
+
+[node name="Object" parent="." instance=ExtResource("2_1hbeg")]
+position = Vector2(130, 316)
+
+[node name="Object6" parent="." instance=ExtResource("2_1hbeg")]
+position = Vector2(-322, 180)
+
+[node name="Object2" parent="." instance=ExtResource("2_1hbeg")]
+position = Vector2(-42, 229)
+
+[node name="Object3" parent="." instance=ExtResource("2_1hbeg")]
+position = Vector2(109, 17)
+
+[node name="Object4" parent="." instance=ExtResource("2_1hbeg")]
+position = Vector2(-305, 47)
+
+[node name="Object7" parent="." instance=ExtResource("2_1hbeg")]
+position = Vector2(-90, 828)
+
+[node name="Object8" parent="." instance=ExtResource("2_1hbeg")]
+position = Vector2(-229, 1120)
+
+[node name="Object9" parent="." instance=ExtResource("2_1hbeg")]
+position = Vector2(-181, 373)
+
+[node name="Object10" parent="." instance=ExtResource("2_1hbeg")]
+position = Vector2(-30, 161)
+
+[node name="Object11" parent="." instance=ExtResource("2_1hbeg")]
+position = Vector2(-444, 191)
+
+[node name="Object12" parent="." instance=ExtResource("2_1hbeg")]
+position = Vector2(-180, 431)
+
+[node name="Object13" parent="." instance=ExtResource("2_1hbeg")]
+position = Vector2(177, 532)
+
+[node name="Object14" parent="." instance=ExtResource("2_1hbeg")]
+position = Vector2(-352, 344)
+
+[node name="Object15" parent="." instance=ExtResource("2_1hbeg")]
+position = Vector2(-201, 132)
+
+[node name="Object16" parent="." instance=ExtResource("2_1hbeg")]
+position = Vector2(194, 399)
+
+[node name="Object17" parent="." instance=ExtResource("2_1hbeg")]
+position = Vector2(-113, -102)
+
+[node name="Object18" parent="." instance=ExtResource("2_1hbeg")]
+position = Vector2(-252, 190)
+
+[node name="Object19" parent="." instance=ExtResource("2_1hbeg")]
+position = Vector2(-285, -189)
+
+[node name="Object20" parent="." instance=ExtResource("2_1hbeg")]
+position = Vector2(-630, -210)
+
+[node name="Object21" parent="." instance=ExtResource("2_1hbeg")]
+position = Vector2(-1044, -180)
+
+[node name="Object22" parent="." instance=ExtResource("2_1hbeg")]
+position = Vector2(757, -375)
+
+[node name="Object23" parent="." instance=ExtResource("2_1hbeg")]
+position = Vector2(1114, -274)
+
+[node name="Object24" parent="." instance=ExtResource("2_1hbeg")]
+position = Vector2(585, -462)
+
+[node name="Object25" parent="." instance=ExtResource("2_1hbeg")]
+position = Vector2(736, -674)
+
+[node name="Object26" parent="." instance=ExtResource("2_1hbeg")]
+position = Vector2(322, -644)
+
+[node name="Object27" parent="." instance=ExtResource("2_1hbeg")]
+position = Vector2(-377, -395)
+
+[node name="Object28" parent="." instance=ExtResource("2_1hbeg")]
+position = Vector2(-20, -294)
+
+[node name="Object29" parent="." instance=ExtResource("2_1hbeg")]
+position = Vector2(-549, -482)
+
+[node name="Object30" parent="." instance=ExtResource("2_1hbeg")]
+position = Vector2(-398, -694)
+
+[node name="Object31" parent="." instance=ExtResource("2_1hbeg")]
+position = Vector2(-812, -664)
+
+[node name="Object5" parent="." instance=ExtResource("2_1hbeg")]
+position = Vector2(-322, 32)
+
+[node name="Entorno" parent="." instance=ExtResource("3_cpwic")]
+visible = false
+position = Vector2(-9, 3)

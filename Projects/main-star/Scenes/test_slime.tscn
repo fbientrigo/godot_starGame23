@@ -1,0 +1,27 @@
+[gd_scene load_steps=3 format=3 uid="uid://cse4pp85lfcyu"]
+
+[ext_resource type="PackedScene" uid="uid://uxgaqqqjl0px" path="res://Nodes/Enemies/enemy_slime.tscn" id="1_r1jrs"]
+[ext_resource type="PackedScene" uid="uid://me0wanq6rcss" path="res://Metodos/player.tscn" id="2_0r6lq"]
+
+[node name="testSlime" type="Node2D"]
+
+[node name="enemy_slime" parent="." instance=ExtResource("1_r1jrs")]
+position = Vector2(1061, -585)
+
+[node name="enemy_slime2" parent="." instance=ExtResource("1_r1jrs")]
+position = Vector2(1645, 1027)
+
+[node name="enemy_slime3" parent="." instance=ExtResource("1_r1jrs")]
+position = Vector2(1861, -765)
+
+[node name="enemy_slime4" parent="." instance=ExtResource("1_r1jrs")]
+position = Vector2(1865, -177)
+
+[node name="enemy_slime5" parent="." instance=ExtResource("1_r1jrs")]
+position = Vector2(1381, -809)
+
+[node name="enemy_slime6" parent="." instance=ExtResource("1_r1jrs")]
+position = Vector2(693, -873)
+
+[node name="Player" parent="." instance=ExtResource("2_0r6lq")]
+position = Vector2(516, -353)
