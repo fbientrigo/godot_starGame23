@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://bwfd1rqogx08v" path="res://Metodos/gui_layer.tscn" id="4_g7kpv"]
 [ext_resource type="PackedScene" uid="uid://g4t1hlsi4hj8" path="res://Metodos/crosshair_on_ship.tscn" id="5_gxqnc"]
 
-[node name="Player" type="Node2D" node_paths=PackedStringArray("expBar", "lbl_level", "spaceship", "crosshair", "levelPanel", "upgradeOptions", "sndLevelUp")]
+[node name="Player" type="Node2D" node_paths=PackedStringArray("expBar", "lbl_level", "spaceship", "crosshair", "levelPanel", "upgradeOptions", "sndLevelUp") groups=["player_root"]]
 script = ExtResource("1_tprph")
 animation_damage_sprites = NodePath("spaceship_1/Base/damage_sprites")
 expBar = NodePath("GUILayer/GUI/MarginContainer/ExperienceBar")
@@ -63,9 +63,15 @@ offset_bottom = 40.0
 grow_horizontal = 1
 
 [node name="LevelUpPanel" parent="GUILayer/GUI" index="1"]
-visible = false
+process_mode = 2
+top_level = true
 offset_top = 800.0
 offset_bottom = 1210.0
+
+[node name="UpgradeOptions" parent="GUILayer/GUI/LevelUpPanel" index="1"]
+layout_direction = 2
+offset_right = 960.0
+theme_override_constants/separation = 0
 
 [node name="Label" type="Label" parent="GUILayer"]
 offset_left = 3.0

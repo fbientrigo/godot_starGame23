@@ -15,6 +15,10 @@ run/main_scene="res://Scenes/space_scene_1.tscn"
 config/features=PackedStringArray("4.1", "Mobile")
 config/icon="res://icon.svg"
 
+[autoload]
+
+UpgradeDb="*res://Data/upgrade_db.tscn"
+
 [display]
 
 window/size/viewport_width=1280

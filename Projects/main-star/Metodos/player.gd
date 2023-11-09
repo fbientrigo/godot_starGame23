@@ -1,4 +1,8 @@
 # PlayerCode
+# guarda la logica sobre como tratar con 
+# - niveles
+# - animaciones
+# - cantidad de vida
 extends Node2D
 
 # Nivel de exp:
@@ -26,9 +30,21 @@ var collected_experience = 0 # constant flush
 # combinar con el health component
 @onready var _animated_sprite = get_node(animation_damage_sprites)
 
+# upgrades
 @export var levelPanel : Panel
 @export  var upgradeOptions : HBoxContainer
 @export var sndLevelUp : AudioStreamPlayer
+@onready var itemOptions = preload("res://Metodos/item_option.tscn")
+
+var collected_upgrades = [] # se guardan las mejoras del player
+var upgrade_options = [] # upgrades en oferta
+# para mejoras futuras:
+var armor = 0
+var speed = 0
+var spell_cooldown = 0 
+var spell_size = 0
+var additional_attacks = 0
+
 
 func _ready():
 #	levelPanel= get_node("%LevelUpPanel")
@@ -41,6 +57,7 @@ func _ready():
 
 func _physics_process(delta):
 	# escucha input extra
+	# esta input es para debugging
 	if Input.is_action_just_pressed("levelupgod"):
 		print("god send 20xp")
 		give20xp_asgod()
@@ -55,24 +72,26 @@ func _physics_process(delta):
 
 
 # Grabbing de Experiencia ================
+# esta función esta ocurriendo para spaceship supongo
+#func _on_grabber_area_entered(area):
+#	if area.is_in_group("Loot"):
+#		area.target = self
+#
+#func _on_picker_area_entered(area):
+#	if area.is_in_group("Loot"):
+#		var exp_recb = area.collect()
+#		#print("recibida exp:", exp_recb)
+#		calculate_experience(exp_recb)
 
-func _on_grabber_area_entered(area):
-	if area.is_in_group("Loot"):
-		area.target = self
-		
-
-
-func _on_picker_area_entered(area):
-	if area.is_in_group("Loot"):
-		var exp_recb = area.collect()
-		#print("recibida exp:", exp_recb)
-		calculate_experience(exp_recb)
-
+# la spaceship recibe experiencia y se comunica con este nodo jugador
+# para explicarle cuanta exp llegó
+func _on_spaceship_1_got_exp(exp_recb):
+	calculate_experience(exp_recb)
 
 func give20xp_asgod():
 	# Funcion que sirve como debug, se programa a una tecla secreata
 	# para asi probar subir e nivel
-	calculate_experience(20)
+	calculate_experience(10)
 
 #Recibir la experiencie
 func calculate_experience(exp_recb):
@@ -117,19 +136,72 @@ func set_expbar(set_value = 1, set_max_value=100):
 
 # ==== 1107 tarjetas de levl up 1:22am
 func levelUp():
-	# sndLevelUp.play()
-	print("spaceship_1.gd")
-	print("func levelUP")
-	
+	sndLevelUp.play()
 	var tween = levelPanel.create_tween()
-	tween.tween_property(levelPanel, "position", Vector2(170,160), 0.2).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN)
+	tween.tween_property(levelPanel, "position", Vector2(170,160), 0.3).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN)
 	tween.play()
 	levelPanel.visible = true
+	var options = 0
+	var optionsmax = 3
+	while options < optionsmax: # spawneara opciones
+#		print("player spawning options")
+#		print("\t",get_parent())
+#		print("\t",options)
+#		print("\t ----")
+		var options_choice = itemOptions.instantiate() # agrega objeto carta
+		options_choice.item = get_random_item() # elige el tipo de carta
+		upgradeOptions.add_child(options_choice)
+		options += 1
+	get_tree().paused = true # pausa el juego por detras
+	# El panel debe de estar en modo WhenPaused y no Inherit
+	# o se pausara tambien
 
+# 1108 10pm comencé
+func upgrade_character(upgrade):
+	var options_children = upgradeOptions.get_children() 
+	for op in options_children:
+		op.queue_free() # remueve las opciones tras elegir una
+	upgrade_options.clear() # limpiar ofertas
+	collected_upgrades.append(upgrade)
+	levelPanel.visible = false
+	levelPanel.position = Vector2(170,800) #vuelve a bajar la pantalla
+	get_tree().paused = false
+	calculate_experience(0) # para despabilar
+
+
+func get_random_item():
+	# selecciona solo 1 mejora aleatoria dela base de datos
+	# dado que se cumplan condiciones de no repetición
+	var dblist = []
+	for upgrade_name in UpgradeDb.df:
+		var upgrade = UpgradeDb.df[upgrade_name]
+		if upgrade["player"]: # si es tipo jugador
+			if upgrade_name in collected_upgrades:
+				print("player.gd\n upgrade repetida, no sumandola")
+				pass
+			elif upgrade in upgrade_options: # si ya la eligimos en mostrar
+				pass
+			elif upgrade["prerequisite"].size()>0:
+				for requisito in upgrade["prerequisite"]: # check si tenemos requisitos
+					# tipo strings
+					if not requisito in collected_upgrades:
+						pass
+					else:
+						dblist.append(upgrade_name)
+			else:
+				dblist.append(upgrade_name)
+		elif upgrade["star"]: # las estrellas se pueden agregar siempre
+			dblist.append(upgrade_name)
+			
+	if dblist.size() > 0:
+		var random_card = dblist.pick_random() # str
+		var random_upgrade = UpgradeDb.df[random_card]
+		if random_upgrade["player"]: # si es tipo player es persistente
+			upgrade_options.append(random_card)
+		return random_card
+	else: # si nada cumplio las condiciones, agregaremos cartas basura
+		return null
+
+	
 # ========================================
 
-
-func _on_spaceship_1_got_exp(exp_recb):
-	print("player recibioi exp")
-	print(exp_recb)
-	calculate_experience(exp_recb)
