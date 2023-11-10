@@ -22,7 +22,7 @@ var direction : Vector2
 #	print(enemy)
 
 func Enter():
-	
+	enemy.movement.setup(enemy) # esto arregla casi todos los bugs
 	#get_groups()
 	#por default su velocidad inicial va hacia el jugador
 		##x player = get_tree().get_first_node_in_group("Player")
@@ -39,6 +39,8 @@ func Enter():
 #		print("enemy movement:")
 		if enemy.movement != null:
 			enemy.movement.move(direction)
+
+
 #		if enemy.animation != null:
 
 

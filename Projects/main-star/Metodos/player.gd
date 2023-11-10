@@ -134,7 +134,29 @@ func set_expbar(set_value = 1, set_max_value=100):
 	expBar.max_value = set_max_value
 
 
+signal free_crosshair
+
 # ==== 1107 tarjetas de levl up 1:22am
+# tarjetas seleccionadas
+var tarjetas = []
+var choosed_index = 1
+func clear_mouse_over(tarjetas_array):
+	if tarjetas.size()>0:
+		for t in tarjetas_array:
+			t.mouse_over = false
+func _process(delta):
+	if levelPanel.visible: #modo level
+		if tarjetas.size() > 0:	
+			clear_mouse_over(tarjetas)
+			tarjetas[choosed_index%3].mouse_over = true
+		if Input.is_action_just_pressed("a"):
+			choosed_index -= 1
+		if Input.is_action_just_pressed("d"):
+			choosed_index += 1
+		if choosed_index < 0:
+			choosed_index = 29 # para darle vuelta
+			
+	
 func levelUp():
 	sndLevelUp.play()
 	var tween = levelPanel.create_tween()
@@ -143,6 +165,7 @@ func levelUp():
 	levelPanel.visible = true
 	var options = 0
 	var optionsmax = 3
+	
 	while options < optionsmax: # spawneara opciones
 #		print("player spawning options")
 #		print("\t",get_parent())
@@ -151,8 +174,12 @@ func levelUp():
 		var options_choice = itemOptions.instantiate() # agrega objeto carta
 		options_choice.item = get_random_item() # elige el tipo de carta
 		upgradeOptions.add_child(options_choice)
+		tarjetas.append(options_choice)
 		options += 1
 	get_tree().paused = true # pausa el juego por detras
+	
+	
+	
 	# El panel debe de estar en modo WhenPaused y no Inherit
 	# o se pausara tambien
 
@@ -165,6 +192,7 @@ func upgrade_character(upgrade):
 	collected_upgrades.append(upgrade)
 	levelPanel.visible = false
 	levelPanel.position = Vector2(170,800) #vuelve a bajar la pantalla
+	tarjetas = [] # vacia el arreglo de tarjetas
 	get_tree().paused = false
 	calculate_experience(0) # para despabilar
 

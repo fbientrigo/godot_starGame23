@@ -37,7 +37,8 @@ class_name Enemy # crea una clase
 # Referencia al nodo de animación para controlar las animaciones del enemigo.
 @export var animation : AnimatedSprite2D 
 # Refeencia al nodo de movimiento que permite al enemigo moverse.
-@onready var movement = $Movement as Movement
+#@onready var movement = $Movement as Movement
+@export var movement : Movement
 # Referencia al sensor del enemigo que detecta al jugador.
 @onready var sensor: Area2D = $Sensor
 
@@ -87,4 +88,4 @@ func _on_health_component_on_dead():
 	#print("dead of enemigo, spawning exp")
 	var gem = exp_gem.instantiate()  # C	rea una instancia del objeto de experiencia.
 	gem.global_position = self.global_position  # Coloca el objeto de experiencia en la posición del enemigo.
-	get_parent().add_child(gem)  # Añade el objeto de experiencia a la escena.
+	get_parent().call_deferred("add_child", gem)

@@ -28,7 +28,9 @@ var last_joystick = Vector2(0,0)
 @export var dead_zone = 0.1
 func _process(_delta):
 	# sigue al mouse
-	if is_joystick:
+	#if is_joystick:
+	if Input.get_connected_joypads().size() != 0:
+	#if Input.is_joy_known(Input.get_connected_joypads()[0]):
 		if get_joystick_position().length_squared() > dead_zone:
 			last_joystick = get_joystick_position()
 			global_position = spaceship.global_position +  100 * last_joystick
@@ -44,3 +46,7 @@ func _process(_delta):
 		animated_sprite.stop()
 		
 
+
+
+func _on_player_free_crosshair():
+	pass # Replace with function body.

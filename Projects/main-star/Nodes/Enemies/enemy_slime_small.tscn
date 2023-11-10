@@ -1,48 +1,48 @@
-[gd_scene load_steps=65 format=3 uid="uid://uxgaqqqjl0px"]
+[gd_scene load_steps=65 format=3 uid="uid://dvk1igk6er22c"]
 
-[ext_resource type="Script" path="res://Nodes/Enemies/enemy_slime.gd" id="1_hw365"]
-[ext_resource type="Script" path="res://Nodes/Player/Equipment.gd" id="3_iyg5a"]
-[ext_resource type="Texture2D" uid="uid://duwc830a5g8hq" path="res://Assets/Ships/Main Ship - Engine Effects/Main Ship - Engines - Base Engine - Idle.png" id="4_balub"]
-[ext_resource type="Texture2D" uid="uid://buds5gwm6oca3" path="res://Assets/Ships/Main Ship - Engine Effects/Main Ship - Engines - Base Engine - Powering.png" id="5_p1qmy"]
-[ext_resource type="Texture2D" uid="uid://bd0wiwpwl7r7o" path="res://Assets/Ships/Main Ship - Weapons/Main Ship - Weapons - Big Space Gun.png" id="6_txcxr"]
-[ext_resource type="Texture2D" uid="uid://cmivjwnddubbw" path="res://Assets/Ships/Main Ship - Weapons/Main Ship - Weapons - Auto Cannon.png" id="7_u2pde"]
-[ext_resource type="Texture2D" uid="uid://dh7kkpfx87pln" path="res://Assets/Enemies/Enemy Ships/slime/slime.png" id="8_uh5bs"]
-[ext_resource type="Texture2D" uid="uid://seks25qmo38w" path="res://Assets/Enemies/Enemy Ships/slime/slimte_damaged.png" id="9_aqq7f"]
-[ext_resource type="Texture2D" uid="uid://j1hvj0fr7qk3" path="res://Assets/Enemies/Enemy Ships/slime/slime_move.png" id="10_tdqjw"]
-[ext_resource type="PackedScene" uid="uid://cgfuua2pxmajk" path="res://Metodos/HitboxComponent.tscn" id="11_ctdx0"]
-[ext_resource type="PackedScene" uid="uid://1vrkeeswwdnw" path="res://Metodos/HealthComponent.tscn" id="12_6d24i"]
-[ext_resource type="PackedScene" uid="uid://byrncwn5e2g0y" path="res://Metodos/Sensor.tscn" id="13_pj13g"]
-[ext_resource type="Script" path="res://Nodes/Enemies/MovementSlime.gd" id="13_t422h"]
-[ext_resource type="PackedScene" uid="uid://dyuvy1275lb7g" path="res://Metodos/States/StateMachine.tscn" id="14_u7s4n"]
-[ext_resource type="Script" path="res://Metodos/States/IA/WanderingIdle.gd" id="15_qvu4u"]
-[ext_resource type="Script" path="res://Metodos/States/IA/EnemyFollow.gd" id="16_57tr5"]
+[ext_resource type="Script" path="res://Nodes/Enemies/Enemy.gd" id="1_0foox"]
+[ext_resource type="Script" path="res://Nodes/Player/Equipment.gd" id="2_ibauh"]
+[ext_resource type="Texture2D" uid="uid://duwc830a5g8hq" path="res://Assets/Ships/Main Ship - Engine Effects/Main Ship - Engines - Base Engine - Idle.png" id="3_p3v48"]
+[ext_resource type="Texture2D" uid="uid://buds5gwm6oca3" path="res://Assets/Ships/Main Ship - Engine Effects/Main Ship - Engines - Base Engine - Powering.png" id="4_owjf0"]
+[ext_resource type="Texture2D" uid="uid://bd0wiwpwl7r7o" path="res://Assets/Ships/Main Ship - Weapons/Main Ship - Weapons - Big Space Gun.png" id="5_1r57s"]
+[ext_resource type="Texture2D" uid="uid://cmivjwnddubbw" path="res://Assets/Ships/Main Ship - Weapons/Main Ship - Weapons - Auto Cannon.png" id="6_iltby"]
+[ext_resource type="Texture2D" uid="uid://dh7kkpfx87pln" path="res://Assets/Enemies/Enemy Ships/slime/slime.png" id="7_xjwx4"]
+[ext_resource type="Texture2D" uid="uid://seks25qmo38w" path="res://Assets/Enemies/Enemy Ships/slime/slimte_damaged.png" id="8_3q37c"]
+[ext_resource type="Texture2D" uid="uid://j1hvj0fr7qk3" path="res://Assets/Enemies/Enemy Ships/slime/slime_move.png" id="9_n1up2"]
+[ext_resource type="PackedScene" uid="uid://cgfuua2pxmajk" path="res://Metodos/HitboxComponent.tscn" id="10_yk8ba"]
+[ext_resource type="PackedScene" uid="uid://1vrkeeswwdnw" path="res://Metodos/HealthComponent.tscn" id="11_gt112"]
+[ext_resource type="PackedScene" uid="uid://byrncwn5e2g0y" path="res://Metodos/Sensor.tscn" id="12_2qhvn"]
+[ext_resource type="Script" path="res://Nodes/Enemies/MovementSlime.gd" id="13_18d06"]
+[ext_resource type="PackedScene" uid="uid://dyuvy1275lb7g" path="res://Metodos/States/StateMachine.tscn" id="14_bt0i4"]
+[ext_resource type="Script" path="res://Metodos/States/IA/WanderingIdle.gd" id="15_166mi"]
+[ext_resource type="Script" path="res://Metodos/States/IA/EnemyFollow.gd" id="16_7c3vi"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vflbb"]
-atlas = ExtResource("4_balub")
+atlas = ExtResource("3_p3v48")
 region = Rect2(0, 0, 48, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_gw280"]
-atlas = ExtResource("4_balub")
+atlas = ExtResource("3_p3v48")
 region = Rect2(48, 0, 48, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6smns"]
-atlas = ExtResource("4_balub")
+atlas = ExtResource("3_p3v48")
 region = Rect2(96, 0, 48, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3txkg"]
-atlas = ExtResource("5_p1qmy")
+atlas = ExtResource("4_owjf0")
 region = Rect2(0, 0, 48, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fxqb7"]
-atlas = ExtResource("5_p1qmy")
+atlas = ExtResource("4_owjf0")
 region = Rect2(48, 0, 48, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ekm4g"]
-atlas = ExtResource("5_p1qmy")
+atlas = ExtResource("4_owjf0")
 region = Rect2(96, 0, 48, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_iu3xn"]
-atlas = ExtResource("5_p1qmy")
+atlas = ExtResource("4_owjf0")
 region = Rect2(144, 0, 48, 48)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_mdhpf"]
@@ -80,79 +80,79 @@ animations = [{
 }]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8atnb"]
-atlas = ExtResource("6_txcxr")
+atlas = ExtResource("5_1r57s")
 region = Rect2(0, 0, 48, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wld0j"]
-atlas = ExtResource("6_txcxr")
+atlas = ExtResource("5_1r57s")
 region = Rect2(48, 0, 48, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2r375"]
-atlas = ExtResource("6_txcxr")
+atlas = ExtResource("5_1r57s")
 region = Rect2(96, 0, 48, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1t2us"]
-atlas = ExtResource("6_txcxr")
+atlas = ExtResource("5_1r57s")
 region = Rect2(144, 0, 48, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_a7m3f"]
-atlas = ExtResource("6_txcxr")
+atlas = ExtResource("5_1r57s")
 region = Rect2(192, 0, 48, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rh23m"]
-atlas = ExtResource("6_txcxr")
+atlas = ExtResource("5_1r57s")
 region = Rect2(240, 0, 48, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_035n8"]
-atlas = ExtResource("6_txcxr")
+atlas = ExtResource("5_1r57s")
 region = Rect2(288, 0, 48, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_36hcq"]
-atlas = ExtResource("6_txcxr")
+atlas = ExtResource("5_1r57s")
 region = Rect2(336, 0, 48, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2o3od"]
-atlas = ExtResource("6_txcxr")
+atlas = ExtResource("5_1r57s")
 region = Rect2(384, 0, 48, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5qs5j"]
-atlas = ExtResource("6_txcxr")
+atlas = ExtResource("5_1r57s")
 region = Rect2(432, 0, 48, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_bm1a6"]
-atlas = ExtResource("6_txcxr")
+atlas = ExtResource("5_1r57s")
 region = Rect2(480, 0, 48, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_jrg6c"]
-atlas = ExtResource("6_txcxr")
+atlas = ExtResource("5_1r57s")
 region = Rect2(528, 0, 48, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_em4tq"]
-atlas = ExtResource("7_u2pde")
+atlas = ExtResource("6_iltby")
 region = Rect2(0, 0, 48, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rhd3i"]
-atlas = ExtResource("7_u2pde")
+atlas = ExtResource("6_iltby")
 region = Rect2(48, 0, 48, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_jxr5n"]
-atlas = ExtResource("7_u2pde")
+atlas = ExtResource("6_iltby")
 region = Rect2(96, 0, 48, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_jpvfv"]
-atlas = ExtResource("7_u2pde")
+atlas = ExtResource("6_iltby")
 region = Rect2(144, 0, 48, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_7jxpr"]
-atlas = ExtResource("7_u2pde")
+atlas = ExtResource("6_iltby")
 region = Rect2(192, 0, 48, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_kxtih"]
-atlas = ExtResource("7_u2pde")
+atlas = ExtResource("6_iltby")
 region = Rect2(240, 0, 48, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_cmyfa"]
-atlas = ExtResource("7_u2pde")
+atlas = ExtResource("6_iltby")
 region = Rect2(288, 0, 48, 48)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_p24ij"]
@@ -226,79 +226,79 @@ animations = [{
 }]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_o3u84"]
-atlas = ExtResource("9_aqq7f")
+atlas = ExtResource("8_3q37c")
 region = Rect2(0, 0, 100, 100)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_7d8wt"]
-atlas = ExtResource("9_aqq7f")
+atlas = ExtResource("8_3q37c")
 region = Rect2(100, 0, 100, 100)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_snuxx"]
-atlas = ExtResource("9_aqq7f")
+atlas = ExtResource("8_3q37c")
 region = Rect2(200, 0, 100, 100)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_k13je"]
-atlas = ExtResource("9_aqq7f")
+atlas = ExtResource("8_3q37c")
 region = Rect2(300, 0, 100, 100)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fv5tw"]
-atlas = ExtResource("9_aqq7f")
+atlas = ExtResource("8_3q37c")
 region = Rect2(400, 0, 100, 100)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vs5mn"]
-atlas = ExtResource("9_aqq7f")
+atlas = ExtResource("8_3q37c")
 region = Rect2(500, 0, 100, 100)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5c6o4"]
-atlas = ExtResource("9_aqq7f")
+atlas = ExtResource("8_3q37c")
 region = Rect2(600, 0, 100, 100)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_yj8gk"]
-atlas = ExtResource("9_aqq7f")
+atlas = ExtResource("8_3q37c")
 region = Rect2(700, 0, 100, 100)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_j6aky"]
-atlas = ExtResource("9_aqq7f")
+atlas = ExtResource("8_3q37c")
 region = Rect2(800, 0, 100, 100)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_tugr2"]
-atlas = ExtResource("9_aqq7f")
+atlas = ExtResource("8_3q37c")
 region = Rect2(900, 0, 100, 100)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_d6mp2"]
-atlas = ExtResource("10_tdqjw")
+atlas = ExtResource("9_n1up2")
 region = Rect2(0, 0, 100, 100)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6xilt"]
-atlas = ExtResource("10_tdqjw")
+atlas = ExtResource("9_n1up2")
 region = Rect2(100, 0, 100, 100)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_tls7w"]
-atlas = ExtResource("10_tdqjw")
+atlas = ExtResource("9_n1up2")
 region = Rect2(200, 0, 100, 100)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vcj0l"]
-atlas = ExtResource("10_tdqjw")
+atlas = ExtResource("9_n1up2")
 region = Rect2(300, 0, 100, 100)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qxogi"]
-atlas = ExtResource("10_tdqjw")
+atlas = ExtResource("9_n1up2")
 region = Rect2(400, 0, 100, 100)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_e3bjr"]
-atlas = ExtResource("10_tdqjw")
+atlas = ExtResource("9_n1up2")
 region = Rect2(500, 0, 100, 100)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_jhp5p"]
-atlas = ExtResource("10_tdqjw")
+atlas = ExtResource("9_n1up2")
 region = Rect2(600, 0, 100, 100)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rd21o"]
-atlas = ExtResource("10_tdqjw")
+atlas = ExtResource("9_n1up2")
 region = Rect2(700, 0, 100, 100)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_x5qn0"]
-atlas = ExtResource("10_tdqjw")
+atlas = ExtResource("9_n1up2")
 region = Rect2(800, 0, 100, 100)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_8rj56"]
@@ -306,7 +306,7 @@ resource_name = "Enemies"
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("8_uh5bs")
+"texture": ExtResource("7_xjwx4")
 }],
 "loop": true,
 "name": &"base_anim",
@@ -380,20 +380,20 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="enemy_slime" type="CharacterBody2D" node_paths=PackedStringArray("animation", "movement")]
+[node name="enemy_slime_small" type="CharacterBody2D" node_paths=PackedStringArray("animation", "movement")]
 rotation = 3.14159
+scale = Vector2(0.5, 0.5)
 collision_layer = 4
 collision_mask = 15
-script = ExtResource("1_hw365")
-slimelvl = 1
-distancia_vision = 800.0
+script = ExtResource("1_0foox")
+distancia_vision = 400.0
 vision_eterna = true
 animation = NodePath("Equipment/Base/AnimatedSprite2D")
 movement = NodePath("Movement")
 
 [node name="Equipment" type="Node2D" parent="."]
 rotation = 1.5708
-script = ExtResource("3_iyg5a")
+script = ExtResource("2_ibauh")
 spaceship_1_path = NodePath("..")
 engine_anim_path = NodePath("engine_sprites")
 
@@ -425,40 +425,40 @@ polygon = PackedVector2Array(10.9474, -17.8109, 6.73687, -9.67804, 4.21051, 10.2
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 attenuation = 0.90125
 
-[node name="HitboxComponent" parent="." instance=ExtResource("11_ctdx0")]
+[node name="HitboxComponent" parent="." instance=ExtResource("10_yk8ba")]
 collision_layer = 0
 collision_mask = 2
 damage = 1
 
-[node name="HealthComponent" parent="." groups=["Enemy"] instance=ExtResource("12_6d24i")]
+[node name="HealthComponent" parent="." groups=["Enemy"] instance=ExtResource("11_gt112")]
 collision_layer = 4
 collision_mask = 0
 max_health = 4
 HurtBoxType = 1
 
-[node name="Sensor" parent="." instance=ExtResource("13_pj13g")]
+[node name="Sensor" parent="." instance=ExtResource("12_2qhvn")]
 scale = Vector2(2.103, 2.103)
 collision_layer = 0
 
 [node name="Movement" type="Node" parent="."]
-script = ExtResource("13_t422h")
+script = ExtResource("13_18d06")
 speed = 120.0
 max_speed = 200.0
 
-[node name="IA_StateMachine" parent="." node_paths=PackedStringArray("initial_state") instance=ExtResource("14_u7s4n")]
+[node name="IA_StateMachine" parent="." node_paths=PackedStringArray("initial_state") instance=ExtResource("14_bt0i4")]
 initial_state = NodePath("EnemyFolow")
 
 [node name="WanderingIdle" type="Node" parent="IA_StateMachine" node_paths=PackedStringArray("object")]
-script = ExtResource("15_qvu4u")
+script = ExtResource("15_166mi")
 object = NodePath("../..")
 
 [node name="EnemyFolow" type="Node" parent="IA_StateMachine" node_paths=PackedStringArray("enemy")]
-script = ExtResource("16_57tr5")
+script = ExtResource("16_7c3vi")
 enemy = NodePath("../..")
-rango_vision_player = 800
-probabilidad_atacar_player = 1.0
+rango_vision_player = 400
+probabilidad_atacar_player = 0.8
 
-[node name="Weapon_StateMachine" parent="." instance=ExtResource("14_u7s4n")]
+[node name="Weapon_StateMachine" parent="." instance=ExtResource("14_bt0i4")]
 
 [connection signal="onDead" from="HealthComponent" to="." method="_on_health_component_on_dead"]
 [connection signal="area_entered" from="Sensor" to="." method="_on_sensor_area_entered"]

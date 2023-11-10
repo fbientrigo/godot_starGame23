@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://g4t1hlsi4hj8" path="res://Metodos/crosshair_on_ship.tscn" id="5_gxqnc"]
 
 [node name="Player" type="Node2D" node_paths=PackedStringArray("expBar", "lbl_level", "spaceship", "crosshair", "levelPanel", "upgradeOptions", "sndLevelUp") groups=["player_root"]]
+process_mode = 3
 script = ExtResource("1_tprph")
 animation_damage_sprites = NodePath("spaceship_1/Base/damage_sprites")
 expBar = NodePath("GUILayer/GUI/MarginContainer/ExperienceBar")
@@ -19,6 +20,7 @@ upgradeOptions = NodePath("GUILayer/GUI/LevelUpPanel/UpgradeOptions")
 sndLevelUp = NodePath("GUILayer/GUI/LevelUpPanel/snd_levelup")
 
 [node name="spaceship_1" parent="." node_paths=PackedStringArray("crosshair") instance=ExtResource("1_q5dtn")]
+process_mode = 1
 rotation = 0.0
 collision_layer = 2
 inertia = 2.0
@@ -34,6 +36,8 @@ script = ExtResource("2_8mm4j")
 
 [node name="Crosshair_onShip" parent="." instance=ExtResource("5_gxqnc")]
 unique_name_in_owner = true
+process_mode = 3
+top_level = true
 position = Vector2(0, 1)
 player_spaceship_path = NodePath("../spaceship_1")
 is_joystick = false
@@ -79,6 +83,7 @@ offset_top = 28.0
 offset_right = 118.0
 offset_bottom = 54.0
 
+[connection signal="free_crosshair" from="." to="Crosshair_onShip" method="_on_player_free_crosshair"]
 [connection signal="got_exp" from="spaceship_1" to="." method="_on_spaceship_1_got_exp"]
 
 [editable path="spaceship_1"]

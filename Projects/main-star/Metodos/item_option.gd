@@ -44,16 +44,27 @@ func _ready():
 
 func _input(event):
 	# para seleccionar
-	if event.is_action("click"):
-		if mouse_over:
-			emit_signal("selected_upgrade", item)
+	if Input.is_joy_known(Input.get_connected_joypads()[0]):
+		if event.is_action("joyaccept"):
+			if mouse_over:
+				emit_signal("selected_upgrade", item)
+	else:
+		if event.is_action("click"):
+			if mouse_over:
+				emit_signal("selected_upgrade", item)
+
+func _process(delta):
+	if mouse_over:
+		textura.modulate = "#ffffff"
+	else:
+		textura.modulate = "#9a9a9a"
 
 # por ahora se seleccionara con el mouse
 # en el futuro puedo usar el crosshair u otra estrategia
 func _on_mouse_entered():
 	mouse_over = true
-	textura.modulate = "#ffffff"
+	
 
 func _on_mouse_exited():
 	mouse_over = false
-	textura.modulate = "#9a9a9a"
+	
