@@ -23,7 +23,8 @@ func get_joystick_position():
 	var vectorjoystick : Vector2 = Input.get_vector("joyx-", "joyx+", "joyy+", "joyy-")
 	return vectorjoystick
 
-@export var is_joystick: bool = true
+# legacy usaba eso
+# @export var is_joystick: bool = true
 var last_joystick = Vector2(0,0)
 @export var dead_zone = 0.1
 func _process(_delta):

@@ -1,4 +1,4 @@
-[gd_scene load_steps=65 format=3 uid="uid://uxgaqqqjl0px"]
+[gd_scene load_steps=66 format=3 uid="uid://uxgaqqqjl0px"]
 
 [ext_resource type="Script" path="res://Nodes/Enemies/enemy_slime.gd" id="1_hw365"]
 [ext_resource type="Script" path="res://Nodes/Player/Equipment.gd" id="3_iyg5a"]
@@ -16,6 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://dyuvy1275lb7g" path="res://Metodos/States/StateMachine.tscn" id="14_u7s4n"]
 [ext_resource type="Script" path="res://Metodos/States/IA/WanderingIdle.gd" id="15_qvu4u"]
 [ext_resource type="Script" path="res://Metodos/States/IA/EnemyFollow.gd" id="16_57tr5"]
+[ext_resource type="AnimationLibrary" uid="uid://f2k5dkdgamu8" path="res://Assets/Animations/AnimationsLibrary_Enemies.res" id="17_5c3cp"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vflbb"]
 atlas = ExtResource("4_balub")
@@ -414,10 +415,10 @@ one_shot = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Equipment/Base"]
 sprite_frames = SubResource("SpriteFrames_8rj56")
-animation = &"base_anim"
-frame_progress = 0.327154
+animation = &"damage_anim"
 
 [node name="CollisionPoly" type="CollisionPolygon2D" parent="."]
+visible = false
 position = Vector2(-1.84774e-06, -1.29007)
 scale = Vector2(1.1875, 1.10662)
 polygon = PackedVector2Array(10.9474, -17.8109, 6.73687, -9.67804, 4.21051, 10.2023, 10.1052, 24.6608, -14.3159, 30.9863, -13.4736, -34.9804)
@@ -426,17 +427,22 @@ polygon = PackedVector2Array(10.9474, -17.8109, 6.73687, -9.67804, 4.21051, 10.2
 attenuation = 0.90125
 
 [node name="HitboxComponent" parent="." instance=ExtResource("11_ctdx0")]
+visible = false
 collision_layer = 0
 collision_mask = 2
 damage = 1
 
+[node name="CollisionShape2D" parent="HitboxComponent" index="0"]
+visible = false
+
 [node name="HealthComponent" parent="." groups=["Enemy"] instance=ExtResource("12_6d24i")]
 collision_layer = 4
 collision_mask = 0
-max_health = 4
+max_health = 6
 HurtBoxType = 1
 
 [node name="Sensor" parent="." instance=ExtResource("13_pj13g")]
+visible = false
 scale = Vector2(2.103, 2.103)
 collision_layer = 0
 
@@ -460,6 +466,12 @@ probabilidad_atacar_player = 1.0
 
 [node name="Weapon_StateMachine" parent="." instance=ExtResource("14_u7s4n")]
 
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"AnimationsLibrary_Enemies": ExtResource("17_5c3cp")
+}
+
+[connection signal="hurt" from="HealthComponent" to="." method="_on_health_component_hurt"]
 [connection signal="onDead" from="HealthComponent" to="." method="_on_health_component_on_dead"]
 [connection signal="area_entered" from="Sensor" to="." method="_on_sensor_area_entered"]
 

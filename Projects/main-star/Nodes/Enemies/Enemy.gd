@@ -41,6 +41,7 @@ class_name Enemy # crea una clase
 @export var movement : Movement
 # Referencia al sensor del enemigo que detecta al jugador.
 @onready var sensor: Area2D = $Sensor
+@onready var animation_player:AnimationPlayer = $AnimationPlayer
 
 
 # Referencia al jugador detectado por el sensor.
@@ -52,8 +53,10 @@ var exp_gem : PackedScene
 
 func _ready(): # Método llamado cuando el nodo está listo.
 	movement.setup(self) # Configura el movimiento del enemigo.
-	animation.play("base_anim") # Reproduce la animación base.
+	#animation.play("base_anim") # Reproduce la animación base.
 	exp_gem = preload("res://Nodes/Objects/Object.tscn")
+	animation.play("damage_anim")
+	animation.pause()
 	
 
 func _physics_process(_delta):
@@ -89,3 +92,18 @@ func _on_health_component_on_dead():
 	var gem = exp_gem.instantiate()  # C	rea una instancia del objeto de experiencia.
 	gem.global_position = self.global_position  # Coloca el objeto de experiencia en la posición del enemigo.
 	get_parent().call_deferred("add_child", gem)
+
+
+
+var times_damaged = 0
+func _on_health_component_hurt(damage):
+	animation_player.play("AnimationsLibrary_Enemies/hurt_animation") # este es un damage anim
+	if times_damaged == 0:
+		times_damaged += 1
+		animation.frame = 0
+	elif times_damaged > 0:
+		times_damaged += 1
+		animation.frame += 1
+	elif times_damaged > 8:
+		animation.frame = 8
+		

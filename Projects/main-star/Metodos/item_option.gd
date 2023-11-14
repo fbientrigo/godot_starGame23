@@ -14,6 +14,7 @@ var item = null
 @onready var textura = get_node("TextureRect")
 @onready var nombre = get_node("Nombre")
 @onready var player = get_tree().get_first_node_in_group("player_root")
+@onready var bus = get_tree().get_first_node_in_group("ComBusGroup")
 
 # con que se comunica para mejorar
 @export var is_star = false
@@ -24,12 +25,15 @@ var mouse_over = false
 signal selected_upgrade(upgrade)
 
 func _ready():
+#	print("item option")
+#	print("combus is:", bus)
+	connect("selected_upgrade",  Callable(bus, "catch_upgrade_call"))
+
 	if item == null:
 		item = "masa" # por default
 	
 	# selecciona de la base de datos en autoload global la informacion
 	#		"icon","display_name","ammount"
-	print(item)
 	var dfitem = UpgradeDb.df[item]
 	nombre.text = UpgradeDb.df[item]["display_name"]
 	textura.texture = load(UpgradeDb.df[item]["icon"])
@@ -44,10 +48,11 @@ func _ready():
 
 func _input(event):
 	# para seleccionar
-	if Input.is_joy_known(Input.get_connected_joypads()[0]):
-		if event.is_action("joyaccept"):
-			if mouse_over:
-				emit_signal("selected_upgrade", item)
+	if len(Input.get_connected_joypads())>0:
+		if Input.is_joy_known(Input.get_connected_joypads()[0]):
+			if event.is_action("joyaccept"):
+				if mouse_over:
+					emit_signal("selected_upgrade", item)
 	else:
 		if event.is_action("click"):
 			if mouse_over:
@@ -64,7 +69,6 @@ func _process(delta):
 func _on_mouse_entered():
 	mouse_over = true
 	
-
 func _on_mouse_exited():
 	mouse_over = false
 	

@@ -16,8 +16,9 @@ func _ready():
 # vieja funcion de centrar la camara que usa el player
 
 var interpolate_val = 10
+var disabled_cooldown = 0
 func _process(delta):
-
+	disabled_cooldown -= 1
 	if mira and mira.is_inside_tree():
 		var target : Vector2 = player.global_position
 		var targetlook : Vector2 = mira.global_position
@@ -27,6 +28,8 @@ func _process(delta):
 	else:
 		pass # no se porque hay momentos en que mira deja de existir
 
+func teleport(newpos : Vector2):
+	global_position = newpos
 
 # funcion que hacia uso de el el deadzone
 # pero con el nuevo sistema de fuerza, quedo buggy y mareaba

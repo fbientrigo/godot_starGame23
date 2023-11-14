@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://bqab1a0i6m4h7"]
+[gd_scene load_steps=33 format=3 uid="uid://bqab1a0i6m4h7"]
 
 [ext_resource type="Script" path="res://Nodes/Star/star_turret.gd" id="1_kdyaq"]
 [ext_resource type="Texture2D" uid="uid://cmivjwnddubbw" path="res://Assets/Ships/Main Ship - Weapons/Main Ship - Weapons - Auto Cannon.png" id="4_d8qcl"]
@@ -82,11 +82,23 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_p4oku"]
 radius = 49.0102
 
-[node name="StarTurret" type="Node2D"]
+[sub_resource type="Gradient" id="Gradient_m6jjy"]
+offsets = PackedFloat32Array(0, 0.106667, 0.266667, 0.38, 0.806667)
+colors = PackedColorArray(0.797659, 0.797658, 0.797659, 1, 0.560711, 0.560711, 0.560711, 1, 0.424286, 0.424286, 0.424286, 1, 0.429222, 0.429222, 0.429222, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_cl45u"]
+gradient = SubResource("Gradient_m6jjy")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0, 0)
+
+[node name="StarTurret" type="Node2D" groups=["Star"]]
+z_index = -4
 script = ExtResource("1_kdyaq")
-tipo_estrella = "TipoM"
+tipo_estrella = "TipoB"
 
 [node name="Sensor" parent="." instance=ExtResource("8_jtdk8")]
+visible = false
 collision_layer = 0
 collision_mask = 6
 
@@ -109,11 +121,9 @@ disabled = true
 
 [node name="Animaciones" parent="." instance=ExtResource("7_qfwb1")]
 animation = &"O"
-frame_progress = 0.588456
 speed_scale = 2.0
 
 [node name="HealthComponent" parent="." instance=ExtResource("7_pfqkg")]
-visible = false
 collision_layer = 8
 collision_mask = 22
 DeadType = 1
@@ -122,7 +132,6 @@ DeadType = 1
 shape = ExtResource("7_72mde")
 
 [node name="StateMachine" parent="." instance=ExtResource("8_nsgwv")]
-visible = false
 
 [node name="TipoGas" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("animacion", "healthcomponent", "statemachine")]
 script = ExtResource("8_gicie")
@@ -200,8 +209,18 @@ position = Vector2(0, -2)
 rotation = 1.57122
 initial_state = NodePath("9mm")
 
+[node name="heavy" parent="BasicWeaponStateMachine" index="2"]
+cooldown = 30.0
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+scale = Vector2(60, 60)
+energy = 0.9
+texture = SubResource("GradientTexture2D_cl45u")
+
 [connection signal="area_entered" from="Sensor" to="." method="_on_sensor_area_entered"]
 [connection signal="area_exited" from="Sensor" to="." method="_on_sensor_area_exited"]
+[connection signal="hurt" from="HealthComponent" to="." method="_on_health_component_hurt"]
+[connection signal="onDead" from="HealthComponent" to="." method="_on_health_component_on_dead"]
 
 [editable path="HealthComponent"]
 [editable path="BasicWeaponStateMachine"]

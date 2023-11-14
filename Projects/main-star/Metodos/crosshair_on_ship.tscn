@@ -47,7 +47,6 @@ animations = [{
 [node name="Crosshair_onShip" type="Node2D" node_paths=PackedStringArray("animated_sprite")]
 position = Vector2(0, -30)
 script = ExtResource("1_k4i27")
-player_spaceship = NodePath("..")
 animated_sprite = NodePath("AnimatedSprite2D")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]

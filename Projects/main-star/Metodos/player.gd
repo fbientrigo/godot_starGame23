@@ -24,6 +24,8 @@ var collected_experience = 0 # constant flush
 # Seccion de fuerzas =======================================
 # se puede encontrar el sistema de toruqe que conecta con el movimiento del mouse
 # se desea entregar un realismo en sonido y movimiento
+@export var teleport_limits : Vector2 # asume una forma cuadrada
+
 
 @export var crosshair : Node2D
 
@@ -35,6 +37,7 @@ var collected_experience = 0 # constant flush
 @export  var upgradeOptions : HBoxContainer
 @export var sndLevelUp : AudioStreamPlayer
 @onready var itemOptions = preload("res://Metodos/item_option.tscn")
+@onready var camera : Camera2D = $Camera2D
 
 var collected_upgrades = [] # se guardan las mejoras del player
 var upgrade_options = [] # upgrades en oferta
@@ -45,6 +48,8 @@ var spell_cooldown = 0
 var spell_size = 0
 var additional_attacks = 0
 
+var offset_limit = 100
+
 
 func _ready():
 #	levelPanel= get_node("%LevelUpPanel")
@@ -52,16 +57,50 @@ func _ready():
 #	sndLevelUp = get_node("%snd_levelup")
 	set_expbar(experience, calculate_experienceCap())
 
-
-
-
 func _physics_process(delta):
-	# escucha input extra
-	# esta input es para debugging
+	# Listen for extra input
+	# This input is for debugging
 	if Input.is_action_just_pressed("levelupgod"):
 		print("god send 20xp")
 		give20xp_asgod()
 
+	# Teleport to the other side of the map
+	if spaceship.global_position.x > teleport_limits.x:
+		print("Before teleportation: ", spaceship.global_position, camera.global_position)
+		camera.set_physics_process(false)
+		spaceship.global_position.x = -teleport_limits.x + offset_limit
+		camera.force_update_scroll()
+		camera.global_position = Vector2(-teleport_limits.x + offset_limit, spaceship.global_position.y)
+		camera.reset_smoothing()
+		camera.set_physics_process(true)
+		print("After teleportation: ", spaceship.global_position, camera.global_position)
+	elif spaceship.global_position.x < -teleport_limits.x:
+		print("Before teleportation: ", spaceship.global_position, camera.global_position)
+		camera.set_physics_process(false)
+		spaceship.global_position.x = teleport_limits.x - offset_limit
+		camera.force_update_scroll()
+		camera.global_position = Vector2(teleport_limits.x - offset_limit, spaceship.global_position.y)
+		camera.reset_smoothing()
+		camera.set_physics_process(true)
+		print("After teleportation: ", spaceship.global_position, camera.global_position)
+	elif spaceship.global_position.y > teleport_limits.y:
+		print("Before teleportation: ", spaceship.global_position, camera.global_position)
+		camera.set_physics_process(false)
+		spaceship.global_position.y = -teleport_limits.y + offset_limit
+		camera.force_update_scroll()
+		camera.global_position = Vector2(spaceship.global_position.x,-teleport_limits.y + offset_limit)
+		camera.reset_smoothing()
+		camera.set_physics_process(true)
+		print("After teleportation: ", spaceship.global_position, camera.global_position)
+	elif spaceship.global_position.y < -teleport_limits.y:
+		print("Before teleportation: ", spaceship.global_position, camera.global_position)
+		camera.set_physics_process(false)
+		spaceship.global_position.y = teleport_limits.y - offset_limit
+		camera.force_update_scroll()
+		camera.global_position = Vector2(spaceship.global_position.x,teleport_limits.y - offset_limit)
+		camera.reset_smoothing()
+		camera.set_physics_process(true)
+		print("After teleportation: ", spaceship.global_position, camera.global_position)
 
 # signal shoot_pass_from_equipment(bullet, direction, location)
 
@@ -116,16 +155,20 @@ func calculate_experience(exp_recb):
 	# configura la barra
 	set_expbar(experience, exp_required)
 
+#TODO
+# exports para cambiar la velocidad de leveleo
 func calculate_experienceCap():
-	var exp_cap = 2
-	if experience_level < 10:
-		exp_cap = 5 * experience_level
+	var exp_cap = 5
+	if experience_level < 2:
+		exp_cap += 5 * experience_level + 3
+	elif experience_level < 10:
+		exp_cap += 5 * experience_level**2
 	elif experience_level < 20:
-		exp_cap = 8 * experience_level
+		exp_cap += 8 * experience_level**2
 	elif experience_level < 40:
-		exp_cap = 95 * (experience_level-19)
+		exp_cap += 95 * (experience_level**2 -19)
 	else:
-		exp_cap = 255 * (experience_level-39)
+		exp_cap += 255 * (experience_level**2 -39)
 	return exp_cap
 
 func set_expbar(set_value = 1, set_max_value=100):
@@ -144,18 +187,24 @@ func clear_mouse_over(tarjetas_array):
 	if tarjetas.size()>0:
 		for t in tarjetas_array:
 			t.mouse_over = false
+
+
 func _process(delta):
-	if levelPanel.visible: #modo level
-		if tarjetas.size() > 0:	
-			clear_mouse_over(tarjetas)
-			tarjetas[choosed_index%3].mouse_over = true
-		if Input.is_action_just_pressed("a"):
-			choosed_index -= 1
-		if Input.is_action_just_pressed("d"):
-			choosed_index += 1
-		if choosed_index < 0:
-			choosed_index = 29 # para darle vuelta
-			
+	if len(Input.get_connected_joypads())>0:
+		if Input.is_joy_known(Input.get_connected_joypads()[0]):
+			if levelPanel.visible: #modo level
+				if tarjetas.size() > 0:	
+					clear_mouse_over(tarjetas)
+					tarjetas[choosed_index%3].mouse_over = true
+				if Input.is_action_just_pressed("a"):
+					choosed_index -= 1
+				if Input.is_action_just_pressed("d"):
+					choosed_index += 1
+				if choosed_index < 0:
+					choosed_index = 29 # para darle vuelta
+	else:
+		pass
+
 	
 func levelUp():
 	sndLevelUp.play()
@@ -205,7 +254,7 @@ func get_random_item():
 		var upgrade = UpgradeDb.df[upgrade_name]
 		if upgrade["player"]: # si es tipo jugador
 			if upgrade_name in collected_upgrades:
-				print("player.gd\n upgrade repetida, no sumandola")
+#				print("player.gd\n upgrade repetida, no sumandola")
 				pass
 			elif upgrade in upgrade_options: # si ya la eligimos en mostrar
 				pass

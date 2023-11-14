@@ -539,11 +539,17 @@ frame_progress = 0.593967
 [node name="StateMachine" type="Node2D" parent="."]
 script = ExtResource("2_wpkbn")
 
-[node name="Pickable" type="Node2D" parent="StateMachine"]
+[node name="Pickable" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("animacion", "sound")]
 script = ExtResource("4_xvht5")
+animacion = NodePath("../../AnimatedSprite2D")
+sound = NodePath("../../AudioStreamPlayer2D")
 
-[node name="StarSeed" type="Node2D" parent="StateMachine"]
+[node name="StarSeed" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("animacion", "sound")]
 script = ExtResource("5_aoxmg")
+animacion = NodePath("../../AnimatedSprite2D")
+sound = NodePath("../../AudioStreamPlayer2D")
 
-[node name="Default" type="Node2D" parent="StateMachine"]
+[node name="Default" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("animacion", "sound")]
 script = ExtResource("6_ghbxs")
+animacion = NodePath("../../AnimatedSprite2D")
+sound = NodePath("../../AudioStreamPlayer2D")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=65 format=3 uid="uid://dvk1igk6er22c"]
+[gd_scene load_steps=66 format=3 uid="uid://dvk1igk6er22c"]
 
 [ext_resource type="Script" path="res://Nodes/Enemies/Enemy.gd" id="1_0foox"]
 [ext_resource type="Script" path="res://Nodes/Player/Equipment.gd" id="2_ibauh"]
@@ -16,6 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://dyuvy1275lb7g" path="res://Metodos/States/StateMachine.tscn" id="14_bt0i4"]
 [ext_resource type="Script" path="res://Metodos/States/IA/WanderingIdle.gd" id="15_166mi"]
 [ext_resource type="Script" path="res://Metodos/States/IA/EnemyFollow.gd" id="16_7c3vi"]
+[ext_resource type="AnimationLibrary" uid="uid://f2k5dkdgamu8" path="res://Assets/Animations/AnimationsLibrary_Enemies.res" id="17_bgc58"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vflbb"]
 atlas = ExtResource("3_p3v48")
@@ -414,10 +415,10 @@ one_shot = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Equipment/Base"]
 sprite_frames = SubResource("SpriteFrames_8rj56")
-animation = &"base_anim"
-frame_progress = 0.327154
+animation = &"damage_anim"
 
 [node name="CollisionPoly" type="CollisionPolygon2D" parent="."]
+visible = false
 position = Vector2(-1.84774e-06, -1.29007)
 scale = Vector2(1.1875, 1.10662)
 polygon = PackedVector2Array(10.9474, -17.8109, 6.73687, -9.67804, 4.21051, 10.2023, 10.1052, 24.6608, -14.3159, 30.9863, -13.4736, -34.9804)
@@ -433,10 +434,11 @@ damage = 1
 [node name="HealthComponent" parent="." groups=["Enemy"] instance=ExtResource("11_gt112")]
 collision_layer = 4
 collision_mask = 0
-max_health = 4
+max_health = 3
 HurtBoxType = 1
 
 [node name="Sensor" parent="." instance=ExtResource("12_2qhvn")]
+visible = false
 scale = Vector2(2.103, 2.103)
 collision_layer = 0
 
@@ -459,6 +461,11 @@ rango_vision_player = 400
 probabilidad_atacar_player = 0.8
 
 [node name="Weapon_StateMachine" parent="." instance=ExtResource("14_bt0i4")]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"AnimationsLibrary_Enemies": ExtResource("17_bgc58")
+}
 
 [connection signal="onDead" from="HealthComponent" to="." method="_on_health_component_on_dead"]
 [connection signal="area_entered" from="Sensor" to="." method="_on_sensor_area_entered"]

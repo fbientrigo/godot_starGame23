@@ -1,3 +1,5 @@
+# no parece estarse utilizando en algun lguar
+
 extends CharacterBody2D
 
 
@@ -15,13 +17,15 @@ var knockback = Vector2.ZERO
 @onready var snd_hit = $snd_hit
 @onready var hitBox = $HitBox
 
-var death_anim = preload("res://Enemy/explosion.tscn")
-var exp_gem = preload("res://Objects/experience_gem.tscn")
+#var death_anim = preload("res://Enemy/explosion.tscn")
+var exp_gem = preload("res://Nodes/Objects/Object.tscn")
 
 signal remove_from_array(object)
 
 
 func _ready():
+	print("enemy.gr running --------")
+	print(self)
 	anim.play("walk")
 	hitBox.damage = enemy_damage
 
@@ -39,10 +43,10 @@ func _physics_process(_delta):
 
 func death():
 	emit_signal("remove_from_array",self)
-	var enemy_death = death_anim.instantiate()
-	enemy_death.scale = sprite.scale
-	enemy_death.global_position = global_position
-	get_parent().call_deferred("add_child",enemy_death)
+	#var enemy_death = death_anim.instantiate()
+#	enemy_death.scale = sprite.scale
+#	enemy_death.global_position = global_position
+#	get_parent().call_deferred("add_child",enemy_death)
 	var new_gem = exp_gem.instantiate()
 	new_gem.global_position = global_position
 	new_gem.experience = experience

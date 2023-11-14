@@ -14,6 +14,7 @@ animation_damage_sprites = NodePath("spaceship_1/Base/damage_sprites")
 expBar = NodePath("GUILayer/GUI/MarginContainer/ExperienceBar")
 lbl_level = NodePath("GUILayer/GUI/MarginContainer/ExperienceBar/lbl_level")
 spaceship = NodePath("spaceship_1")
+teleport_limits = Vector2(1500, 1500)
 crosshair = NodePath("Crosshair_onShip")
 levelPanel = NodePath("GUILayer/GUI/LevelUpPanel")
 upgradeOptions = NodePath("GUILayer/GUI/LevelUpPanel/UpgradeOptions")
@@ -23,13 +24,23 @@ sndLevelUp = NodePath("GUILayer/GUI/LevelUpPanel/snd_levelup")
 process_mode = 1
 rotation = 0.0
 collision_layer = 2
-inertia = 2.0
+inertia = 4.0
 linear_damp = 1.6
 angular_damp = 10.0
-velocidad_nave = 320.0
-torque_strength = 85.0
-propulsor_strength = 500.0
+velocidad_nave = 350.0
+torque_strength = 200.0
+propulsor_strength = 400.0
 crosshair = NodePath("../Crosshair_onShip")
+
+[node name="9mm" parent="spaceship_1/BasicWeaponStateMachine" index="0"]
+cooldown = 10
+
+[node name="machinegun" parent="spaceship_1/BasicWeaponStateMachine" index="1"]
+cooldown = 5.0
+max_recoil = 0.25
+
+[node name="heavy" parent="spaceship_1/BasicWeaponStateMachine" index="2"]
+cooldown = 20.0
 
 [node name="root_balas" type="Node2D" parent="."]
 script = ExtResource("2_8mm4j")
@@ -40,14 +51,7 @@ process_mode = 3
 top_level = true
 position = Vector2(0, 1)
 player_spaceship_path = NodePath("../spaceship_1")
-is_joystick = false
-
-[node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(1.7, 1.7)
-position_smoothing_enabled = true
-position_smoothing_speed = 6.0
-script = ExtResource("3_1e071")
-player_path = NodePath("../spaceship_1")
+dead_zone = 0.2
 
 [node name="GUILayer" parent="." instance=ExtResource("4_g7kpv")]
 unique_name_in_owner = true
@@ -82,6 +86,14 @@ offset_left = 3.0
 offset_top = 28.0
 offset_right = 118.0
 offset_bottom = 54.0
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(0, -28)
+zoom = Vector2(1.7, 1.7)
+position_smoothing_enabled = true
+position_smoothing_speed = 6.0
+script = ExtResource("3_1e071")
+player_path = NodePath("../spaceship_1")
 
 [connection signal="free_crosshair" from="." to="Crosshair_onShip" method="_on_player_free_crosshair"]
 [connection signal="got_exp" from="spaceship_1" to="." method="_on_spaceship_1_got_exp"]

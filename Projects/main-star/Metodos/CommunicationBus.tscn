@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://c4drybq7dx5x3"]
+
+[ext_resource type="Script" path="res://Metodos/CommunicationBus.gd" id="1_7xjn8"]
+
+[node name="CommunicationBus" type="Node" groups=["ComBusGroup"]]
+script = ExtResource("1_7xjn8")

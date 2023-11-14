@@ -8,11 +8,11 @@
 [node name="bullet_root" type="Node2D"]
 z_index = -15
 script = ExtResource("1_8rgqb")
-bullet_damage = 2
+bullet_speed = 400.0
+bullet_damage = 3
 
 [node name="timer_destruction" type="Timer" parent="."]
-wait_time = 9.0
-autostart = true
+wait_time = 2.0
 script = ExtResource("2_apf8q")
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]

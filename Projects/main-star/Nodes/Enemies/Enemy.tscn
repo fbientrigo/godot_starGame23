@@ -1,4 +1,4 @@
-[gd_scene load_steps=56 format=3 uid="uid://bhxlsbs7rvctp"]
+[gd_scene load_steps=58 format=3 uid="uid://bhxlsbs7rvctp"]
 
 [ext_resource type="Script" path="res://Nodes/Enemies/Enemy.gd" id="1_wqpsa"]
 [ext_resource type="Script" path="res://Nodes/Player/Equipment.gd" id="3_epa8a"]
@@ -16,6 +16,7 @@
 [ext_resource type="Script" path="res://Metodos/States/IA/WanderingIdle.gd" id="13_gd583"]
 [ext_resource type="Script" path="res://Metodos/States/StateMachine_IAEnemy.gd" id="14_hcnm4"]
 [ext_resource type="Script" path="res://Metodos/States/IA/EnemyFollow.gd" id="15_bjrxe"]
+[ext_resource type="AnimationLibrary" uid="uid://f2k5dkdgamu8" path="res://Assets/Animations/AnimationsLibrary_Enemies.res" id="17_ueosm"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vflbb"]
 atlas = ExtResource("3_gjnad")
@@ -309,10 +310,12 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_1385d"]
+
 [node name="Enemy" type="CharacterBody2D" node_paths=PackedStringArray("animation", "movement")]
 rotation = 3.14159
 collision_layer = 4
-collision_mask = 0
+collision_mask = 8
 script = ExtResource("1_wqpsa")
 distancia_vision = 800.0
 vision_eterna = true
@@ -344,10 +347,9 @@ one_shot = true
 position = Vector2(1.99999, -11)
 sprite_frames = SubResource("SpriteFrames_8rj56")
 animation = &"move_anim"
-frame = 6
-frame_progress = 0.853988
 
 [node name="CollisionPoly" type="CollisionPolygon2D" parent="."]
+visible = false
 position = Vector2(-7.15252e-07, -2.58438)
 scale = Vector2(1.1875, 0.992126)
 polygon = PackedVector2Array(-4.21051, -5.45861, 5.05265, -5.45858, 8.42105, 2.60492, 4.21051, 11.6763, -3.36844, 11.6763, -8.42105, 2.60487)
@@ -357,16 +359,17 @@ attenuation = 0.90125
 
 [node name="HitboxComponent" parent="." instance=ExtResource("8_s111m")]
 collision_layer = 0
-collision_mask = 2
+collision_mask = 10
 damage = 1
 
 [node name="HealthComponent" parent="." groups=["Enemy"] instance=ExtResource("9_q8vln")]
 collision_layer = 4
 collision_mask = 2
-max_health = 4
+max_health = 15
 HurtBoxType = 1
 
 [node name="Sensor" parent="." instance=ExtResource("11_3jmin")]
+visible = false
 self_modulate = Color(1, 0.733333, 0.690196, 1)
 show_behind_parent = true
 collision_layer = 0
@@ -391,5 +394,12 @@ enemy = NodePath("../..")
 rango_vision_player = 2000
 probabilidad_atacar_player = 1.0
 
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_1385d"),
+"AnimationsLibrary_Enemies": ExtResource("17_ueosm")
+}
+
+[connection signal="hurt" from="HealthComponent" to="." method="_on_health_component_hurt"]
 [connection signal="onDead" from="HealthComponent" to="." method="_on_health_component_on_dead"]
 [connection signal="area_entered" from="Sensor" to="IA_StateMachine" method="_on_sensor_area_entered"]

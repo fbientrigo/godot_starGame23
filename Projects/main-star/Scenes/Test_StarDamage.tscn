@@ -1,0 +1,49 @@
+[gd_scene load_steps=4 format=3 uid="uid://clsfgcuu5ba4h"]
+
+[ext_resource type="PackedScene" uid="uid://bqab1a0i6m4h7" path="res://Nodes/Star/star_turret.tscn" id="1_5qx3d"]
+[ext_resource type="PackedScene" uid="uid://dsm8p7ex0tdrg" path="res://EnemyType2/enemy_2.tscn" id="2_frscd"]
+[ext_resource type="PackedScene" uid="uid://bhxlsbs7rvctp" path="res://Nodes/Enemies/Enemy.tscn" id="3_8dj3y"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="StarTurret" parent="." instance=ExtResource("1_5qx3d")]
+position = Vector2(611, 345)
+
+[node name="Object" parent="." instance=ExtResource("2_frscd")]
+position = Vector2(554, 524)
+
+[node name="Enemy" parent="." instance=ExtResource("3_8dj3y")]
+position = Vector2(621, 369)
+
+[node name="Enemy2" parent="." instance=ExtResource("3_8dj3y")]
+position = Vector2(822, 379)
+
+[node name="Enemy3" parent="." node_paths=PackedStringArray("animation", "movement") instance=ExtResource("3_8dj3y")]
+position = Vector2(486, 305)
+animation = NodePath("../Enemy/Equipment/Base/AnimatedSprite2D")
+movement = NodePath("../Enemy/Movement")
+
+[node name="Enemy4" parent="." node_paths=PackedStringArray("animation", "movement") instance=ExtResource("3_8dj3y")]
+position = Vector2(687, 315)
+animation = NodePath("../Enemy2/Equipment/Base/AnimatedSprite2D")
+movement = NodePath("../Enemy2/Movement")
+
+[node name="Enemy5" parent="." node_paths=PackedStringArray("animation", "movement") instance=ExtResource("3_8dj3y")]
+position = Vector2(517, 426)
+animation = NodePath("../Enemy/Equipment/Base/AnimatedSprite2D")
+movement = NodePath("../Enemy/Movement")
+
+[node name="Enemy6" parent="." node_paths=PackedStringArray("animation", "movement") instance=ExtResource("3_8dj3y")]
+position = Vector2(718, 436)
+animation = NodePath("../Enemy2/Equipment/Base/AnimatedSprite2D")
+movement = NodePath("../Enemy2/Movement")
+
+[node name="Enemy7" parent="." node_paths=PackedStringArray("animation", "movement") instance=ExtResource("3_8dj3y")]
+position = Vector2(559, 219)
+animation = NodePath("../Enemy/Equipment/Base/AnimatedSprite2D")
+movement = NodePath("../Enemy/Movement")
+
+[node name="Enemy8" parent="." node_paths=PackedStringArray("animation", "movement") instance=ExtResource("3_8dj3y")]
+position = Vector2(760, 229)
+animation = NodePath("../Enemy2/Equipment/Base/AnimatedSprite2D")
+movement = NodePath("../Enemy2/Movement")

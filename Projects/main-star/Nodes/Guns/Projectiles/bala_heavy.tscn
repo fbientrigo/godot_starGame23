@@ -8,10 +8,11 @@
 [node name="bullet_heavy" type="Node2D"]
 z_index = -15
 script = ExtResource("1_gl5fm")
+bullet_speed = 400.0
+bullet_damage = 2
 
 [node name="timer_destruction" type="Timer" parent="."]
-wait_time = 9.0
-autostart = true
+wait_time = 2.0
 script = ExtResource("2_mgbe2")
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
@@ -23,7 +24,7 @@ damage = 1
 
 [node name="Animation" type="AnimatedSprite2D" parent="."]
 sprite_frames = ExtResource("4_gknam")
-animation = &"bullet"
+animation = &"Bigbullet"
 
 [connection signal="timeout" from="timer_destruction" to="." method="_on_timer_timeout"]
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="timer_destruction" method="_on_visible_on_screen_notifier_2d_screen_exited"]

@@ -53,6 +53,8 @@ func take_heal(value:int):
 
 # Reduce la salud actual de la entidad.
 func take_damage(damage:int):
+#	print(self.get_parent())
+#	print("HealthCompo", damage)
 	var value = abs(damage)
 	set_health(-value)
 	emit_signal("hurt",damage) # para sprites u otros
@@ -81,7 +83,7 @@ func dead():
 	emit_signal("onDead")
 	match DeadType:
 		0: # Tipo Enemigo
-			get_parent().queue_free()
+			get_parent().call_deferred("queue_free")
 		1: # Tipo Estrella
 			pass
 		2: # Tipo Mineral

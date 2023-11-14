@@ -21,5 +21,6 @@ func Update(delta:float):
 		randomize_wander()
 
 func Physics_Update(delta:float):
-	if object:
+	if object and object.movement and is_instance_valid(object.movement):
 		object.movement.move(move_direction, move_speed)
+

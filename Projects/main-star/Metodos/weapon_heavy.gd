@@ -1,3 +1,5 @@
+# Weapon Tipo Pistola Heavy
+
 extends Weapon
 
 
@@ -7,7 +9,7 @@ var bulletheavy= preload("res://Nodes/Guns/Projectiles/bala_heavy.tscn")
 # fase de la escopeta, mayor angulo mayor deflexión
 var phase_recoil = PI/6
 
-@export var cooldown = 10.0
+@export var cooldown = 30.0
 
 
 func _ready():

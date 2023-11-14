@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://4jslef5iluqi"]
+[gd_scene load_steps=8 format=3 uid="uid://4jslef5iluqi"]
 
 [ext_resource type="PackedScene" uid="uid://me0wanq6rcss" path="res://Metodos/player.tscn" id="1_ln5gm"]
 [ext_resource type="PackedScene" uid="uid://csc6cyvaojn3c" path="res://Scenes/entorno.tscn" id="2_5ijhr"]
 [ext_resource type="PackedScene" uid="uid://ce8bfmrsk33n" path="res://Nodes/Enemies/spawner.tscn" id="6_6mp7b"]
 [ext_resource type="PackedScene" uid="uid://bhxlsbs7rvctp" path="res://Nodes/Enemies/Enemy.tscn" id="6_c70g1"]
+[ext_resource type="PackedScene" uid="uid://c4drybq7dx5x3" path="res://Metodos/CommunicationBus.tscn" id="7_0ypak"]
 [ext_resource type="PackedScene" uid="uid://cafwk803csaae" path="res://Scenes/buiild_module.tscn" id="7_b4vwi"]
 [ext_resource type="PackedScene" uid="uid://uxgaqqqjl0px" path="res://Nodes/Enemies/enemy_slime.tscn" id="7_jr6lv"]
 
@@ -45,5 +46,13 @@ spawn_interval_max = 3.0
 spawn_radius = 900.0
 
 [node name="BuiildModule" parent="." instance=ExtResource("7_b4vwi")]
+position = Vector2(-597, 566)
 
 [node name="Player" parent="." instance=ExtResource("1_ln5gm")]
+velocidad_nave = 0.0
+teleport_limits = Vector2(3400, 3400)
+
+[node name="DirectionalLight2D" type="DirectionalLight2D" parent="."]
+blend_mode = 1
+
+[node name="CommunicationBus" parent="." instance=ExtResource("7_0ypak")]

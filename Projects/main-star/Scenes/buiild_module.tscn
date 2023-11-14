@@ -12,6 +12,8 @@ tipo_estrella = "TipoG"
 
 [node name="Sol2" parent="." instance=ExtResource("2_6qr8g")]
 position = Vector2(-346, -545)
+tipo_estrella = "TipoG"
 
 [node name="Sol3" parent="." instance=ExtResource("2_6qr8g")]
 position = Vector2(639, -535)
+tipo_estrella = "TipoB"
