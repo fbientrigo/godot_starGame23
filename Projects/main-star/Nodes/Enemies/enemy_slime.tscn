@@ -471,6 +471,10 @@ libraries = {
 "AnimationsLibrary_Enemies": ExtResource("17_5c3cp")
 }
 
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]
+position = Vector2(-3.31081, -1.72164)
+scale = Vector2(1.75486, 4.21812)
+
 [connection signal="hurt" from="HealthComponent" to="." method="_on_health_component_hurt"]
 [connection signal="onDead" from="HealthComponent" to="." method="_on_health_component_on_dead"]
 [connection signal="area_entered" from="Sensor" to="." method="_on_sensor_area_entered"]

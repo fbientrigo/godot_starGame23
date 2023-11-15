@@ -13,3 +13,5 @@ class_name TipoGas
 func Enter():
 	healthcomponent.collision.shape = collision_shape
 	animacion.play("WhiteDwarf")
+	
+	

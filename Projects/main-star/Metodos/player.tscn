@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://me0wanq6rcss"]
+[gd_scene load_steps=8 format=3 uid="uid://me0wanq6rcss"]
 
 [ext_resource type="PackedScene" uid="uid://brab36ph13h7o" path="res://Nodes/spaceship_1.tscn" id="1_q5dtn"]
 [ext_resource type="Script" path="res://Metodos/player.gd" id="1_tprph"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://Scenes/Camera_Controller.gd" id="3_1e071"]
 [ext_resource type="PackedScene" uid="uid://bwfd1rqogx08v" path="res://Metodos/gui_layer.tscn" id="4_g7kpv"]
 [ext_resource type="PackedScene" uid="uid://g4t1hlsi4hj8" path="res://Metodos/crosshair_on_ship.tscn" id="5_gxqnc"]
+[ext_resource type="Script" path="res://Metodos/FPS_Show.gd" id="6_obniw"]
 
 [node name="Player" type="Node2D" node_paths=PackedStringArray("expBar", "lbl_level", "spaceship", "crosshair", "levelPanel", "upgradeOptions", "sndLevelUp") groups=["player_root"]]
 process_mode = 3
@@ -86,6 +87,14 @@ offset_left = 3.0
 offset_top = 28.0
 offset_right = 118.0
 offset_bottom = 54.0
+
+[node name="FPSMeter" type="Label" parent="GUILayer"]
+offset_left = 1205.0
+offset_top = 686.0
+offset_right = 1259.0
+offset_bottom = 712.0
+text = "FPS: 60"
+script = ExtResource("6_obniw")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(0, -28)

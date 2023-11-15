@@ -95,6 +95,7 @@ fill_to = Vector2(0, 0)
 [node name="StarTurret" type="Node2D" groups=["Star"]]
 z_index = -4
 script = ExtResource("1_kdyaq")
+multiplicador_crecimiento = 0.4
 tipo_estrella = "TipoB"
 
 [node name="Sensor" parent="." instance=ExtResource("8_jtdk8")]
@@ -216,6 +217,8 @@ cooldown = 30.0
 scale = Vector2(60, 60)
 energy = 0.9
 texture = SubResource("GradientTexture2D_cl45u")
+
+[node name="Timer_Vida" type="Timer" parent="."]
 
 [connection signal="area_entered" from="Sensor" to="." method="_on_sensor_area_entered"]
 [connection signal="area_exited" from="Sensor" to="." method="_on_sensor_area_exited"]

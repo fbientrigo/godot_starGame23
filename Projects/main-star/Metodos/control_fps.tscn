@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=3 uid="uid://2jute2w46adp"]
+
+[ext_resource type="Script" path="res://Metodos/FPS_Show.gd" id="1_nefqg"]
+
+[node name="CommandInput" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="FPS_Show" type="Label" parent="CanvasLayer"]
+offset_right = 40.0
+offset_bottom = 23.0
+script = ExtResource("1_nefqg")

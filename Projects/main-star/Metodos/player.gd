@@ -61,8 +61,9 @@ func _physics_process(delta):
 	# Listen for extra input
 	# This input is for debugging
 	if Input.is_action_just_pressed("levelupgod"):
-		print("god send 20xp")
-		give20xp_asgod()
+		#print("god send 20xp")
+		#give20xp_asgod()
+		give_levelUp()
 
 	# Teleport to the other side of the map
 	if spaceship.global_position.x > teleport_limits.x:
@@ -131,6 +132,10 @@ func give20xp_asgod():
 	# Funcion que sirve como debug, se programa a una tecla secreata
 	# para asi probar subir e nivel
 	calculate_experience(10)
+
+func give_levelUp():
+	var exp_necesaria = calculate_experienceCap()
+	calculate_experience(exp_necesaria)
 
 #Recibir la experiencie
 func calculate_experience(exp_recb):

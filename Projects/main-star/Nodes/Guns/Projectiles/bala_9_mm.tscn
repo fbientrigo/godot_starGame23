@@ -9,7 +9,7 @@
 z_index = -15
 script = ExtResource("1_8rgqb")
 bullet_speed = 400.0
-bullet_damage = 3
+bullet_damage = 10
 
 [node name="timer_destruction" type="Timer" parent="."]
 wait_time = 2.0

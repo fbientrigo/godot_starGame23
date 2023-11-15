@@ -1,6 +1,11 @@
 # Componente de Torreta Estrella
 extends Node2D
 
+@export var carga : float = 0
+@export var masa : float = 0
+@export var tiempo_vida : float = 0
+@export var rotacion :  float = 0
+
 # Conexión con otros nodos
 
 @onready var statemachine : StateMachine = $StateMachine
@@ -8,12 +13,30 @@ extends Node2D
 @onready var light:PointLight2D = $PointLight2D
 @onready var healthcomponent_collision:CollisionShape2D = $HealthComponent/CollisionShape2D
 
+var health : int  = 10
+@onready var timer_vida : Timer = $Timer_Vida
+
+
 func _ready():
 	set_star_type(tipo_estrella)
-	
 
+@export var multiplicador_crecimiento : float
+func set_star_size_by_mass(tipo_estrella):
+	var star_data = STAR_DATA.get(tipo_estrella, {})
+	
+	if star_data != {}:
+		# masa, cuando una estrella evoluciona
+		# masa = star_data["masa"], esto ocurre en 
+		var mass_surplus = masa - star_data["masa"]
+		if mass_surplus > 0:
+			# esto es un % de crecimiento, el 1.5 da un plus visual
+			var new_scale = 0 #1.5 * mass_surplus / star_data["masa"]
+			new_scale = log(1 + mass_surplus) * multiplicador_crecimiento
+			self.scale = Vector2(1+new_scale,1+new_scale)
 	
 func set_star_type(tipo_estrella):
+	# Corre popr primera vez el setup
+	
 	# Sección de busquedo usando enum =============
 	var nodo_hijo = statemachine.get_node(tipo_estrella)
 	#print(nodo_hijo)
@@ -21,10 +44,15 @@ func set_star_type(tipo_estrella):
 		#print("nodo hijo encontrado")
 		statemachine.initial_state = nodo_hijo
 		statemachine.set_initial_state(nodo_hijo)
+		
 	else:
 		print("Nodo hijo no encontrado.")
 		
 	var star_data = STAR_DATA.get(tipo_estrella, {})
+	masa = star_data["masa"]
+	timer_vida.wait_time = star_data["masa"]
+	
+	
 	print("tipo estrella ", tipo_estrella)
 	print("radio:",star_data["radio"])
 #	var scale_factor = log(star_data["radio"])
@@ -167,23 +195,23 @@ const STAR_DATA = {
 }
 
 
-@export var carga : float = 0
-@export var masa : float = STAR_DATA[tipo_estrella]["masa"]
-@export var tiempo_vida : float = STAR_DATA[tipo_estrella]["tiempo_vida"]
-@export var rotacion :  float = 0
 
 # Obtener datos de estrella por tipo
 func get_star_data(star_type: String) -> Dictionary:
 	return STAR_DATA.get(star_type, {})
 
 
-@export var delta_vida : float = 200
-
+# Cambiar estrella ocurre cada vez que existe un cambio en los if
 func cambiar_estrella(_tipo_estrella):
 	masa = STAR_DATA[_tipo_estrella]["masa"]
-	tiempo_vida = STAR_DATA[_tipo_estrella]["tiempo_vida"]
+	timer_vida.wait_time = STAR_DATA[_tipo_estrella]["tiempo_vida"]
+	timer_vida.start()
 	var new_state = statemachine.get_node(_tipo_estrella)
 	statemachine.set_initial_state(new_state)
+	
+	
+
+
 
 func _physics_process(delta):
 	#weaponstatemachine.current_state.fire(0, Vector2(0,0))
@@ -191,9 +219,10 @@ func _physics_process(delta):
 		current_enemy = enemies[0]
 		if can_shoot:
 			weaponstatemachine.current_state.fire(global_rotation, current_enemy.global_position, PI)
-	tiempo_vida -= delta_vida * delta 
 #	print(tiempo_vida)
 	# Comportamiento de G para el sol
+	
+	
 	
 	# ============ Evolucion Estelar ========================================
 	if tipo_estrella == "TipoG":
@@ -208,7 +237,7 @@ func _physics_process(delta):
 				
 			print("starturret estrella tipo G ha llegado al 50% de suministros, coviertiendo en RedGiant")
 			cambiar_estrella(tipo_estrella)
-		elif tiempo_vida < 0:
+		elif timer_vida.time_left < 0:
 			light.color = Color(0.85, 0.395, 0.374)
 			if carga < 2:
 				tipo_estrella = "TipoRG" # gigante roja
@@ -217,7 +246,7 @@ func _physics_process(delta):
 			cambiar_estrella(tipo_estrella)
 		
 	if tipo_estrella == "TipoRG":
-		if tiempo_vida < 0:
+		if  timer_vida.time_left < 0:
 			tipo_estrella = "TipoWD"
 			light.color = Color(1, 1, 1)
 			print("starturret: convirtiendo RG en WhiteDwarf")
@@ -230,13 +259,14 @@ func _physics_process(delta):
 #			tipo_estrella = "TipoBSG"  # Blue Supergiant
 #			print("StarTurret: B-type star has lost significant mass, evolving into Blue Supergiant")
 #			cambiar_estrella(tipo_estrella)
-		if tiempo_vida < 0:
+		if timer_vida.time_left < 0:
 			# The star has exhausted its nuclear fuel and collapses into a neutron star or black hole
 			if masa <= 3:  # Assuming stars with mass <= 3 times the mass of the sun become neutron stars
-				tipo_estrella = "TipoNS"  # Neutron Star
+				#tipo_estrella = "TipoNS"  # Neutron Star
 				print("StarTurret: B-type star has exhausted nuclear fuel, evolving into Neutron Star")
 			else:  # Stars with mass > 3 times the mass of the sun become black holes
-				tipo_estrella = "TipoBH"  # Black Hole
+				
+				#tipo_estrella = "TipoBH"  # Black Hole
 				print("StarTurret: B-type star has exhausted nuclear fuel, evolving into Black Hole")
 			cambiar_estrella(tipo_estrella)
 
@@ -253,7 +283,7 @@ func _on_sensor_area_exited(area):
 	if area.is_in_group("Enemy"):
 		enemies.erase(area)
 
-var health : int  = 10
+
 func _on_health_component_hurt(damage):
 	health = health - damage
 	if masa > 0:
@@ -268,6 +298,8 @@ func _on_health_component_on_dead():
 func _on_area_2d_area_entered(area):
 	pass
 
+# ====== Leveling Up Variables ============================
+# connected by communication bus indireclty
 # Conectados mediante communicationBus
 func upgrade_carga(ammount):
 	carga += ammount
@@ -275,6 +307,8 @@ func upgrade_carga(ammount):
 func upgrade_masa(ammount):
 	masa += ammount
 	health += 1
+	set_star_size_by_mass(tipo_estrella)
+	print("upgrade de masa_starsize")
 
 func upgrade_rotacion(ammount):
 	rotacion += rotacion
