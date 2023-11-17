@@ -7,6 +7,7 @@ class_name Movement # es una clase
 
 var character: CharacterBody2D
 func setup(character2D: CharacterBody2D):
+	#print("running setup movement on:, ", character2D)
 	character = character2D
 
 # mueve tipos characterBody2D
@@ -14,6 +15,7 @@ func setup(character2D: CharacterBody2D):
 func move(input_vector: Vector2, _speed:float = speed):
 	character.velocity = (input_vector.normalized() * _speed)
 	character.look_at(input_vector + character.global_position)
+	#character.call_deferred("move_and_slide")
 	character.move_and_slide()
 	
 func stop_movement():

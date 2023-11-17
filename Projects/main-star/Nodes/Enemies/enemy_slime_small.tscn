@@ -1,4 +1,4 @@
-[gd_scene load_steps=66 format=3 uid="uid://dvk1igk6er22c"]
+[gd_scene load_steps=67 format=3 uid="uid://dvk1igk6er22c"]
 
 [ext_resource type="Script" path="res://Nodes/Enemies/Enemy.gd" id="1_0foox"]
 [ext_resource type="Script" path="res://Nodes/Player/Equipment.gd" id="2_ibauh"]
@@ -381,14 +381,16 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1ldg8"]
+size = Vector2(6, 20)
+
 [node name="enemy_slime_small" type="CharacterBody2D" node_paths=PackedStringArray("animation", "movement")]
 rotation = 3.14159
 scale = Vector2(0.5, 0.5)
 collision_layer = 4
-collision_mask = 15
+collision_mask = 10
+motion_mode = 1
 script = ExtResource("1_0foox")
-distancia_vision = 400.0
-vision_eterna = true
 animation = NodePath("Equipment/Base/AnimatedSprite2D")
 movement = NodePath("Movement")
 
@@ -417,21 +419,17 @@ one_shot = true
 sprite_frames = SubResource("SpriteFrames_8rj56")
 animation = &"damage_anim"
 
-[node name="CollisionPoly" type="CollisionPolygon2D" parent="."]
-visible = false
-position = Vector2(-1.84774e-06, -1.29007)
-scale = Vector2(1.1875, 1.10662)
-polygon = PackedVector2Array(10.9474, -17.8109, 6.73687, -9.67804, 4.21051, 10.2023, 10.1052, 24.6608, -14.3159, 30.9863, -13.4736, -34.9804)
-
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 attenuation = 0.90125
 
 [node name="HitboxComponent" parent="." instance=ExtResource("10_yk8ba")]
+visible = false
 collision_layer = 0
 collision_mask = 2
 damage = 1
 
 [node name="HealthComponent" parent="." groups=["Enemy"] instance=ExtResource("11_gt112")]
+visible = false
 collision_layer = 4
 collision_mask = 0
 max_health = 3
@@ -448,7 +446,7 @@ speed = 120.0
 max_speed = 200.0
 
 [node name="IA_StateMachine" parent="." node_paths=PackedStringArray("initial_state") instance=ExtResource("14_bt0i4")]
-initial_state = NodePath("EnemyFolow")
+initial_state = NodePath("WanderingIdle")
 
 [node name="WanderingIdle" type="Node" parent="IA_StateMachine" node_paths=PackedStringArray("object")]
 script = ExtResource("15_166mi")
@@ -468,8 +466,13 @@ libraries = {
 }
 
 [node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]
+visible = false
 position = Vector2(-3.18199, -5.72205e-06)
 scale = Vector2(1.77781, 4.28805)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-2, -5.07036e-06)
+shape = SubResource("RectangleShape2D_1ldg8")
 
 [connection signal="onDead" from="HealthComponent" to="." method="_on_health_component_on_dead"]
 [connection signal="area_entered" from="Sensor" to="." method="_on_sensor_area_entered"]

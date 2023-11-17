@@ -13,3 +13,4 @@ class_name TipoWD
 func Enter():
 	healthcomponent.collision.shape = collision_shape
 	animacion.play("WhiteDwarf")
+	# cambiarla por una enana negra

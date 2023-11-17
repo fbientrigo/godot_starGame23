@@ -8,7 +8,7 @@ extends RigidBody2D
 
 # ==== 1107 tarjetas de levl up 1:22am
 
-@export var velocidad_nave : float = 300
+#@export var velocidad_nave : float = 300
 @export var animation_damage_sprites: NodePath
 
 #EXP GUI
@@ -25,6 +25,12 @@ extends RigidBody2D
 
 # combinar con el health component
 @onready var _animated_sprite = get_node(animation_damage_sprites)
+@onready var sound_thursters : AudioStreamPlayer2D = $Sounds/Thursters
+@onready var sound_dash : AudioStreamPlayer2D = $Sounds/Dash2
+
+@onready var timer_dash : Timer = $Timers/Dash
+@onready var cooldown_dash : Timer = $Timers/CanDash
+@export var dash_power : int = 3
 #@onready var parent : Node2D = get_parent()
 #var levelPanel : Node2D
 #var upgradeOptions : Node2D
@@ -35,6 +41,24 @@ func _ready():
 	
 	#print("Hello world")
 #	set_expbar(experience, calculate_experienceCap())
+
+@export var can_dash : bool = true
+var dashing : bool = false # esta en estado de dash
+
+func dash_ctrl():
+	if can_dash and Input.is_action_just_pressed("dash"):
+		dashing = true
+		can_dash = false
+		sound_dash.play()
+		timer_dash.start()
+
+func _on_dash_timeout():
+	dashing = false
+	cooldown_dash.start()
+func _on_can_dash_timeout():
+	can_dash = true
+
+
 
 
 # codigo sin testear, me falta implementar funcionalidad
@@ -55,16 +79,14 @@ func get_input_actions():
 
 func _integrate_forces(_state):
 	# sigue la posicion del mouse, y calcula el torque
-	var direction_position : Vector2
-	var difference : Vector2
-	var angle_to_look : float
-	direction_position = crosshair.global_position
-	difference = direction_position - global_position
-	angle_to_look = difference.angle_to(transform.y)
-
+	var direction_position : Vector2 = crosshair.global_position
+	var difference : Vector2  = direction_position - global_position
+	var angle_to_look : float = difference.angle_to(transform.y)
+	
+	dash_ctrl()
 
 	# deja de temblar la nave
-	if abs(abs(angle_to_look) - PI) > 0.1:
+	if abs(abs(angle_to_look) - PI) > 0.15:
 		# Calculate the torque to apply
 		var torque = angle_to_look * torque_strength
 		# Apply the torque to the spaceship
@@ -72,9 +94,16 @@ func _integrate_forces(_state):
 	else:
 		pass # se pierde el control de la nave, animación
 	
-	apply_force( - transform.y  * Input.get_action_strength("w") * propulsor_strength)
-
-
+	if Input.is_action_pressed("w"):
+#		if sound_thursters.playing != true:
+#			sound_thursters.play()
+		match dashing:
+			true: #dash activo
+				apply_force( - transform.y  * Input.get_action_strength("w") * propulsor_strength * (dash_power+1))
+				$Particles/Dash.emitting = true
+			false:
+				apply_force( - transform.y  * Input.get_action_strength("w") * propulsor_strength )
+				$Particles/Dash.emitting = false
 # Grabbing de Experiencia ================
 
 func _on_grabber_area_entered(area):
@@ -90,6 +119,7 @@ func _on_picker_area_entered(area):
 		var exp_recb = area.collect()
 		#print("recibida exp:", exp_recb)
 		emit_signal("got_exp", exp_recb)
+
 
 #
 #func _physics_process(delta):
@@ -181,4 +211,7 @@ func _on_picker_area_entered(area):
 #
 ## ========================================
 #
+
+
+
 

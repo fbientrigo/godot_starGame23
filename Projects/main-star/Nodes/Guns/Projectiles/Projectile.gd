@@ -43,5 +43,5 @@ func _on_hitbox_component_area_entered(area):
 
 # Legacy code
 # anteriormente hacia lo del hitboxcomponent
-func _on_area_2d_body_entered(body):
+func _on_area_2d_body_entered(_body):
 	pass

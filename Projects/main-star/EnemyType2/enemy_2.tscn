@@ -1,7 +1,8 @@
-[gd_scene load_steps=81 format=3 uid="uid://dsm8p7ex0tdrg"]
+[gd_scene load_steps=82 format=3 uid="uid://dsm8p7ex0tdrg"]
 
 [ext_resource type="Script" path="res://Nodes/Objects/experience_gem.gd" id="1_84udy"]
 [ext_resource type="Texture2D" uid="uid://dptbbu6alo4gg" path="res://Assets/Pickups/Hydrogen/hydrogen_gas.png" id="1_vv038"]
+[ext_resource type="AudioStream" uid="uid://cbchkan8nx3q6" path="res://shapeform_audio/Arcane Activations Preview/AUDIO/Glyph Activation Warm Aura.wav" id="2_63hwb"]
 [ext_resource type="Script" path="res://Metodos/States/StateMachine.gd" id="2_wpkbn"]
 [ext_resource type="Script" path="res://Nodes/Objects/Pickable.gd" id="4_xvht5"]
 [ext_resource type="Script" path="res://Nodes/Objects/StarSeed.gd" id="5_aoxmg"]
@@ -530,6 +531,7 @@ position = Vector2(1, 4.5)
 shape = SubResource("RectangleShape2D_j6una")
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("2_63hwb")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_a1une")

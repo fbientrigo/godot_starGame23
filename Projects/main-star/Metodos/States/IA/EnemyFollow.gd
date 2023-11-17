@@ -14,6 +14,7 @@ class_name EnemyFolow
 # @export var move_speed:= 40
 @export var rango_vision_player := 100
 @export var probabilidad_atacar_player := 0.9
+@onready var movement : Movement = $"../../Movement"
 var player:RigidBody2D #aqui guardaremos al player
 var direction : Vector2
 
@@ -22,28 +23,24 @@ var direction : Vector2
 #	print(enemy)
 
 func Enter():
-	enemy.movement.setup(enemy) # esto arregla casi todos los bugs
-	#get_groups()
-	#por default su velocidad inicial va hacia el jugador
-		##x player = get_tree().get_first_node_in_group("Player")
-	# nueva version:
 	var player_group_nodes = get_tree().get_nodes_in_group("Player")
-	#var player_node = player_group_nodes[0]
 	for player_node in player_group_nodes:
 		player = player_node
 		break
+	if enemy == null or player == null:
+		return
+
+	movement.call_deferred("setup",enemy)
+	#movement.setup(enemy)
+
 	
-	if enemy != null:
-		if player != null:
-			direction = player.global_position - enemy.global_position
-#		print("enemy movement:")
-		if enemy.movement != null:
-			enemy.movement.move(direction)
+	direction = player.global_position - enemy.global_position
+	# 1115 probe quitarlo apra el bug del movimeino
+	# enemy.movement.move(direction)
+
 
 
 #		if enemy.animation != null:
-
-
 
 	
 func Physics_Update(_delta: float):
@@ -51,6 +48,6 @@ func Physics_Update(_delta: float):
 		if player != null:
 			direction = player.global_position - enemy.global_position
 		if direction.length() < rango_vision_player:
-			enemy.movement.move(direction)
-			enemy.animation.play("move_anim")
+			movement.move(direction)
+			#animation.play("move_anim")
 	

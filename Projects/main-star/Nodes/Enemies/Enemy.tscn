@@ -274,7 +274,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_uwk7f")
 }],
 "loop": true,
-"name": &"base_anim",
+"name": &"damage_anim",
 "speed": 5.0
 }, {
 "frames": [{
@@ -315,7 +315,7 @@ animations = [{
 [node name="Enemy" type="CharacterBody2D" node_paths=PackedStringArray("animation", "movement")]
 rotation = 3.14159
 collision_layer = 4
-collision_mask = 8
+collision_mask = 15
 script = ExtResource("1_wqpsa")
 distancia_vision = 800.0
 vision_eterna = true
@@ -346,13 +346,12 @@ one_shot = true
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Equipment/Base"]
 position = Vector2(1.99999, -11)
 sprite_frames = SubResource("SpriteFrames_8rj56")
-animation = &"move_anim"
+animation = &"damage_anim"
 
 [node name="CollisionPoly" type="CollisionPolygon2D" parent="."]
-visible = false
 position = Vector2(-7.15252e-07, -2.58438)
 scale = Vector2(1.1875, 0.992126)
-polygon = PackedVector2Array(-4.21051, -5.45861, 5.05265, -5.45858, 8.42105, 2.60492, 4.21051, 11.6763, -3.36844, 11.6763, -8.42105, 2.60487)
+polygon = PackedVector2Array(-9.26313, -10.4983, 5.89478, -16.5459, 8.42105, 2.60492, 5.05259, 24.7795, -10.9474, 14.7001, -8.42105, 2.60487)
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 attenuation = 0.90125

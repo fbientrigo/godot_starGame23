@@ -35,8 +35,8 @@ func _ready():
 	# selecciona de la base de datos en autoload global la informacion
 	#		"icon","display_name","ammount"
 	var dfitem = UpgradeDb.df[item]
-	nombre.text = UpgradeDb.df[item]["display_name"]
-	textura.texture = load(UpgradeDb.df[item]["icon"])
+	nombre.text =dfitem["display_name"]
+	textura.texture = load(dfitem["icon"])
 	
 	
 	if is_player:
@@ -58,7 +58,7 @@ func _input(event):
 			if mouse_over:
 				emit_signal("selected_upgrade", item)
 
-func _process(delta):
+func _process(_delta):
 	if mouse_over:
 		textura.modulate = "#ffffff"
 	else:

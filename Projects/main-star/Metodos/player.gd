@@ -57,6 +57,9 @@ func _ready():
 #	sndLevelUp = get_node("%snd_levelup")
 	set_expbar(experience, calculate_experienceCap())
 
+
+
+
 func _physics_process(delta):
 	# Listen for extra input
 	# This input is for debugging
@@ -64,7 +67,6 @@ func _physics_process(delta):
 		#print("god send 20xp")
 		#give20xp_asgod()
 		give_levelUp()
-
 	# Teleport to the other side of the map
 	if spaceship.global_position.x > teleport_limits.x:
 		print("Before teleportation: ", spaceship.global_position, camera.global_position)
@@ -163,17 +165,17 @@ func calculate_experience(exp_recb):
 #TODO
 # exports para cambiar la velocidad de leveleo
 func calculate_experienceCap():
-	var exp_cap = 5
+	var exp_cap = 2
 	if experience_level < 2:
-		exp_cap += 5 * experience_level + 3
+		exp_cap += 3 * experience_level + 3
 	elif experience_level < 10:
-		exp_cap += 5 * experience_level**2
+		exp_cap += 6 * experience_level + 3
 	elif experience_level < 20:
-		exp_cap += 8 * experience_level**2
+		exp_cap += 8 * experience_level + 3
 	elif experience_level < 40:
-		exp_cap += 95 * (experience_level**2 -19)
+		exp_cap += 12 * experience_level + 3
 	else:
-		exp_cap += 255 * (experience_level**2 -39)
+		exp_cap += 42 * log(experience_level) + 255 + experience_level
 	return exp_cap
 
 func set_expbar(set_value = 1, set_max_value=100):

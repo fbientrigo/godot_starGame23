@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://c563105ufpn66"
+path="res://.godot/imported/High-Tech Gadget Activate.wav-14c0b15baf08ef725e01e1a2bf7eed77.sample"
+
+[deps]
+
+source_file="res://shapeform_audio/Future UI Preview/Audio/High-Tech Gadget Activate.wav"
+dest_files=["res://.godot/imported/High-Tech Gadget Activate.wav-14c0b15baf08ef725e01e1a2bf7eed77.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

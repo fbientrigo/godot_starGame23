@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://0giboa36sedp"
+path="res://.godot/imported/GUNSupr_Silenced Pistol Fire Short_01.wav-8deeef58cf401acd63640866c6b91f8e.sample"
+
+[deps]
+
+source_file="res://shapeform_audio/Sci Fi Weapons Cyberpunk Arsenal Preview/AUDIO/GUNSupr_Silenced Pistol Fire Short_01.wav"
+dest_files=["res://.godot/imported/GUNSupr_Silenced Pistol Fire Short_01.wav-8deeef58cf401acd63640866c6b91f8e.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

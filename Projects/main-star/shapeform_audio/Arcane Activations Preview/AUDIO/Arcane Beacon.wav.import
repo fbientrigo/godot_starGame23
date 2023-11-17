@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://dd17y5m80i5x5"
+path="res://.godot/imported/Arcane Beacon.wav-4dc0c46b26487fee6746fd69d7ecf8cd.sample"
+
+[deps]
+
+source_file="res://shapeform_audio/Arcane Activations Preview/AUDIO/Arcane Beacon.wav"
+dest_files=["res://.godot/imported/Arcane Beacon.wav-4dc0c46b26487fee6746fd69d7ecf8cd.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

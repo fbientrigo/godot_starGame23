@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://bqab1a0i6m4h7"]
+[gd_scene load_steps=35 format=3 uid="uid://bqab1a0i6m4h7"]
 
 [ext_resource type="Script" path="res://Nodes/Star/star_turret.gd" id="1_kdyaq"]
 [ext_resource type="Texture2D" uid="uid://cmivjwnddubbw" path="res://Assets/Ships/Main Ship - Weapons/Main Ship - Weapons - Auto Cannon.png" id="4_d8qcl"]
@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://dyuvy1275lb7g" path="res://Metodos/States/StateMachine.tscn" id="8_nsgwv"]
 [ext_resource type="Script" path="res://Nodes/Star/TipoO.gd" id="9_3eyw6"]
 [ext_resource type="Script" path="res://Nodes/Star/TipoB.gd" id="10_3tjds"]
+[ext_resource type="Script" path="res://Nodes/Star/TipoBH.gd" id="10_hbubf"]
 [ext_resource type="Script" path="res://Nodes/Star/TipoA.gd" id="11_83wjl"]
 [ext_resource type="Script" path="res://Nodes/Star/TipoF.gd" id="12_m2pnu"]
 [ext_resource type="Script" path="res://Nodes/Star/TipoK.gd" id="13_n53u3"]
@@ -19,6 +20,7 @@
 [ext_resource type="Script" path="res://Nodes/Star/TipoWD.gd" id="15_dww2m"]
 [ext_resource type="Script" path="res://Nodes/Star/TipoRG.gd" id="16_0ddt4"]
 [ext_resource type="Script" path="res://Nodes/Star/TipoSRG.gd" id="17_3bnc0"]
+[ext_resource type="Script" path="res://Nodes/Star/TipoBD.gd" id="18_6kmvi"]
 [ext_resource type="Script" path="res://Nodes/Star/CommunicationBus.gd" id="20_8vmcm"]
 [ext_resource type="PackedScene" uid="uid://km12pyk2lnw8" path="res://Nodes/Guns/basic_weapon_state_machine.tscn" id="21_cpoek"]
 
@@ -83,14 +85,14 @@ animations = [{
 radius = 49.0102
 
 [sub_resource type="Gradient" id="Gradient_m6jjy"]
-offsets = PackedFloat32Array(0, 0.106667, 0.266667, 0.38, 0.806667)
-colors = PackedColorArray(0.797659, 0.797658, 0.797659, 1, 0.560711, 0.560711, 0.560711, 1, 0.424286, 0.424286, 0.424286, 1, 0.429222, 0.429222, 0.429222, 1, 0, 0, 0, 1)
+offsets = PackedFloat32Array(0, 0.60101, 0.806667)
+colors = PackedColorArray(0.797659, 0.797658, 0.797659, 1, 0.429222, 0.429222, 0.429222, 1, 0, 0, 0, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_cl45u"]
 gradient = SubResource("Gradient_m6jjy")
 fill = 1
 fill_from = Vector2(0.5, 0.5)
-fill_to = Vector2(0, 0)
+fill_to = Vector2(0.216524, 0.282051)
 
 [node name="StarTurret" type="Node2D" groups=["Star"]]
 z_index = -4
@@ -140,6 +142,9 @@ animacion = NodePath("../../Animaciones")
 healthcomponent = NodePath("../../HealthComponent")
 statemachine = NodePath("..")
 
+[node name="TipoBH" type="Node2D" parent="StateMachine"]
+script = ExtResource("10_hbubf")
+
 [node name="TipoA" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("animacion", "healthcomponent", "statemachine")]
 script = ExtResource("11_83wjl")
 animacion = NodePath("../../Animaciones")
@@ -188,6 +193,9 @@ animacion = NodePath("../../Animaciones")
 healthcomponent = NodePath("../../HealthComponent")
 statemachine = NodePath("..")
 
+[node name="TipoBD" type="Node2D" parent="StateMachine"]
+script = ExtResource("18_6kmvi")
+
 [node name="TipoRG" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("animacion", "healthcomponent", "statemachine")]
 script = ExtResource("16_0ddt4")
 animacion = NodePath("../../Animaciones")
@@ -205,10 +213,12 @@ script = ExtResource("20_8vmcm")
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
 
-[node name="BasicWeaponStateMachine" parent="." node_paths=PackedStringArray("initial_state") instance=ExtResource("21_cpoek")]
-position = Vector2(0, -2)
-rotation = 1.57122
-initial_state = NodePath("9mm")
+[node name="BasicWeaponStateMachine" parent="." instance=ExtResource("21_cpoek")]
+position = Vector2(0, 2)
+rotation = 0.0
+
+[node name="machinegun" parent="BasicWeaponStateMachine" index="1"]
+max_recoil = 0.11
 
 [node name="heavy" parent="BasicWeaponStateMachine" index="2"]
 cooldown = 30.0
@@ -224,6 +234,7 @@ texture = SubResource("GradientTexture2D_cl45u")
 [connection signal="area_exited" from="Sensor" to="." method="_on_sensor_area_exited"]
 [connection signal="hurt" from="HealthComponent" to="." method="_on_health_component_hurt"]
 [connection signal="onDead" from="HealthComponent" to="." method="_on_health_component_on_dead"]
+[connection signal="timeout" from="Timer_Vida" to="." method="_on_timer_vida_timeout"]
 
 [editable path="HealthComponent"]
 [editable path="BasicWeaponStateMachine"]

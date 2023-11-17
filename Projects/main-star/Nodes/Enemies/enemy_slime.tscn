@@ -418,10 +418,9 @@ sprite_frames = SubResource("SpriteFrames_8rj56")
 animation = &"damage_anim"
 
 [node name="CollisionPoly" type="CollisionPolygon2D" parent="."]
-visible = false
 position = Vector2(-1.84774e-06, -1.29007)
 scale = Vector2(1.1875, 1.10662)
-polygon = PackedVector2Array(10.9474, -17.8109, 6.73687, -9.67804, 4.21051, 10.2023, 10.1052, 24.6608, -14.3159, 30.9863, -13.4736, -34.9804)
+polygon = PackedVector2Array(5.05269, -22.3292, 5.05258, 24.6608, -12.6316, 0.262088)
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 attenuation = 0.90125

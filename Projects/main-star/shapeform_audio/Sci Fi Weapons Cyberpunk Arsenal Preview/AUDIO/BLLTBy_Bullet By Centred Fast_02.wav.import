@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://eqydck65udrd"
+path="res://.godot/imported/BLLTBy_Bullet By Centred Fast_02.wav-9fbde4ed1e41294f6a2af0cb1407c840.sample"
+
+[deps]
+
+source_file="res://shapeform_audio/Sci Fi Weapons Cyberpunk Arsenal Preview/AUDIO/BLLTBy_Bullet By Centred Fast_02.wav"
+dest_files=["res://.godot/imported/BLLTBy_Bullet By Centred Fast_02.wav-9fbde4ed1e41294f6a2af0cb1407c840.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

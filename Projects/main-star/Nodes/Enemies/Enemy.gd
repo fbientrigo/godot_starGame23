@@ -38,8 +38,9 @@ class_name Enemy # crea una clase
 @export var animation : AnimatedSprite2D 
 # Refeencia al nodo de movimiento que permite al enemigo moverse.
 #@onready var movement = $Movement as Movement
-@export var movement : Movement
+#@export var movement : Movement
 # Referencia al sensor del enemigo que detecta al jugador.
+@onready var movement : Movement = $Movement
 @onready var sensor: Area2D = $Sensor
 @onready var animation_player:AnimationPlayer = $AnimationPlayer
 
@@ -49,18 +50,14 @@ var player
 var player_area
 
 # exp
-var exp_gem : PackedScene
+@onready var exp_gem : PackedScene = preload("res://Nodes/Objects/Object.tscn")
 
 func _ready(): # Método llamado cuando el nodo está listo.
 	movement.setup(self) # Configura el movimiento del enemigo.
 	#animation.play("base_anim") # Reproduce la animación base.
-	exp_gem = preload("res://Nodes/Objects/Object.tscn")
 	animation.play("damage_anim")
 	animation.pause()
 	
-
-func _physics_process(_delta):
-	pass
 
 # Nota: Código de seguimiento del jugador se ha comentado temporalmente.
 # Implementa esta lógica según tus necesidades específicas.

@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://dvk1myjdrncvw"
+path="res://.godot/imported/ONE_SHOT_CINEMATIC_EFFECT_10.wav-9f4fb24ef75b4e2d0369e49e48c4bb3c.sample"
+
+[deps]
+
+source_file="res://shapeform_audio/Dystopia – Ambience and Drone Preview/AUDIO/ONE_SHOT_CINEMATIC_EFFECT_10.wav"
+dest_files=["res://.godot/imported/ONE_SHOT_CINEMATIC_EFFECT_10.wav-9f4fb24ef75b4e2d0369e49e48c4bb3c.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://66idhadqi71v"
+path="res://.godot/imported/SLOW DOWN SPEED UP_05.wav-fe8faee4c7ded499cae0508a283d1da9.sample"
+
+[deps]
+
+source_file="res://shapeform_audio/Cassette Preview/AUDIO/SLOW DOWN SPEED UP_05.wav"
+dest_files=["res://.godot/imported/SLOW DOWN SPEED UP_05.wav-fe8faee4c7ded499cae0508a283d1da9.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

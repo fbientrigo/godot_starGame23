@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://dm7ye8vkrvbdn"
+path="res://.godot/imported/Coins_Placed_Down_Hardcover_Pitched.wav-28612fed0bc4a1d15b91a9b4b0ecbec0.sample"
+
+[deps]
+
+source_file="res://shapeform_audio/The Mint – Coins and Money Preview/AUDIO/Coins_Placed_Down_Hardcover_Pitched.wav"
+dest_files=["res://.godot/imported/Coins_Placed_Down_Hardcover_Pitched.wav-28612fed0bc4a1d15b91a9b4b0ecbec0.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

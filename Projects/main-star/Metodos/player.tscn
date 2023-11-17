@@ -28,9 +28,8 @@ collision_layer = 2
 inertia = 4.0
 linear_damp = 1.6
 angular_damp = 10.0
-velocidad_nave = 350.0
-torque_strength = 200.0
-propulsor_strength = 400.0
+torque_strength = 420.0
+propulsor_strength = 600.0
 crosshair = NodePath("../Crosshair_onShip")
 
 [node name="9mm" parent="spaceship_1/BasicWeaponStateMachine" index="0"]
@@ -100,7 +99,7 @@ script = ExtResource("6_obniw")
 position = Vector2(0, -28)
 zoom = Vector2(1.7, 1.7)
 position_smoothing_enabled = true
-position_smoothing_speed = 6.0
+position_smoothing_speed = 15.0
 script = ExtResource("3_1e071")
 player_path = NodePath("../spaceship_1")
 

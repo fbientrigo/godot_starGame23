@@ -6,8 +6,10 @@
 [ext_resource type="Script" path="res://Metodos/weapon_machinegun.gd" id="4_fo0l3"]
 [ext_resource type="Script" path="res://Metodos/weapon_heavy.gd" id="5_6solp"]
 
-[node name="BasicWeaponStateMachine" type="Node2D"]
+[node name="BasicWeaponStateMachine" type="Node2D" node_paths=PackedStringArray("initial_state") groups=["Disparador"]]
+rotation = 1.5708
 script = ExtResource("1_f52jw")
+initial_state = NodePath("9mm")
 
 [node name="9mm" parent="." instance=ExtResource("2_swqjf")]
 script = ExtResource("3_dotj1")

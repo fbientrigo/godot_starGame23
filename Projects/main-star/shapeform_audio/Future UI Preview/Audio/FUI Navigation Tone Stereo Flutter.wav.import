@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://m31yscj2xone"
+path="res://.godot/imported/FUI Navigation Tone Stereo Flutter.wav-0875f8d3f2d59e5671b1d314eecbe33c.sample"
+
+[deps]
+
+source_file="res://shapeform_audio/Future UI Preview/Audio/FUI Navigation Tone Stereo Flutter.wav"
+dest_files=["res://.godot/imported/FUI Navigation Tone Stereo Flutter.wav-0875f8d3f2d59e5671b1d314eecbe33c.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

@@ -16,4 +16,4 @@ func fire(rotation,direction, phase=0.0,type='direction',hardpoint=self):
 	else:
 		last_shot = 0
 	
-	low_level_fire(rotation,direction,max_recoil*(randf()-0.5),'direction')
+	low_level_fire(rotation,direction, phase +  max_recoil*(randf()-0.5),'direction')

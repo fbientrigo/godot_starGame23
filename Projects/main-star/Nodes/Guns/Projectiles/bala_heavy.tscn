@@ -7,6 +7,7 @@
 
 [node name="bullet_heavy" type="Node2D"]
 z_index = -15
+scale = Vector2(1.5, 1.5)
 script = ExtResource("1_gl5fm")
 bullet_speed = 400.0
 bullet_damage = 2

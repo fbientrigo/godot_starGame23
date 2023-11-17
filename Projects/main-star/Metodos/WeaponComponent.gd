@@ -17,7 +17,6 @@ var bullet : PackedScene
 
 func low_level_fire(rotation, direction, phase = 0.0,type='direction',hardpoint=self):
 
-
 	var projectile = bullet.instantiate()
 	projectile.position = hardpoint.global_position
 	var bullet_speed = projectile.bullet_speed
@@ -26,7 +25,10 @@ func low_level_fire(rotation, direction, phase = 0.0,type='direction',hardpoint=
 	elif type == 'direction':
 		projectile.rotation = hardpoint.global_position.angle_to_point(direction) - PI/2 + phase
 	
-	var velocity = Vector2(bullet_speed,0).rotated(projectile.rotation)
+	# noviembre
+	#var porjectile_rotation = projectile.rotation
+	var velocity = Vector2(0,-bullet_speed).rotated(projectile.rotation)
+	print("from:",self,"lowlevelfire : ,velocity: ", velocity, " rotation:", projectile.rotation)
 	
 	get_node("/root").add_child(projectile)
 	
@@ -37,7 +39,7 @@ func low_level_fire(rotation, direction, phase = 0.0,type='direction',hardpoint=
 		"damage": projectile.bullet_damage
 	})
 
-func _process(delta):
+func _process(_delta):
 	last_shot += 1
 
 func change_bullet_type(new:PackedScene):
