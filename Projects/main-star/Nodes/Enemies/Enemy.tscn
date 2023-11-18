@@ -370,7 +370,7 @@ HurtBoxType = 1
 self_modulate = Color(1, 0.733333, 0.690196, 1)
 show_behind_parent = true
 collision_layer = 0
-collision_mask = 10
+collision_mask = 0
 
 [node name="Movement" type="Node" parent="."]
 script = ExtResource("10_ld4ds")
@@ -405,4 +405,3 @@ scale = Vector2(2.70089, 4.29155)
 [connection signal="hurt" from="HealthComponent" to="." method="_on_health_component_hurt"]
 [connection signal="onDead" from="HealthComponent" to="." method="_on_health_component_on_dead"]
 [connection signal="area_entered" from="Sensor" to="IA_StateMachine" method="_on_sensor_area_entered"]
-[connection signal="area_exited" from="Sensor" to="." method="_on_sensor_area_exited"]
