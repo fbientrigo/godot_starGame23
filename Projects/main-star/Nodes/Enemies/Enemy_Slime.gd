@@ -20,7 +20,6 @@ var timer = 0.0  # temporizador para llevar la cuenta del tiempo
 
 func _ready():
 	animation.play("damage_anim")
-	animation.pause()
 
 var flag_spawn_slime : bool = false
 
