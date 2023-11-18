@@ -11,7 +11,11 @@ extends Node2D
 @onready var statemachine : StateMachine = $StateMachine
 @onready var weaponstatemachine: WeaponStateMachine = $BasicWeaponStateMachine
 @onready var light:PointLight2D = $PointLight2D
+#@onready var healthcomponent : HealthComponent = %HealthComponent
 @onready var healthcomponent_collision:CollisionShape2D = $HealthComponent/CollisionShape2D
+@onready var character_collision:CollisionShape2D = %CollisionShape2D
+#@export var healthcomponent_collision:CollisionShape2D
+#@export var character_collision:CollisionShape2D
 
 var health : int  = 10
 @onready var timer_vida : Timer = $Timer_Vida
@@ -19,6 +23,9 @@ var health : int  = 10
 
 func _ready():
 	set_star_type(tipo_estrella)
+	change_size_collisioner()
+	
+	
 
 @export var multiplicador_crecimiento : float
 func set_star_size_by_mass(tipo_estrella):
@@ -33,7 +40,14 @@ func set_star_size_by_mass(tipo_estrella):
 			var new_scale = 0 #1.5 * mass_surplus / star_data["masa"]
 			new_scale = log(1 + mass_surplus) * multiplicador_crecimiento
 			self.scale = Vector2(1+new_scale,1+new_scale)
-	
+
+func change_size_collisioner(factor = 0.9):
+	print("--- area de cambio de colisión ---")
+	print("col de ", self)
+	print("col hc: ",healthcomponent_collision.shape.radius)
+	character_collision.shape.radius = healthcomponent_collision.shape.radius * factor
+	print("colision de estrella: ", character_collision.shape.radius)
+
 func set_star_type(tipo_estrella):
 	# Corre popr primera vez el setup
 	# Sección de busquedo usando enum =============
@@ -64,9 +78,10 @@ func set_star_type(tipo_estrella):
 
 	light.scale.x = int(30 + scale_factor * 20)
 	light.scale.y = int(30 + scale_factor * 20)
-	print("star_turred:")
-	print("\tscale factor: ", scale_factor)
-	print("\t light_scale\t", light.scale.x)
+	# colisionador de characterBody2D
+#	print("star_turred:")
+#	print("\tscale factor: ", scale_factor)
+#	print("\t light_scale\t", light.scale.x)
 	
 	if tipo_estrella == "TipoB":
 		print(healthcomponent_collision)
@@ -260,7 +275,9 @@ var fin_de_vida : bool = false
 func _on_timer_vida_timeout():
 	fin_de_vida = true
 
+
 func _on_sensor_area_entered(area):
+	# si entran en el sensor de ataque
 	if area.is_in_group("Enemy"):
 		enemies.append(area)
 
@@ -311,14 +328,14 @@ func upgrade_rotacion(ammount):
 
 func procesos_fisicos_tipoG():
 		# chequear si llega a la mitad de su masa
-	print("PRoceso de G")
-	print("tim: ",timer_vida.time_left)
+#	print("PRoceso de G")
+#	print("tim: ",timer_vida.time_left)
 	var umbral1_vida : float = 0.8 * get_star_data(tipo_estrella)["tiempo_vida"]
-	print("umbral:", umbral1_vida)
+#	print("umbral:", umbral1_vida)
 	
 	if timer_vida.time_left < umbral1_vida:
 		light.color = Color(0.85, 0.395, 0.374)
-		print("tiempo de vida critico")
+#		print("tiempo de vida critico")
 	elif masa < 0.5 * get_star_data(tipo_estrella)["masa"]:
 		if carga < 2:
 			tipo_estrella = "TipoRG" # gigante roja
@@ -328,6 +345,7 @@ func procesos_fisicos_tipoG():
 		print("starturret estrella tipo G ha llegado al 50% de suministros, coviertiendo en RedGiant")
 		cambiar_estrella(tipo_estrella)
 	elif fin_de_vida:
+		fin_de_vida = false
 		light.color = Color(0.85, 0.395, 0.374)
 		if carga < 2:
 			tipo_estrella = "TipoRG" # gigante roja
@@ -337,7 +355,8 @@ func procesos_fisicos_tipoG():
 
 func procesos_fisicos_tipoRG():
 	print("tipo RG existiendo")
-	if  fin_de_vida:
+	if fin_de_vida:
+		fin_de_vida = false
 		tipo_estrella = "TipoWD"
 		light.color = Color(1, 1, 1)
 		print("starturret: convirtiendo RG en WhiteDwarf")
@@ -352,6 +371,7 @@ func procesos_fisicos_tipoB():
 		print("StarTurret: B-type star has lost significant mass, evolving into Blue Supergiant")
 		cambiar_estrella(tipo_estrella)
 	if fin_de_vida:
+		fin_de_vida = false
 		# The star has exhausted its nuclear fuel and collapses into a neutron star or black hole
 		if masa <= 3:  # Assuming stars with mass <= 3 times the mass of the sun become neutron stars
 			#tipo_estrella = "TipoNS"  # Neutron Star

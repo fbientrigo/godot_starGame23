@@ -15,7 +15,7 @@ class_name EnemyFolow
 @export var rango_vision_player := 100
 @export var probabilidad_atacar_player := 0.9
 @onready var movement : Movement = $"../../Movement"
-var player:RigidBody2D #aqui guardaremos al player
+var player_and_stars: Node2D #aqui guardaremos al player
 var direction : Vector2
 
 #func _ready():
@@ -23,18 +23,22 @@ var direction : Vector2
 #	print(enemy)
 
 func Enter():
-	var player_group_nodes = get_tree().get_nodes_in_group("Player")
-	for player_node in player_group_nodes:
-		player = player_node
-		break
-	if enemy == null or player == null:
-		return
-
 	movement.call_deferred("setup",enemy)
+	
+	var player_group_nodes = get_tree().get_nodes_in_group("Aliados")
+	if player_group_nodes != []:
+		player_and_stars = player_group_nodes.pick_random()
+		direction = player_and_stars.global_position - enemy.global_position
+		
+#	for player_node in player_group_nodes:
+#		player_and_stars = player_node
+#		break
+
+
 	#movement.setup(enemy)
 
 	
-	direction = player.global_position - enemy.global_position
+	
 	# 1115 probe quitarlo apra el bug del movimeino
 	# enemy.movement.move(direction)
 
@@ -45,9 +49,10 @@ func Enter():
 	
 func Physics_Update(_delta: float):
 	if enemy != null:
-		if player != null:
-			direction = player.global_position - enemy.global_position
-		if direction.length() < rango_vision_player:
-			movement.move(direction)
+		if player_and_stars != null:
+			direction = player_and_stars.global_position - enemy.global_position
+			if direction.length() < rango_vision_player:
+				# movement.move(direction)
+				movement.move_to(player_and_stars)
 			#animation.play("move_anim")
 	

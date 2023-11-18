@@ -312,7 +312,7 @@ animations = [{
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_1385d"]
 
-[node name="Enemy" type="CharacterBody2D" node_paths=PackedStringArray("animation", "movement")]
+[node name="Enemy" type="CharacterBody2D" node_paths=PackedStringArray("animation")]
 rotation = 3.14159
 collision_layer = 4
 collision_mask = 15
@@ -320,7 +320,6 @@ script = ExtResource("1_wqpsa")
 distancia_vision = 800.0
 vision_eterna = true
 animation = NodePath("Equipment/Base/AnimatedSprite2D")
-movement = NodePath("Movement")
 
 [node name="Equipment" type="Node2D" parent="."]
 rotation = 1.5708
@@ -368,10 +367,10 @@ max_health = 15
 HurtBoxType = 1
 
 [node name="Sensor" parent="." instance=ExtResource("11_3jmin")]
-visible = false
 self_modulate = Color(1, 0.733333, 0.690196, 1)
 show_behind_parent = true
 collision_layer = 0
+collision_mask = 10
 
 [node name="Movement" type="Node" parent="."]
 script = ExtResource("10_ld4ds")
@@ -406,3 +405,4 @@ scale = Vector2(2.70089, 4.29155)
 [connection signal="hurt" from="HealthComponent" to="." method="_on_health_component_hurt"]
 [connection signal="onDead" from="HealthComponent" to="." method="_on_health_component_on_dead"]
 [connection signal="area_entered" from="Sensor" to="IA_StateMachine" method="_on_sensor_area_entered"]
+[connection signal="area_exited" from="Sensor" to="." method="_on_sensor_area_exited"]

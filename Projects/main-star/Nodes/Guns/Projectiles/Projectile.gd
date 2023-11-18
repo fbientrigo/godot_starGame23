@@ -31,7 +31,6 @@ func _on_timer_timeout():
 func _on_hitbox_component_area_entered(area):
 	if area is HealthComponent:
 		area.take_damage(bullet_damage)
-		
 		var explosion_instance = explosion.instantiate()
 		explosion_instance.position = get_global_position()
 		# hay distintas explosiones que se pueden acceder

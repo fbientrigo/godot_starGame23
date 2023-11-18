@@ -1,9 +1,7 @@
-[gd_scene load_steps=38 format=3 uid="uid://bqab1a0i6m4h7"]
+[gd_scene load_steps=28 format=3 uid="uid://bqab1a0i6m4h7"]
 
 [ext_resource type="Script" path="res://Nodes/Star/star_turret.gd" id="1_kdyaq"]
-[ext_resource type="Texture2D" uid="uid://cmivjwnddubbw" path="res://Assets/Ships/Main Ship - Weapons/Main Ship - Weapons - Auto Cannon.png" id="4_d8qcl"]
-[ext_resource type="Script" path="res://Nodes/Scripts/satelite_arma.gd" id="4_ewsq5"]
-[ext_resource type="Shape2D" uid="uid://i2mqwyrb56qv" path="res://Nodes/Star/collision_A.tres" id="7_72mde"]
+[ext_resource type="Shape2D" uid="uid://cukhexpuxpiny" path="res://Nodes/Star/collision_G.tres" id="5_j260d"]
 [ext_resource type="PackedScene" uid="uid://1vrkeeswwdnw" path="res://Metodos/HealthComponent.tscn" id="7_pfqkg"]
 [ext_resource type="PackedScene" uid="uid://djle2nd60gt" path="res://Metodos/StarStates/animaciones.tscn" id="7_qfwb1"]
 [ext_resource type="Script" path="res://Nodes/Star/TipoG.gd" id="8_1upmp"]
@@ -25,65 +23,8 @@
 [ext_resource type="PackedScene" uid="uid://km12pyk2lnw8" path="res://Nodes/Guns/basic_weapon_state_machine.tscn" id="21_cpoek"]
 [ext_resource type="AnimationLibrary" uid="uid://d4aaj8hbatr0y" path="res://Assets/Animations/Star_anim.res" id="24_7nocl"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_b12us"]
-atlas = ExtResource("4_d8qcl")
-region = Rect2(0, 0, 48, 48)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_lov6m"]
-atlas = ExtResource("4_d8qcl")
-region = Rect2(48, 0, 48, 48)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_4ie7m"]
-atlas = ExtResource("4_d8qcl")
-region = Rect2(96, 0, 48, 48)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_edwxj"]
-atlas = ExtResource("4_d8qcl")
-region = Rect2(144, 0, 48, 48)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_icpjy"]
-atlas = ExtResource("4_d8qcl")
-region = Rect2(192, 0, 48, 48)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ic7iw"]
-atlas = ExtResource("4_d8qcl")
-region = Rect2(240, 0, 48, 48)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_yab2j"]
-atlas = ExtResource("4_d8qcl")
-region = Rect2(288, 0, 48, 48)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_bw5hb"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_b12us")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_lov6m")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_4ie7m")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_edwxj")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_icpjy")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ic7iw")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_yab2j")
-}],
-"loop": true,
-"name": &"pistolas",
-"speed": 5.0
-}]
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_p4oku"]
-radius = 288.016
+[sub_resource type="CircleShape2D" id="CircleShape2D_hivhy"]
+radius = 89.0056
 
 [sub_resource type="Gradient" id="Gradient_m6jjy"]
 offsets = PackedFloat32Array(0, 0.69697, 0.828283)
@@ -107,40 +48,33 @@ _data = {
 z_index = -4
 script = ExtResource("1_kdyaq")
 multiplicador_crecimiento = 0.4
-tipo_estrella = "TipoB"
+tipo_estrella = "TipoRG"
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+unique_name_in_owner = true
+modulate = Color(0.27451, 1, 0.14902, 1)
+z_index = 3
+shape = SubResource("CircleShape2D_hivhy")
 
 [node name="Sensor" parent="." instance=ExtResource("8_jtdk8")]
 visible = false
 collision_layer = 0
 collision_mask = 6
 
-[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
-collision_layer = 8
-collision_mask = 6
-
-[node name="Equipment" type="Node2D" parent="CharacterBody2D"]
-script = ExtResource("4_ewsq5")
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CharacterBody2D/Equipment"]
-position = Vector2(0, -66)
-sprite_frames = SubResource("SpriteFrames_bw5hb")
-animation = &"pistolas"
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
-shape = SubResource("CircleShape2D_p4oku")
-disabled = true
-
 [node name="Animaciones" parent="." instance=ExtResource("7_qfwb1")]
 animation = &"O"
 speed_scale = 2.0
 
 [node name="HealthComponent" parent="." instance=ExtResource("7_pfqkg")]
+unique_name_in_owner = true
 collision_layer = 8
 collision_mask = 22
 DeadType = 1
 
 [node name="CollisionShape2D" parent="HealthComponent" index="0"]
-shape = ExtResource("7_72mde")
+shape = ExtResource("5_j260d")
 
 [node name="StateMachine" parent="." instance=ExtResource("8_nsgwv")]
 

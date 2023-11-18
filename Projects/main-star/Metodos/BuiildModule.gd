@@ -1,3 +1,6 @@
+# Build Mode
+# contiene los elementos necesarios para hostear y hacer spawn de nuevas estrellas
+
 extends Node2D
 
 var map_node # representa referencias a botones con informacion

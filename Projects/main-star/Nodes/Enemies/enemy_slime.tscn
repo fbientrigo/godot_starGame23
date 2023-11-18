@@ -11,8 +11,8 @@
 [ext_resource type="Texture2D" uid="uid://j1hvj0fr7qk3" path="res://Assets/Enemies/Enemy Ships/slime/slime_move.png" id="10_tdqjw"]
 [ext_resource type="PackedScene" uid="uid://cgfuua2pxmajk" path="res://Metodos/HitboxComponent.tscn" id="11_ctdx0"]
 [ext_resource type="PackedScene" uid="uid://1vrkeeswwdnw" path="res://Metodos/HealthComponent.tscn" id="12_6d24i"]
+[ext_resource type="Script" path="res://Metodos/Movement.gd" id="13_00ipx"]
 [ext_resource type="PackedScene" uid="uid://byrncwn5e2g0y" path="res://Metodos/Sensor.tscn" id="13_pj13g"]
-[ext_resource type="Script" path="res://Nodes/Enemies/MovementSlime.gd" id="13_t422h"]
 [ext_resource type="PackedScene" uid="uid://dyuvy1275lb7g" path="res://Metodos/States/StateMachine.tscn" id="14_u7s4n"]
 [ext_resource type="Script" path="res://Metodos/States/IA/WanderingIdle.gd" id="15_qvu4u"]
 [ext_resource type="Script" path="res://Metodos/States/IA/EnemyFollow.gd" id="16_57tr5"]
@@ -435,18 +435,18 @@ damage = 1
 visible = false
 
 [node name="HealthComponent" parent="." groups=["Enemy"] instance=ExtResource("12_6d24i")]
+visible = false
 collision_layer = 4
 collision_mask = 0
 max_health = 6
 HurtBoxType = 1
 
 [node name="Sensor" parent="." instance=ExtResource("13_pj13g")]
-visible = false
 scale = Vector2(2.103, 2.103)
 collision_layer = 0
 
 [node name="Movement" type="Node" parent="."]
-script = ExtResource("13_t422h")
+script = ExtResource("13_00ipx")
 speed = 120.0
 max_speed = 200.0
 

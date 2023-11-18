@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://4jslef5iluqi"]
+[gd_scene load_steps=9 format=3 uid="uid://4jslef5iluqi"]
 
 [ext_resource type="PackedScene" uid="uid://me0wanq6rcss" path="res://Metodos/player.tscn" id="1_ln5gm"]
 [ext_resource type="PackedScene" uid="uid://csc6cyvaojn3c" path="res://Scenes/entorno.tscn" id="2_5ijhr"]
 [ext_resource type="PackedScene" uid="uid://ce8bfmrsk33n" path="res://Nodes/Enemies/spawner.tscn" id="6_6mp7b"]
+[ext_resource type="PackedScene" uid="uid://bqab1a0i6m4h7" path="res://Nodes/Star/star_turret.tscn" id="6_504rg"]
 [ext_resource type="PackedScene" uid="uid://bhxlsbs7rvctp" path="res://Nodes/Enemies/Enemy.tscn" id="6_c70g1"]
 [ext_resource type="PackedScene" uid="uid://c4drybq7dx5x3" path="res://Metodos/CommunicationBus.tscn" id="7_0ypak"]
 [ext_resource type="PackedScene" uid="uid://cafwk803csaae" path="res://Scenes/buiild_module.tscn" id="7_b4vwi"]
@@ -46,18 +47,16 @@ spawn_interval_max = 3.0
 spawn_radius = 900.0
 
 [node name="BuiildModule" parent="." instance=ExtResource("7_b4vwi")]
-position = Vector2(-597, 566)
 
-[node name="Sol" parent="BuiildModule" index="0"]
-can_shoot = false
+[node name="StarTurret" parent="BuiildModule" instance=ExtResource("6_504rg")]
+position = Vector2(-301, 7)
+tipo_estrella = "TipoA"
 
-[node name="Sol2" parent="BuiildModule" index="1"]
-can_shoot = false
-
-[node name="Sol3" parent="BuiildModule" index="2"]
-can_shoot = false
+[node name="StarTurret2" parent="BuiildModule" instance=ExtResource("6_504rg")]
+position = Vector2(310, 9)
 
 [node name="Player" parent="." instance=ExtResource("1_ln5gm")]
+position = Vector2(-183, -134)
 velocidad_nave = 0.0
 teleport_limits = Vector2(3200, 3400)
 
