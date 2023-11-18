@@ -312,14 +312,13 @@ animations = [{
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_1385d"]
 
-[node name="Enemy" type="CharacterBody2D" node_paths=PackedStringArray("animation")]
+[node name="Enemy" type="CharacterBody2D"]
 rotation = 3.14159
 collision_layer = 4
 collision_mask = 15
 script = ExtResource("1_wqpsa")
 distancia_vision = 800.0
 vision_eterna = true
-animation = NodePath("Equipment/Base/AnimatedSprite2D")
 
 [node name="Equipment" type="Node2D" parent="."]
 rotation = 1.5708
@@ -370,7 +369,6 @@ HurtBoxType = 1
 self_modulate = Color(1, 0.733333, 0.690196, 1)
 show_behind_parent = true
 collision_layer = 0
-collision_mask = 0
 
 [node name="Movement" type="Node" parent="."]
 script = ExtResource("10_ld4ds")
