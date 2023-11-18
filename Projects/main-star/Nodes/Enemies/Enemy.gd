@@ -85,11 +85,15 @@ func _on_sensor_area_exited(_area):
 # Función llamada cuando el componente de salud del enemigo alcanza una salud de 0.
 # Puede implementar acciones adicionales aquí, como cambiar la animación y eliminar al enemigo.
 
-func _on_health_component_on_dead():
-	#print("dead of enemigo, spawning exp")
+func spawn_gem_exp():
 	var gem = exp_gem.instantiate()  # C	rea una instancia del objeto de experiencia.
 	gem.global_position = self.global_position  # Coloca el objeto de experiencia en la posición del enemigo.
-	get_parent().call_deferred("add_child", gem)
+	get_tree().get_root().call_deferred("add_child", gem)
+
+
+
+func _on_health_component_on_dead():
+	spawn_gem_exp()
 
 
 
@@ -104,4 +108,4 @@ func _on_health_component_hurt(damage):
 		animation.frame += 1
 	elif times_damaged > 8:
 		animation.frame = 8
-		
+

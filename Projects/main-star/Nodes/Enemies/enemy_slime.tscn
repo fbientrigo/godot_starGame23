@@ -440,6 +440,7 @@ max_health = 6
 HurtBoxType = 1
 
 [node name="Sensor" parent="." instance=ExtResource("13_pj13g")]
+visible = false
 scale = Vector2(2.103, 2.103)
 collision_layer = 0
 

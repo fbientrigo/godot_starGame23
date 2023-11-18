@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://bqab1a0i6m4h7"]
+[gd_scene load_steps=27 format=3 uid="uid://bqab1a0i6m4h7"]
 
 [ext_resource type="Script" path="res://Nodes/Star/star_turret.gd" id="1_kdyaq"]
 [ext_resource type="Shape2D" uid="uid://cukhexpuxpiny" path="res://Nodes/Star/collision_G.tres" id="5_j260d"]
@@ -22,9 +22,6 @@
 [ext_resource type="Script" path="res://Nodes/Star/CommunicationBus.gd" id="20_8vmcm"]
 [ext_resource type="PackedScene" uid="uid://km12pyk2lnw8" path="res://Nodes/Guns/basic_weapon_state_machine.tscn" id="21_cpoek"]
 [ext_resource type="AnimationLibrary" uid="uid://d4aaj8hbatr0y" path="res://Assets/Animations/Star_anim.res" id="24_7nocl"]
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_hivhy"]
-radius = 89.0056
 
 [sub_resource type="Gradient" id="Gradient_m6jjy"]
 offsets = PackedFloat32Array(0, 0.69697, 0.828283)
@@ -50,15 +47,6 @@ script = ExtResource("1_kdyaq")
 multiplicador_crecimiento = 0.4
 tipo_estrella = "TipoRG"
 
-[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
-collision_layer = 4
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
-unique_name_in_owner = true
-modulate = Color(0.27451, 1, 0.14902, 1)
-z_index = 3
-shape = SubResource("CircleShape2D_hivhy")
-
 [node name="Sensor" parent="." instance=ExtResource("8_jtdk8")]
 visible = false
 collision_layer = 0
@@ -68,7 +56,7 @@ collision_mask = 6
 animation = &"O"
 speed_scale = 2.0
 
-[node name="HealthComponent" parent="." groups=["Aliados"] instance=ExtResource("7_pfqkg")]
+[node name="HealthComponent" parent="." instance=ExtResource("7_pfqkg")]
 unique_name_in_owner = true
 collision_layer = 8
 collision_mask = 4

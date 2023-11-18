@@ -26,6 +26,7 @@ func Enter():
 func Update(delta:float):
 	if wander_time > 0:
 		wander_time -= delta
+		move_direction = - object.global_position.normalized()
 	else:
 		randomize_wander()
 

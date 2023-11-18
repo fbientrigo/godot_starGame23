@@ -20,41 +20,34 @@ var timer = 0.0  # temporizador para llevar la cuenta del tiempo
 
 var flag_spawn_slime : bool = false
 
+
 func spawn_slime():
 	var smallSlime_instance = smallSlime.instantiate()
 	#var smallSlime_instance2 = smallSlime.instantiate()
 	var theta = 2 * PI *  randf()
 	var spawn_radius = 20
 	var spawn_position = Vector2(spawn_radius * cos(theta), spawn_radius * sin(theta))
-	smallSlime_instance.global_position = self.global_position + spawn_position
+	smallSlime_instance.global_position = self.global_position +  spawn_position
 	#smallSlime_instance2.global_position = self.global_position + spawn_position
 	
 	# smallSlime_instance2.velocity = Vector2(100,100)
 	#get_tree().get_nodes_in_group("Level")[0].call_deferred("add_child", smallSlime_instance)
 	#get_tree().get_nodes_in_group("Level")[0].add_child(smallSlime_instance)
-	var level = get_tree().get_nodes_in_group("Level")[0]
+	get_tree().get_root().call_deferred("add_child", smallSlime_instance)
 	
-	level.call_deferred("add_child", smallSlime_instance)
 
 
-func _process(delta):
-	if flag_spawn_slime:
-		spawn_slime()
-		flag_spawn_slime = false
-		
+#
+#func _process(delta):
+#	if flag_spawn_slime:
+#		spawn_slime()
+#		flag_spawn_slime = false
+#
 
-# sobreescribir el metodo
+
 func _on_health_component_on_dead():
-	#print("dead of enemigo, spawning exp")
-	if self.slimelvl == 0:
-		var gem = exp_gem.instantiate()  # C	rea una instancia del objeto de experiencia.
-		gem.global_position = self.global_position  # Coloca el objeto de experiencia en la posición del enemigo.
-		get_parent().call_deferred("add_child", gem)
-	elif self.slimelvl > 0:
-		spawn_slime()
-		var gem = exp_gem.instantiate()  # C	rea una instancia del objeto de experiencia.
-		gem.global_position = self.global_position  # Coloca el objeto de experiencia en la posición del enemigo.
-		get_parent().call_deferred("add_child", gem)
+	spawn_gem_exp()
+	spawn_slime()
 
 
 func _on_health_component_hurt(damage):

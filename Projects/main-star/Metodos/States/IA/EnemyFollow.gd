@@ -24,7 +24,6 @@ var direction : Vector2
 
 func Enter():
 	movement.call_deferred("setup",enemy)
-	
 	var player_group_nodes = get_tree().get_nodes_in_group("Aliados")
 	if player_group_nodes != []:
 		player_and_stars = player_group_nodes.pick_random()

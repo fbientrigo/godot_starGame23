@@ -1,11 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://4jslef5iluqi"]
+[gd_scene load_steps=7 format=3 uid="uid://4jslef5iluqi"]
 
 [ext_resource type="PackedScene" uid="uid://me0wanq6rcss" path="res://Metodos/player.tscn" id="1_ln5gm"]
 [ext_resource type="PackedScene" uid="uid://csc6cyvaojn3c" path="res://Scenes/entorno.tscn" id="2_5ijhr"]
-[ext_resource type="PackedScene" uid="uid://cgnmrexn4aug3" path="res://Modular_Enemies/enemy_slime_1.tscn" id="5_pahwn"]
 [ext_resource type="PackedScene" uid="uid://ce8bfmrsk33n" path="res://Nodes/Enemies/spawner.tscn" id="6_6mp7b"]
 [ext_resource type="PackedScene" uid="uid://bqab1a0i6m4h7" path="res://Nodes/Star/star_turret.tscn" id="6_504rg"]
-[ext_resource type="PackedScene" uid="uid://bhxlsbs7rvctp" path="res://Nodes/Enemies/Enemy.tscn" id="6_c70g1"]
 [ext_resource type="PackedScene" uid="uid://c4drybq7dx5x3" path="res://Metodos/CommunicationBus.tscn" id="7_0ypak"]
 [ext_resource type="PackedScene" uid="uid://cafwk803csaae" path="res://Scenes/buiild_module.tscn" id="7_b4vwi"]
 
@@ -14,15 +12,18 @@ texture_repeat = 2
 
 [node name="Entorno" parent="." instance=ExtResource("2_5ijhr")]
 
-[node name="spawner" parent="." instance=ExtResource("6_6mp7b")]
-position = Vector2(61, 383)
-mob_scene = Array[PackedScene]([ExtResource("6_c70g1"), ExtResource("5_pahwn")])
+[node name="spawner3" parent="." instance=ExtResource("6_6mp7b")]
+position = Vector2(-143, 353)
 spawn_interval_max = 3.0
 spawn_radius = 900.0
 
-[node name="spawner3" parent="." instance=ExtResource("6_6mp7b")]
+[node name="spawner4" parent="." instance=ExtResource("6_6mp7b")]
 position = Vector2(-143, 353)
-mob_scene = Array[PackedScene]([ExtResource("6_c70g1"), ExtResource("5_pahwn")])
+spawn_interval_max = 3.0
+spawn_radius = 900.0
+
+[node name="spawner5" parent="." instance=ExtResource("6_6mp7b")]
+position = Vector2(-143, 353)
 spawn_interval_max = 3.0
 spawn_radius = 900.0
 
@@ -46,8 +47,5 @@ teleport_limits = Vector2(3200, 3400)
 blend_mode = 1
 
 [node name="CommunicationBus" parent="." instance=ExtResource("7_0ypak")]
-
-[node name="enemy_slime_1" parent="." instance=ExtResource("5_pahwn")]
-position = Vector2(-1100, 47)
 
 [editable path="BuiildModule"]

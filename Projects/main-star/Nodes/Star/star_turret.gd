@@ -13,7 +13,7 @@ extends Node2D
 @onready var light:PointLight2D = $PointLight2D
 #@onready var healthcomponent : HealthComponent = %HealthComponent
 @onready var healthcomponent_collision:CollisionShape2D = $HealthComponent/CollisionShape2D
-@onready var character_collision:CollisionShape2D = %CollisionShape2D
+#@onready var character_collision:CollisionShape2D = %CollisionShape2D
 #@export var healthcomponent_collision:CollisionShape2D
 #@export var character_collision:CollisionShape2D
 
@@ -23,7 +23,7 @@ var health : int  = 10
 
 func _ready():
 	set_star_type(tipo_estrella)
-	change_size_collisioner()
+#	change_size_collisioner()
 	
 	
 
@@ -40,13 +40,13 @@ func set_star_size_by_mass(tipo_estrella):
 			var new_scale = 0 #1.5 * mass_surplus / star_data["masa"]
 			new_scale = log(1 + mass_surplus) * multiplicador_crecimiento
 			self.scale = Vector2(1+new_scale,1+new_scale)
-
-func change_size_collisioner(factor = 0.9):
-	print("--- area de cambio de colisión ---")
-	print("col de ", self)
-	print("col hc: ",healthcomponent_collision.shape.radius)
-	character_collision.shape.radius = healthcomponent_collision.shape.radius * factor
-	print("colision de estrella: ", character_collision.shape.radius)
+#
+#func change_size_collisioner(factor = 0.9):
+#	print("--- area de cambio de colisión ---")
+#	print("col de ", self)
+#	print("col hc: ",healthcomponent_collision.shape.radius)
+#	character_collision.shape.radius = healthcomponent_collision.shape.radius * factor
+#	print("colision de estrella: ", character_collision.shape.radius)
 
 func set_star_type(tipo_estrella):
 	# Corre popr primera vez el setup

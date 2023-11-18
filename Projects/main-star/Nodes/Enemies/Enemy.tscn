@@ -373,8 +373,8 @@ collision_mask = 10
 
 [node name="Movement" type="Node" parent="."]
 script = ExtResource("10_ld4ds")
-speed = 100.0
-max_speed = 200.0
+speed = 180.0
+max_speed = 300.0
 
 [node name="IA_StateMachine" parent="." node_paths=PackedStringArray("initial_state") instance=ExtResource("12_pww30")]
 script = ExtResource("14_hcnm4")
@@ -383,7 +383,7 @@ initial_state = NodePath("WanderingIdle")
 [node name="WanderingIdle" type="Node" parent="IA_StateMachine" node_paths=PackedStringArray("object")]
 script = ExtResource("13_gd583")
 object = NodePath("../..")
-move_speed = 80.0
+move_speed = 400.0
 
 [node name="EnemyFollow" type="Node" parent="IA_StateMachine" node_paths=PackedStringArray("enemy")]
 script = ExtResource("15_bjrxe")
