@@ -18,10 +18,6 @@ var timer = 0.0  # temporizador para llevar la cuenta del tiempo
 @onready var smallSlime = preload("res://Nodes/Enemies/enemy_slime_small_fix.tscn")
 
 
-func _ready():
-	animation.play("damage_anim")
-	animation.pause()
-
 var flag_spawn_slime : bool = false
 
 func spawn_slime():
