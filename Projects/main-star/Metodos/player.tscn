@@ -21,7 +21,7 @@ levelPanel = NodePath("GUILayer/GUI/LevelUpPanel")
 upgradeOptions = NodePath("GUILayer/GUI/LevelUpPanel/UpgradeOptions")
 sndLevelUp = NodePath("GUILayer/GUI/LevelUpPanel/snd_levelup")
 
-[node name="spaceship_1" parent="." node_paths=PackedStringArray("crosshair") instance=ExtResource("1_q5dtn")]
+[node name="spaceship_1" parent="." node_paths=PackedStringArray("crosshair") groups=["Aliados"] instance=ExtResource("1_q5dtn")]
 process_mode = 1
 rotation = 0.0
 collision_layer = 2

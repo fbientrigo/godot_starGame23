@@ -51,6 +51,7 @@ multiplicador_crecimiento = 0.4
 tipo_estrella = "TipoRG"
 
 [node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+collision_layer = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
 unique_name_in_owner = true
@@ -67,10 +68,10 @@ collision_mask = 6
 animation = &"O"
 speed_scale = 2.0
 
-[node name="HealthComponent" parent="." instance=ExtResource("7_pfqkg")]
+[node name="HealthComponent" parent="." groups=["Aliados"] instance=ExtResource("7_pfqkg")]
 unique_name_in_owner = true
 collision_layer = 8
-collision_mask = 22
+collision_mask = 4
 DeadType = 1
 
 [node name="CollisionShape2D" parent="HealthComponent" index="0"]

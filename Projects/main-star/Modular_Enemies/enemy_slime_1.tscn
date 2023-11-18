@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://cgnmrexn4aug3"]
+
+[ext_resource type="Script" path="res://Modular_Enemies/enemy_slime_1.gd" id="1_cqhkn"]
+[ext_resource type="Texture2D" uid="uid://dh7kkpfx87pln" path="res://Assets/Enemies/Enemy Ships/slime/slime.png" id="1_oivqd"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0ia61"]
+size = Vector2(28, 15)
+
+[node name="enemy_slime_1" type="CharacterBody2D"]
+script = ExtResource("1_cqhkn")
+movement_speed = 200.0
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_oivqd")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -0.5)
+shape = SubResource("RectangleShape2D_0ia61")

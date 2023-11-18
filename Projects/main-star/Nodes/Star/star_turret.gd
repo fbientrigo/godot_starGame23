@@ -82,9 +82,7 @@ func set_star_type(tipo_estrella):
 #	print("star_turred:")
 #	print("\tscale factor: ", scale_factor)
 #	print("\t light_scale\t", light.scale.x)
-	
-	if tipo_estrella == "TipoB":
-		print(healthcomponent_collision)
+
 
 
 # =====

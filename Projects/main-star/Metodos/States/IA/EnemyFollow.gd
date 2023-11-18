@@ -52,7 +52,8 @@ func Physics_Update(_delta: float):
 		if player_and_stars != null:
 			direction = player_and_stars.global_position - enemy.global_position
 			if direction.length() < rango_vision_player:
-				# movement.move(direction)
-				movement.move_to(player_and_stars)
+				movement.move(direction)
+				#movement.move_to(player_and_stars)
+				print("working mvement")
 			#animation.play("move_anim")
 	

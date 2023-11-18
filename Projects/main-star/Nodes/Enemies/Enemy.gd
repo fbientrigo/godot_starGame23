@@ -35,11 +35,12 @@ class_name Enemy # crea una clase
 # Indica si la visión del enemigo es eterna o no (siempre persigue al jugador).
 @export var vision_eterna: bool
 # Referencia al nodo de animación para controlar las animaciones del enemigo.
-@export var animation : AnimatedSprite2D 
+
 # Refeencia al nodo de movimiento que permite al enemigo moverse.
 #@onready var movement = $Movement as Movement
 #@export var movement : Movement
 # Referencia al sensor del enemigo que detecta al jugador.
+@onready var animation : AnimatedSprite2D = $Equipment/Base/AnimatedSprite2D
 @onready var movement : Movement = $Movement
 @onready var sensor: Area2D = $Sensor
 @onready var animation_player:AnimationPlayer = $AnimationPlayer

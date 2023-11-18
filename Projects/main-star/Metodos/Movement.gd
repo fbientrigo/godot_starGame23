@@ -18,9 +18,9 @@ func move(input_vector: Vector2, _speed:float = speed):
 	#character.call_deferred("move_and_slide")
 	character.move_and_slide()
 
-func move_to(object_tomove : Node2D, _speed : float = speed):
-	var r_ri : Vector2 = object_tomove.position #posición relativa
-	character.velocity = r_ri * _speed
+func move_to(self_position:Vector2, object_tomove : Node2D, _speed : float = speed):
+	var r_ri : Vector2 = object_tomove.global_position #posición relativa
+	character.velocity = (r_ri) * _speed
 	character.move_and_slide()
 	
 func stop_movement():

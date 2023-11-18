@@ -58,7 +58,6 @@ func _on_health_component_on_dead():
 
 
 func _on_health_component_hurt(damage):
-	print(animation.frame)
 	animation_player.play("AnimationsLibrary_Enemies/hurt_animation") # este es un damage anim
 	if times_damaged == 0:
 		times_damaged += 1

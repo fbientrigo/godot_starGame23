@@ -2,47 +2,27 @@
 
 [ext_resource type="PackedScene" uid="uid://me0wanq6rcss" path="res://Metodos/player.tscn" id="1_ln5gm"]
 [ext_resource type="PackedScene" uid="uid://csc6cyvaojn3c" path="res://Scenes/entorno.tscn" id="2_5ijhr"]
+[ext_resource type="PackedScene" uid="uid://cgnmrexn4aug3" path="res://Modular_Enemies/enemy_slime_1.tscn" id="5_pahwn"]
 [ext_resource type="PackedScene" uid="uid://ce8bfmrsk33n" path="res://Nodes/Enemies/spawner.tscn" id="6_6mp7b"]
 [ext_resource type="PackedScene" uid="uid://bqab1a0i6m4h7" path="res://Nodes/Star/star_turret.tscn" id="6_504rg"]
 [ext_resource type="PackedScene" uid="uid://bhxlsbs7rvctp" path="res://Nodes/Enemies/Enemy.tscn" id="6_c70g1"]
 [ext_resource type="PackedScene" uid="uid://c4drybq7dx5x3" path="res://Metodos/CommunicationBus.tscn" id="7_0ypak"]
 [ext_resource type="PackedScene" uid="uid://cafwk803csaae" path="res://Scenes/buiild_module.tscn" id="7_b4vwi"]
-[ext_resource type="PackedScene" uid="uid://uxgaqqqjl0px" path="res://Nodes/Enemies/enemy_slime.tscn" id="7_jr6lv"]
 
 [node name="Level" type="Node2D" groups=["Level"]]
 texture_repeat = 2
 
 [node name="Entorno" parent="." instance=ExtResource("2_5ijhr")]
 
-[node name="Enemy" parent="." instance=ExtResource("6_c70g1")]
-position = Vector2(-364, 259)
-
-[node name="enemy_slime" parent="." instance=ExtResource("7_jr6lv")]
-position = Vector2(367, 199)
-
-[node name="Enemy2" parent="." instance=ExtResource("6_c70g1")]
-position = Vector2(-1369, -413)
-
-[node name="enemy_slime2" parent="." instance=ExtResource("7_jr6lv")]
-position = Vector2(-1183, -414)
-
-[node name="Enemy3" parent="." instance=ExtResource("6_c70g1")]
-position = Vector2(169, -957)
-
-[node name="enemy_slime3" parent="." instance=ExtResource("7_jr6lv")]
-position = Vector2(355, -958)
-
-[node name="enemy_slime4" parent="." instance=ExtResource("7_jr6lv")]
-position = Vector2(104, -434)
-
-[node name="enemy_slime5" parent="." instance=ExtResource("7_jr6lv")]
-position = Vector2(-249, -342)
-
 [node name="spawner" parent="." instance=ExtResource("6_6mp7b")]
+position = Vector2(61, 383)
+mob_scene = Array[PackedScene]([ExtResource("6_c70g1"), ExtResource("5_pahwn")])
 spawn_interval_max = 3.0
 spawn_radius = 900.0
 
-[node name="spawner2" parent="." instance=ExtResource("6_6mp7b")]
+[node name="spawner3" parent="." instance=ExtResource("6_6mp7b")]
+position = Vector2(-143, 353)
+mob_scene = Array[PackedScene]([ExtResource("6_c70g1"), ExtResource("5_pahwn")])
 spawn_interval_max = 3.0
 spawn_radius = 900.0
 
@@ -50,10 +30,12 @@ spawn_radius = 900.0
 
 [node name="StarTurret" parent="BuiildModule" instance=ExtResource("6_504rg")]
 position = Vector2(-301, 7)
+can_shoot = false
 tipo_estrella = "TipoA"
 
 [node name="StarTurret2" parent="BuiildModule" instance=ExtResource("6_504rg")]
 position = Vector2(310, 9)
+can_shoot = false
 
 [node name="Player" parent="." instance=ExtResource("1_ln5gm")]
 position = Vector2(-183, -134)
@@ -64,5 +46,8 @@ teleport_limits = Vector2(3200, 3400)
 blend_mode = 1
 
 [node name="CommunicationBus" parent="." instance=ExtResource("7_0ypak")]
+
+[node name="enemy_slime_1" parent="." instance=ExtResource("5_pahwn")]
+position = Vector2(-1100, 47)
 
 [editable path="BuiildModule"]
