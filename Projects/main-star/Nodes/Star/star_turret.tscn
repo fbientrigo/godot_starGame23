@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://bqab1a0i6m4h7"]
+[gd_scene load_steps=38 format=3 uid="uid://bqab1a0i6m4h7"]
 
 [ext_resource type="Script" path="res://Nodes/Star/star_turret.gd" id="1_kdyaq"]
 [ext_resource type="Texture2D" uid="uid://cmivjwnddubbw" path="res://Assets/Ships/Main Ship - Weapons/Main Ship - Weapons - Auto Cannon.png" id="4_d8qcl"]
@@ -23,6 +23,7 @@
 [ext_resource type="Script" path="res://Nodes/Star/TipoBD.gd" id="18_6kmvi"]
 [ext_resource type="Script" path="res://Nodes/Star/CommunicationBus.gd" id="20_8vmcm"]
 [ext_resource type="PackedScene" uid="uid://km12pyk2lnw8" path="res://Nodes/Guns/basic_weapon_state_machine.tscn" id="21_cpoek"]
+[ext_resource type="AnimationLibrary" uid="uid://d4aaj8hbatr0y" path="res://Assets/Animations/Star_anim.res" id="24_7nocl"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_b12us"]
 atlas = ExtResource("4_d8qcl")
@@ -82,17 +83,25 @@ animations = [{
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_p4oku"]
-radius = 49.0102
+radius = 288.016
 
 [sub_resource type="Gradient" id="Gradient_m6jjy"]
-offsets = PackedFloat32Array(0, 0.60101, 0.806667)
+offsets = PackedFloat32Array(0, 0.69697, 0.828283)
 colors = PackedColorArray(0.797659, 0.797658, 0.797659, 1, 0.429222, 0.429222, 0.429222, 1, 0, 0, 0, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_cl45u"]
 gradient = SubResource("Gradient_m6jjy")
 fill = 1
 fill_from = Vector2(0.5, 0.5)
-fill_to = Vector2(0.216524, 0.282051)
+fill_to = Vector2(0.501424, 0.014245)
+
+[sub_resource type="Animation" id="Animation_nvwlh"]
+resource_name = "Star"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_k4vyd"]
+_data = {
+"Star": SubResource("Animation_nvwlh")
+}
 
 [node name="StarTurret" type="Node2D" groups=["Star"]]
 z_index = -4
@@ -106,7 +115,6 @@ collision_layer = 0
 collision_mask = 6
 
 [node name="CharacterBody2D" type="CharacterBody2D" parent="."]
-visible = false
 collision_layer = 8
 collision_mask = 6
 
@@ -229,6 +237,12 @@ energy = 0.9
 texture = SubResource("GradientTexture2D_cl45u")
 
 [node name="Timer_Vida" type="Timer" parent="."]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_k4vyd"),
+"Star_anim": ExtResource("24_7nocl")
+}
 
 [connection signal="area_entered" from="Sensor" to="." method="_on_sensor_area_entered"]
 [connection signal="area_exited" from="Sensor" to="." method="_on_sensor_area_exited"]

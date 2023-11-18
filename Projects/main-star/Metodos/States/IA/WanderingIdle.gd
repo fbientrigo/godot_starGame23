@@ -18,12 +18,17 @@ func randomize_wander():
 	
 func Enter():
 	stars = get_tree().get_nodes_in_group("Star")
-	print("Wandering idel stars: ", stars)
+	#print("Wandering idel stars: ", stars)
 	movement.setup(object)
 	
 	# randomize_wander()
 	
+var target : Node2D
 func Update(delta:float):
+	if stars != []:
+		target = stars.pick_random()
+		
+	
 	if wander_time > 0:
 		wander_time -= delta
 	else:
@@ -32,3 +37,4 @@ func Update(delta:float):
 func Physics_Update(delta:float):
 	if object and is_instance_valid(movement):
 		movement.move(move_direction, move_speed)
+	

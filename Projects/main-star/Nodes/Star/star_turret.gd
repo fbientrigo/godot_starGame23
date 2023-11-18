@@ -15,7 +15,7 @@ extends Node2D
 
 var health : int  = 10
 @onready var timer_vida : Timer = $Timer_Vida
-
+@onready var animaciones : AnimationPlayer = $AnimationPlayer
 
 func _ready():
 	set_star_type(tipo_estrella)
@@ -271,6 +271,7 @@ func _on_sensor_area_exited(area):
 
 
 func _on_health_component_hurt(damage):
+	animaciones.play("Star_anim/star_hurt")
 	health = health - damage
 	if masa > 0:
 		masa -= 0.1 * damage/2

@@ -48,6 +48,15 @@ spawn_radius = 900.0
 [node name="BuiildModule" parent="." instance=ExtResource("7_b4vwi")]
 position = Vector2(-597, 566)
 
+[node name="Sol" parent="BuiildModule" index="0"]
+can_shoot = false
+
+[node name="Sol2" parent="BuiildModule" index="1"]
+can_shoot = false
+
+[node name="Sol3" parent="BuiildModule" index="2"]
+can_shoot = false
+
 [node name="Player" parent="." instance=ExtResource("1_ln5gm")]
 velocidad_nave = 0.0
 teleport_limits = Vector2(3200, 3400)
@@ -56,3 +65,5 @@ teleport_limits = Vector2(3200, 3400)
 blend_mode = 1
 
 [node name="CommunicationBus" parent="." instance=ExtResource("7_0ypak")]
+
+[editable path="BuiildModule"]

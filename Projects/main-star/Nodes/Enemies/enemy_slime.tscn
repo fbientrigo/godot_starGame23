@@ -381,7 +381,7 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="enemy_slime" type="CharacterBody2D" node_paths=PackedStringArray("animation", "movement")]
+[node name="enemy_slime" type="CharacterBody2D" node_paths=PackedStringArray("animation")]
 rotation = 3.14159
 collision_layer = 4
 collision_mask = 15
@@ -390,7 +390,6 @@ slimelvl = 1
 distancia_vision = 800.0
 vision_eterna = true
 animation = NodePath("Equipment/Base/AnimatedSprite2D")
-movement = NodePath("Movement")
 
 [node name="Equipment" type="Node2D" parent="."]
 rotation = 1.5708
@@ -414,6 +413,7 @@ one_shot = true
 [node name="Base" type="Node2D" parent="Equipment"]
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Equipment/Base"]
+rotation = 0.174533
 sprite_frames = SubResource("SpriteFrames_8rj56")
 animation = &"damage_anim"
 
@@ -428,7 +428,7 @@ attenuation = 0.90125
 [node name="HitboxComponent" parent="." instance=ExtResource("11_ctdx0")]
 visible = false
 collision_layer = 0
-collision_mask = 2
+collision_mask = 10
 damage = 1
 
 [node name="CollisionShape2D" parent="HitboxComponent" index="0"]
