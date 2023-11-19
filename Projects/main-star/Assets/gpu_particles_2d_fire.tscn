@@ -1,0 +1,41 @@
+[gd_scene load_steps=5 format=3 uid="uid://gn45l04v0xhq"]
+
+[ext_resource type="Texture2D" uid="uid://b6asx2mlpefqb" path="res://Assets/FXHit/particles/Flame.png" id="1_u5wlx"]
+
+[sub_resource type="Gradient" id="Gradient_tncv8"]
+interpolation_color_space = 1
+offsets = PackedFloat32Array(0, 0.100559, 0.430168, 0.681564, 0.899441, 1)
+colors = PackedColorArray(0.992157, 0.921569, 0.678431, 0, 0.992157, 0.921569, 0.678431, 1, 0.993866, 0.578607, 0.0858244, 1, 0.576471, 0, 0.00392157, 1, 0.576471, 0, 0.00392157, 1, 0.992157, 0.921569, 0.678431, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_qqlr5"]
+gradient = SubResource("Gradient_tncv8")
+width = 6
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_656o0"]
+emission_shape = 6
+emission_ring_axis = Vector3(0, 0, 1)
+emission_ring_height = 1.0
+emission_ring_radius = 1.0
+emission_ring_inner_radius = 0.0
+particle_flag_disable_z = true
+spread = 120.0
+gravity = Vector3(0, 0, 0)
+initial_velocity_min = 280.0
+initial_velocity_max = 410.0
+angular_velocity_min = 25.0
+angular_velocity_max = 50.0
+orbit_velocity_min = 0.0
+orbit_velocity_max = 1.0
+radial_accel_min = 50.0
+radial_accel_max = 100.0
+damping_max = 5.0
+color_ramp = SubResource("GradientTexture1D_qqlr5")
+
+[node name="GPUParticles2D" type="GPUParticles2D"]
+z_index = 2
+process_material = SubResource("ParticleProcessMaterial_656o0")
+texture = ExtResource("1_u5wlx")
+lifetime = 0.8
+preprocess = 0.2
+explosiveness = 0.8
+randomness = 0.15

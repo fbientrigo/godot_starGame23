@@ -16,6 +16,7 @@ extends Node2D
 #@onready var character_collision:CollisionShape2D = %CollisionShape2D
 #@export var healthcomponent_collision:CollisionShape2D
 #@export var character_collision:CollisionShape2D
+@onready var animation : AnimationPlayer = $AnimationPlayer
 
 var health : int  = 10
 @onready var timer_vida : Timer = $Timer_Vida
@@ -219,8 +220,11 @@ func get_star_data(star_type: String) -> Dictionary:
 	return STAR_DATA.get(star_type, {})
 
 
-# Cambiar estrella ocurre cada vez que existe un cambio en los if
+
 func cambiar_estrella(_tipo_estrella):
+	# Cambiar estrella ocurre cada vez que existe un cambio en los if
+	animation.play("Star_anim/star_evolve")
+	
 	masa = STAR_DATA[_tipo_estrella]["masa"]
 	timer_vida.wait_time = STAR_DATA[_tipo_estrella]["tiempo_vida"]
 	timer_vida.start()
@@ -287,6 +291,8 @@ func _on_sensor_area_exited(area):
 
 func _on_health_component_hurt(damage):
 	health = health - damage
+	animation.play("Star_anim/star_hurt")
+	
 	if masa > 0:
 		masa -= 0.1 * damage/2
 	# Aqui se pueden agregar if's dependiendo del tipo de estrella
@@ -306,6 +312,7 @@ func upgrade_carga(ammount):
 	carga += ammount
 
 func upgrade_masa(ammount):
+	animation.play("Star_anim/star_evolve")
 	masa += ammount
 	health += 1
 	set_star_size_by_mass(tipo_estrella)

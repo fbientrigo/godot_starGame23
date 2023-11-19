@@ -167,13 +167,13 @@ func calculate_experience(exp_recb):
 func calculate_experienceCap():
 	var exp_cap = 2
 	if experience_level < 2:
-		exp_cap += 3 * experience_level + 3
+		exp_cap += experience_level * 2
 	elif experience_level < 10:
-		exp_cap += 6 * experience_level + 3
+		exp_cap += log(6 * experience_level + 3)*10
 	elif experience_level < 20:
-		exp_cap += 8 * experience_level + 3
+		exp_cap += log(8 * experience_level + 3)*20
 	elif experience_level < 40:
-		exp_cap += 12 * experience_level + 3
+		exp_cap += log(12 * experience_level + 3)*40
 	else:
 		exp_cap += 42 * log(experience_level) + 255 + experience_level
 	return exp_cap
