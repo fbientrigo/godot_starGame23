@@ -100,7 +100,7 @@ collision_mask = 6
 
 [node name="Animaciones" parent="." instance=ExtResource("7_qfwb1")]
 scale = Vector2(1.01644, 1.01644)
-animation = &"O"
+animation = &"G"
 speed_scale = 2.0
 
 [node name="HealthComponent" parent="." instance=ExtResource("7_pfqkg")]
@@ -202,6 +202,7 @@ max_recoil = 0.11
 cooldown = 30.0
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
+position = Vector2(13, 20)
 scale = Vector2(60, 60)
 energy = 0.9
 texture = SubResource("GradientTexture2D_cl45u")
@@ -216,6 +217,7 @@ libraries = {
 
 [node name="GPUParticles2D_explosion" type="GPUParticles2D" parent="."]
 material = SubResource("CanvasItemMaterial_igr48")
+emitting = false
 amount = 10
 process_material = SubResource("ParticleProcessMaterial_yl4h7")
 texture = ExtResource("24_x7yw8")
