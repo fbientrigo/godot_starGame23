@@ -42,8 +42,12 @@ func _ready():
 	#print("Hello world")
 #	set_expbar(experience, calculate_experienceCap())
 
-@export var can_dash : bool = true
+
+@export var can_dash : bool = false
 var dashing : bool = false # esta en estado de dash
+
+func unlock_dash():
+	can_dash = true
 
 func dash_ctrl():
 	if can_dash and Input.is_action_just_pressed("dash"):

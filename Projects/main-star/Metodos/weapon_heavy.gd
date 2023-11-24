@@ -7,7 +7,7 @@ extends Weapon
 
 var bulletheavy= preload("res://Nodes/Guns/Projectiles/bala_heavy.tscn")
 # fase de la escopeta, mayor angulo mayor deflexión
-var phase_recoil = PI/6
+var phase_recoil = PI/12
 
 @export var cooldown = 30.0
 

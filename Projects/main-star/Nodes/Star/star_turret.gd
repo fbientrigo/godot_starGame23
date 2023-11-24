@@ -21,6 +21,8 @@ extends Node2D
 var health : int  = 10
 @onready var timer_vida : Timer = $Timer_Vida
 
+# spawn de exp al morir
+@onready var exp_gem : PackedScene = preload("res://Nodes/Objects/Object.tscn")
 
 func _ready():
 	set_star_type(tipo_estrella)
@@ -260,7 +262,7 @@ func _physics_process(_delta):
 #	print(tiempo_vida)
 	# Comportamiento de G para el sol
 
-	print(self," \t timervida:",timer_vida.time_left)
+	#print(self," \t timervida:",timer_vida.time_left)
 	
 	
 	# ============ Evolucion Estelar ========================================
@@ -299,7 +301,17 @@ func _on_health_component_hurt(damage):
 	if health < 0:
 		queue_free()
 
+
+
+
 func _on_health_component_on_dead():
+	# spawnear restos para subir de nivel
+	var gem = exp_gem.instantiate()  # C	rea una instancia del objeto de experiencia.
+	gem.global_position = self.global_position  # Coloca el objeto de experiencia en la posición del enemigo.
+	gem.scale = Vector2(3,3)
+	# darle mas exp a la gem
+	gem.experience = 5
+	get_tree().get_root().call_deferred("add_child", gem)
 	queue_free()
 
 func _on_area_2d_area_entered(area):
@@ -310,6 +322,8 @@ func _on_area_2d_area_entered(area):
 # Conectados mediante communicationBus
 func upgrade_carga(ammount):
 	carga += ammount
+	light.energy += 0.05 # aumenta la luz que entrega un poquito
+	
 
 func upgrade_masa(ammount):
 	animation.play("Star_anim/star_evolve")
@@ -318,7 +332,7 @@ func upgrade_masa(ammount):
 	set_star_size_by_mass(tipo_estrella)
 #	print("upgrade de masa_starsize")
 
-@export var cada_cuantas_rotaciones = 1
+@export var cada_cuantas_rotaciones = 2
 func upgrade_rotacion(ammount):
 	rotacion += ammount
 	$Animaciones.speed_scale = 1 + 0.3 * log(1+rotacion)
@@ -329,6 +343,7 @@ func upgrade_rotacion(ammount):
 		disparador.rotation = PI
 		#print("disparador:", disparador)
 
+# =============== Procesos Fisicos ======================
 
 func procesos_fisicos_tipoG():
 		# chequear si llega a la mitad de su masa

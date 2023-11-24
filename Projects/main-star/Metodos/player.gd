@@ -289,3 +289,9 @@ func get_random_item():
 	
 # ========================================
 
+# Upgrades:
+func upgrade_dash():
+	spaceship.unlock_dash()
+
+
+

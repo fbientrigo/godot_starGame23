@@ -1,17 +1,18 @@
 extends Node
 
-# Define signals
-signal upgradeStars(type:String, amount:int)
-signal upgradeEnemies(type:String, amount:int)
-signal upgradePlayer(type:String, amount:int)
+## Define signals
+#signal upgradeStars(type:String, amount:int)
+#signal upgradeEnemies(type:String, amount:int)
+#signal upgradePlayer(type:String, amount:int)
+#
+#func _ready():
+#	# Connect the signals to the handle_signal function
+#	upgradeStars.connect(_onUpgradeStars)
 
-func _ready():
-	# Connect the signals to the handle_signal function
-	upgradeStars.connect(_onUpgradeStars)
 
-
-
+# Funcion de upgrade, utiliza varios if para asi extraer las mejoas
 func catch_upgrade_call(upgrade):
+	
 	# upgrade = "masa
 	var upgrade_data = UpgradeDb.df[upgrade]
 	#{ "icon": "res://Assets/LevelCards/dash_ship.png", "player": true, "star": true, "display_name": "dash", "ammount": 1, "prerequisite": [] }
@@ -29,23 +30,26 @@ func catch_upgrade_call(upgrade):
 		elif upgrade == "carga":
 			for star in stars:
 				star.upgrade_carga(upgrade_data["ammount"])
+	if upgrade_data["player"]:
+		var player = get_tree().get_nodes_in_group("player_root") # busca el nood
+		if upgrade == "dash":
+			player[0].upgrade_dash()
 	
-
-func _onUpgradeStars(type, amount):
-	var star_nodes = get_nodes_from_type("Star")
-	print("ComBus")
-	print(star_nodes)
-	
-func handle_signal(type: String, amount: int):
-	# Get all nodes in the group
-	var nodes = get_nodes_from_type(type)
-
-	# Iterate over the nodes
-	for node in nodes:
-		# Perform some action
-		node.some_variable = amount  # Replace 'some_variable' with the actual variable you want to change
-
-func get_nodes_from_type(type: String):
-	# Get all nodes in the group
-	var nodes = get_tree().get_nodes_in_group(type)
-	return nodes
+#
+#func _onUpgradeStars(type, amount):
+#	var star_nodes = get_nodes_from_type("Star")
+#	print("ComBus")
+#	print(star_nodes)
+#
+#func handle_signal(type: String, amount: int):
+#	# Get all nodes in the group
+#	var nodes = get_nodes_from_type(type)
+#	# Iterate over the nodes
+#	for node in nodes:
+#		# Perform some action
+#		node.some_variable = amount  # Replace 'some_variable' with the actual variable you want to change
+#
+#func get_nodes_from_type(type: String):
+#	# Get all nodes in the group
+#	var nodes = get_tree().get_nodes_in_group(type)
+#	return nodes
