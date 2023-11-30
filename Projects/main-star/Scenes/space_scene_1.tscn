@@ -31,10 +31,13 @@ spawn_radius = 900.0
 
 [node name="StarTurret" parent="BuiildModule" instance=ExtResource("6_504rg")]
 position = Vector2(-301, 7)
+motion_mode = 1
 tipo_estrella = "TipoA"
 
 [node name="StarTurret2" parent="BuiildModule" instance=ExtResource("6_504rg")]
 position = Vector2(310, 9)
+motion_mode = 1
+tipo_estrella = "TipoM"
 
 [node name="Player" parent="." instance=ExtResource("1_ln5gm")]
 position = Vector2(-183, -134)

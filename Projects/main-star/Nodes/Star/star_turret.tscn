@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://bqab1a0i6m4h7"]
+[gd_scene load_steps=36 format=3 uid="uid://bqab1a0i6m4h7"]
 
 [ext_resource type="Script" path="res://Nodes/Star/star_turret.gd" id="1_kdyaq"]
 [ext_resource type="Shape2D" uid="uid://cukhexpuxpiny" path="res://Nodes/Star/collision_G.tres" id="5_j260d"]
@@ -23,6 +23,8 @@
 [ext_resource type="PackedScene" uid="uid://km12pyk2lnw8" path="res://Nodes/Guns/basic_weapon_state_machine.tscn" id="21_cpoek"]
 [ext_resource type="AnimationLibrary" uid="uid://d4aaj8hbatr0y" path="res://Assets/Animations/Star_anim.res" id="24_7nocl"]
 [ext_resource type="Texture2D" uid="uid://dw5mqdat8mwar" path="res://Assets/FXHit/particles/Explosion_Sheet.png" id="24_x7yw8"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qi8go"]
 
 [sub_resource type="Gradient" id="Gradient_m6jjy"]
 offsets = PackedFloat32Array(0, 0.69697, 0.828283)
@@ -87,11 +89,17 @@ color_ramp = SubResource("GradientTexture1D_i7cuw")
 anim_speed_min = 1.0
 anim_speed_max = 2.0
 
-[node name="StarTurret" type="Node2D" groups=["Star"]]
-z_index = -4
+[node name="CharacterBody2D" type="CharacterBody2D" groups=["Star"]]
+y_sort_enabled = true
+collision_layer = 0
+collision_mask = 0
+motion_mode = 1
+floor_stop_on_slope = false
+floor_block_on_wall = false
 script = ExtResource("1_kdyaq")
-multiplicador_crecimiento = 0.4
-tipo_estrella = "TipoRG"
+
+[node name="NotIUsedCollision" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_qi8go")
 
 [node name="Sensor" parent="." instance=ExtResource("8_jtdk8")]
 visible = false
@@ -112,7 +120,8 @@ DeadType = 1
 [node name="CollisionShape2D" parent="HealthComponent" index="0"]
 shape = ExtResource("5_j260d")
 
-[node name="StateMachine" parent="." instance=ExtResource("8_nsgwv")]
+[node name="StateMachine" parent="." node_paths=PackedStringArray("initial_state") instance=ExtResource("8_nsgwv")]
+initial_state = NodePath("TipoGas")
 
 [node name="TipoGas" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("animacion", "healthcomponent", "statemachine")]
 script = ExtResource("8_gicie")
@@ -195,11 +204,15 @@ script = ExtResource("20_8vmcm")
 position = Vector2(0, 2)
 rotation = 0.0
 
+[node name="9mm" parent="BasicWeaponStateMachine" index="0"]
+cooldown = 75
+
 [node name="machinegun" parent="BasicWeaponStateMachine" index="1"]
+cooldown = 12.0
 max_recoil = 0.11
 
 [node name="heavy" parent="BasicWeaponStateMachine" index="2"]
-cooldown = 30.0
+cooldown = 90.0
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
 position = Vector2(13, 20)
@@ -210,6 +223,7 @@ texture = SubResource("GradientTexture2D_cl45u")
 [node name="Timer_Vida" type="Timer" parent="."]
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("")
 libraries = {
 "": SubResource("AnimationLibrary_k4vyd"),
 "Star_anim": ExtResource("24_7nocl")
@@ -227,12 +241,6 @@ preprocess = 0.2
 explosiveness = 0.8
 randomness = 0.15
 fixed_fps = 20
-
-[connection signal="area_entered" from="Sensor" to="." method="_on_sensor_area_entered"]
-[connection signal="area_exited" from="Sensor" to="." method="_on_sensor_area_exited"]
-[connection signal="hurt" from="HealthComponent" to="." method="_on_health_component_hurt"]
-[connection signal="onDead" from="HealthComponent" to="." method="_on_health_component_on_dead"]
-[connection signal="timeout" from="Timer_Vida" to="." method="_on_timer_vida_timeout"]
 
 [editable path="HealthComponent"]
 [editable path="BasicWeaponStateMachine"]

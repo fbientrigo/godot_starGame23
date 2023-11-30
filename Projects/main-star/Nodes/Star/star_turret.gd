@@ -1,5 +1,5 @@
 # Componente de Torreta Estrella
-extends Node2D
+extends CharacterBody2D
 class_name StarTurret
 
 @export var carga : float = 0
@@ -7,6 +7,8 @@ class_name StarTurret
 @export var tiempo_vida : float = 0
 @export var rotacion :  float = 0
 
+@export var top_masa : bool = false
+@export var orbit_resistance : float = 20 # define sufrir menos daños si esta en orbita
 # Conexión con otros nodos
 
 @onready var statemachine : StateMachine = $StateMachine
@@ -28,7 +30,6 @@ var health : int  = 10
 func _ready():
 	set_star_type(tipo_estrella)
 #	change_size_collisioner()
-	
 	
 
 @export var multiplicador_crecimiento : float
@@ -257,15 +258,9 @@ func shooting_rambo():
 
 
 func _physics_process(_delta):
-
-	shooting_rambo()
-	
 #	print(tiempo_vida)
-	# Comportamiento de G para el sol
-
+	# Comportamiento de G para el so
 	#print(self," \t timervida:",timer_vida.time_left)
-	
-	
 	# ============ Evolucion Estelar ========================================
 	match tipo_estrella:
 		"TipoG":
@@ -274,7 +269,11 @@ func _physics_process(_delta):
 			procesos_fisicos_tipoRG()
 		"TipoB":
 			procesos_fisicos_tipoB()
-
+	
+	# Funcionamiento interno
+	shooting_rambo()
+	if top_masa == false:
+		move_and_slide()
 
 var fin_de_vida : bool = false
 func _on_timer_vida_timeout():
@@ -293,12 +292,17 @@ func _on_sensor_area_exited(area):
 
 
 func _on_health_component_hurt(damage):
-	health = health - damage
+	
 	animation.play("Star_anim/star_hurt")
 	
 	if masa > 0:
 		masa -= 0.1 * damage/2
 	# Aqui se pueden agregar if's dependiendo del tipo de estrella
+	if top_masa: # en el caso de ser la estrella más fuerte recibe daño normal
+		health = health - damage
+	else: # las estrellas en orbita son 100 veces más resistentes
+		health = health - damage/orbit_resistance
+		
 	if health < 0:
 		queue_free()
 
