@@ -1,5 +1,6 @@
 # Componente de Torreta Estrella
 extends Node2D
+class_name StarTurret
 
 @export var carga : float = 0
 @export var masa : float = 0
