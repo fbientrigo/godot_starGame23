@@ -4,15 +4,14 @@ extends Node
 #signal upgradeStars(type:String, amount:int)
 #signal upgradeEnemies(type:String, amount:int)
 #signal upgradePlayer(type:String, amount:int)
-#
+##
 #func _ready():
 #	# Connect the signals to the handle_signal function
 #	upgradeStars.connect(_onUpgradeStars)
-
+#
 
 # Funcion de upgrade, utiliza varios if para asi extraer las mejoas
 func catch_upgrade_call(upgrade):
-	
 	# upgrade = "masa
 	var upgrade_data = UpgradeDb.df[upgrade]
 	#{ "icon": "res://Assets/LevelCards/dash_ship.png", "player": true, "star": true, "display_name": "dash", "ammount": 1, "prerequisite": [] }
@@ -20,6 +19,7 @@ func catch_upgrade_call(upgrade):
 	if upgrade_data["star"]:
 		# Get all nodes in the 'Star' group
 		var stars = get_tree().get_nodes_in_group("Star")
+		
 		# Iterate over the stars and upgrade each one
 		if upgrade == "masa":
 			for star in stars:
