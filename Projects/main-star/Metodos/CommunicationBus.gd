@@ -19,7 +19,7 @@ func catch_upgrade_call(upgrade):
 	if upgrade_data["star"]:
 		# Get all nodes in the 'Star' group
 		var stars = get_tree().get_nodes_in_group("Star")
-		
+		print("groupd stars:", stars)
 		# Iterate over the stars and upgrade each one
 		if upgrade == "masa":
 			for star in stars:
