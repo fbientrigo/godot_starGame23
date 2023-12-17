@@ -1,6 +1,11 @@
-[gd_scene load_steps=2 format=3 uid="uid://bsgc5qgnux5gk"]
+[gd_scene load_steps=7 format=3 uid="uid://bsgc5qgnux5gk"]
 
 [ext_resource type="Script" path="res://Scenes/menu.gd" id="1_da1we"]
+[ext_resource type="Texture2D" uid="uid://fctbj7cmd0xh" path="res://Assets/UI/ButtonsNovember/play.png" id="2_hi7vm"]
+[ext_resource type="Script" path="res://Scenes/Button_Play.gd" id="3_4a1ej"]
+[ext_resource type="Texture2D" uid="uid://bdd5oqedc2cbd" path="res://Assets/UI/ButtonsNovember/boton de options.png" id="3_ro7c6"]
+[ext_resource type="Texture2D" uid="uid://cyh4u63sktxla" path="res://Assets/UI/ButtonsNovember/boton exit.png" id="4_7v8hj"]
+[ext_resource type="Texture2D" uid="uid://c2sux6idd8jfb" path="res://Assets/Tilemaps/tm_pink_nebulae.png" id="5_d8occ"]
 
 [node name="Menu" type="Control"]
 layout_mode = 3
@@ -8,34 +13,49 @@ anchors_preset = 0
 script = ExtResource("1_da1we")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
+z_index = 5
 layout_mode = 1
-offset_left = 171.0
-offset_top = 266.0
-offset_right = 1108.0
-offset_bottom = 664.0
+offset_left = 415.0
+offset_top = 358.0
+offset_right = 1352.0
+offset_bottom = 1050.0
+scale = Vector2(0.46, 0.46)
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+modulate = Color(0.964706, 0.952941, 0.988235, 1)
 layout_mode = 2
 alignment = 1
 
 [node name="Play" type="Button" parent="MarginContainer/VBoxContainer"]
+modulate = Color(0.76189, 0.595503, 1, 1)
 layout_mode = 2
-text = "Jugar"
+icon = ExtResource("2_hi7vm")
+flat = true
+icon_alignment = 1
+script = ExtResource("3_4a1ej")
 
 [node name="Options" type="Button" parent="MarginContainer/VBoxContainer"]
+modulate = Color(0.76189, 0.595503, 1, 1)
 layout_mode = 2
-text = "Opciones"
+icon = ExtResource("3_ro7c6")
+flat = true
+icon_alignment = 1
+script = ExtResource("3_4a1ej")
 
 [node name="Exit" type="Button" parent="MarginContainer/VBoxContainer"]
+modulate = Color(0.76189, 0.595503, 1, 1)
 layout_mode = 2
-text = "Salir"
+icon = ExtResource("4_7v8hj")
+flat = true
+icon_alignment = 1
+script = ExtResource("3_4a1ej")
 
 [node name="Label" type="Label" parent="."]
 layout_mode = 0
-offset_left = 477.0
-offset_top = 274.0
-offset_right = 815.0
-offset_bottom = 332.0
+offset_left = 479.0
+offset_top = 131.0
+offset_right = 817.0
+offset_bottom = 189.0
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 40
@@ -43,6 +63,22 @@ text = "Solarium Defense
 "
 horizontal_alignment = 1
 
+[node name="TituloJuego" type="Sprite2D" parent="."]
+z_index = 10
+z_as_relative = false
+
+[node name="TmPinkNebulae" type="Sprite2D" parent="."]
+modulate = Color(0.423529, 0.184314, 0.462745, 1)
+position = Vector2(606, 263)
+scale = Vector2(0.791643, 0.563511)
+texture = ExtResource("5_d8occ")
+
+[connection signal="mouse_entered" from="MarginContainer/VBoxContainer/Play" to="MarginContainer/VBoxContainer/Play" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="MarginContainer/VBoxContainer/Play" to="MarginContainer/VBoxContainer/Play" method="_on_mouse_exited"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Play" to="." method="_on_play_pressed"]
+[connection signal="mouse_entered" from="MarginContainer/VBoxContainer/Options" to="MarginContainer/VBoxContainer/Options" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="MarginContainer/VBoxContainer/Options" to="MarginContainer/VBoxContainer/Options" method="_on_mouse_exited"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Options" to="." method="_on_options_pressed"]
+[connection signal="mouse_entered" from="MarginContainer/VBoxContainer/Exit" to="MarginContainer/VBoxContainer/Exit" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="MarginContainer/VBoxContainer/Exit" to="MarginContainer/VBoxContainer/Exit" method="_on_mouse_exited"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Exit" to="." method="_on_exit_pressed"]

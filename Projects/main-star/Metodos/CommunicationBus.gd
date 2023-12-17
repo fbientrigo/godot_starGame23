@@ -53,3 +53,20 @@ func catch_upgrade_call(upgrade):
 #	# Get all nodes in the group
 #	var nodes = get_tree().get_nodes_in_group(type)
 #	return nodes
+
+# TODO ---------------- 231213:11am
+# communication bus debe de hablar con Build Module para agregar nuevas estrellas
+# build module ha de tener una función o mecanismo para agregarlas
+
+
+# TODO ----------------- 231213
+# modificar el tiempo de los spawner
+
+# en teorica cada spawner posee datos para spawnear unenemigo
+# ahora mismo lo hace random
+# 
+
+
+
+
+

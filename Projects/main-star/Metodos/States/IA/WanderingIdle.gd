@@ -5,7 +5,8 @@ class_name WanderingIdle
 @export var move_speed := 10.0
 @onready var movement : Movement = $"../../Movement"
 var move_direction : Vector2 = Vector2(1,1)
-var wander_time : float
+var wander_time : float = 2
+var wandering: bool = false
 var stars = []
 
 #func _ready():
@@ -24,11 +25,7 @@ func Enter():
 	# randomize_wander()
 	
 func Update(delta:float):
-	if wander_time > 0:
-		wander_time -= delta
-		move_direction = - object.global_position.normalized()
-	else:
-		randomize_wander()
+	move_direction = - object.global_position.normalized()
 
 func Physics_Update(delta:float):
 	if object and is_instance_valid(movement):

@@ -381,14 +381,15 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="enemy_slime" type="CharacterBody2D"]
+[node name="enemy_slime" type="CharacterBody2D" groups=["Enemy"]]
+position = Vector2(262, 229)
 rotation = 3.14159
-collision_layer = 4
+collision_layer = 12
 collision_mask = 15
 script = ExtResource("1_hw365")
-slimelvl = 1
 distancia_vision = 800.0
 vision_eterna = true
+slimelvl = 1
 
 [node name="Equipment" type="Node2D" parent="."]
 rotation = 1.5708
@@ -450,11 +451,12 @@ speed = 120.0
 max_speed = 200.0
 
 [node name="IA_StateMachine" parent="." node_paths=PackedStringArray("initial_state") instance=ExtResource("14_u7s4n")]
-initial_state = NodePath("EnemyFolow")
+initial_state = NodePath("WanderingIdle")
 
 [node name="WanderingIdle" type="Node" parent="IA_StateMachine" node_paths=PackedStringArray("object")]
 script = ExtResource("15_qvu4u")
 object = NodePath("../..")
+move_speed = 180.0
 
 [node name="EnemyFolow" type="Node" parent="IA_StateMachine" node_paths=PackedStringArray("enemy")]
 script = ExtResource("16_57tr5")

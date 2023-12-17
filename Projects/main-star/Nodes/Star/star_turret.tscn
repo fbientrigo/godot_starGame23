@@ -69,19 +69,17 @@ curve = SubResource("Curve_b6iex")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_yl4h7"]
 lifetime_randomness = 0.5
+particle_flag_disable_z = true
 emission_shape = 1
 emission_sphere_radius = 128.0
-particle_flag_disable_z = true
-direction = Vector3(0, 0, 0)
-spread = 60.68
-gravity = Vector3(0, 98, 0)
-initial_velocity_max = 91.84
-orbit_velocity_min = 0.0
-orbit_velocity_max = 0.0
-radial_accel_max = 100.0
-radial_accel_curve = SubResource("CurveTexture_ki1bi")
 angle_min = -71.3
 angle_max = 132.2
+direction = Vector3(0, 0, 0)
+spread = 60.68
+initial_velocity_max = 91.84
+gravity = Vector3(0, 98, 0)
+radial_accel_max = 100.0
+radial_accel_curve = SubResource("CurveTexture_ki1bi")
 scale_min = 3.0
 scale_max = 5.0
 scale_curve = SubResource("CurveTexture_jtrh1")
@@ -99,6 +97,7 @@ floor_block_on_wall = false
 script = ExtResource("1_kdyaq")
 
 [node name="NotIUsedCollision" type="CollisionShape2D" parent="."]
+visible = false
 light_mask = 0
 visibility_layer = 0
 shape = SubResource("RectangleShape2D_qi8go")
@@ -108,6 +107,8 @@ disabled = true
 visible = false
 collision_layer = 0
 collision_mask = 6
+
+[node name="Sprite2D" type="Sprite2D" parent="Sensor"]
 
 [node name="Animaciones" parent="." instance=ExtResource("7_qfwb1")]
 scale = Vector2(1.01644, 1.01644)

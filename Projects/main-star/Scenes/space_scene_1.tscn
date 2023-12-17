@@ -12,29 +12,14 @@ texture_repeat = 2
 
 [node name="Entorno" parent="." instance=ExtResource("2_5ijhr")]
 
-[node name="spawner3" parent="." instance=ExtResource("6_6mp7b")]
-position = Vector2(-143, 353)
-spawn_interval_max = 3.0
-spawn_radius = 900.0
-
-[node name="spawner4" parent="." instance=ExtResource("6_6mp7b")]
-position = Vector2(-143, 353)
-spawn_interval_max = 3.0
-spawn_radius = 900.0
-
-[node name="spawner5" parent="." instance=ExtResource("6_6mp7b")]
-position = Vector2(-143, 353)
-spawn_interval_max = 3.0
-spawn_radius = 900.0
-
 [node name="BuiildModule" parent="." instance=ExtResource("7_b4vwi")]
 
 [node name="StarTurret" parent="BuiildModule" instance=ExtResource("6_504rg")]
-position = Vector2(-301, 7)
+position = Vector2(-7, 10)
 tipo_estrella = "TipoA"
 
 [node name="StarTurret2" parent="BuiildModule" instance=ExtResource("6_504rg")]
-position = Vector2(310, 9)
+position = Vector2(16, 6)
 tipo_estrella = "TipoM"
 
 [node name="Player" parent="." instance=ExtResource("1_ln5gm")]
@@ -46,5 +31,26 @@ teleport_limits = Vector2(3200, 3400)
 blend_mode = 1
 
 [node name="CommunicationBus" parent="." instance=ExtResource("7_0ypak")]
+
+[node name="spawner_regular" parent="." instance=ExtResource("6_6mp7b")]
+position = Vector2(660, -738)
+spawn_interval_min = 1.0
+spawn_interval_max = 4.0
+spawn_radius = 500.0
+
+[node name="spawner_regular2" parent="." instance=ExtResource("6_6mp7b")]
+position = Vector2(-773, 800)
+spawn_interval_max = 3.0
+spawn_radius = 500.0
+
+[node name="spawner_regular3" parent="." instance=ExtResource("6_6mp7b")]
+position = Vector2(-835, -672)
+spawn_interval_max = 3.0
+spawn_radius = 500.0
+
+[node name="spawner_regular4" parent="." instance=ExtResource("6_6mp7b")]
+position = Vector2(816, 704)
+spawn_interval_max = 3.0
+spawn_radius = 500.0
 
 [editable path="BuiildModule"]

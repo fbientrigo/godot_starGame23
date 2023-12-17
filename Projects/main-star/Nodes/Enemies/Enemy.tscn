@@ -312,7 +312,8 @@ animations = [{
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_1385d"]
 
-[node name="Enemy" type="CharacterBody2D"]
+[node name="Enemy" type="CharacterBody2D" groups=["Enemy"]]
+position = Vector2(588, 450)
 rotation = 3.14159
 collision_layer = 4
 collision_mask = 15
@@ -368,13 +369,14 @@ HurtBoxType = 1
 [node name="Sensor" parent="." instance=ExtResource("11_3jmin")]
 self_modulate = Color(1, 0.733333, 0.690196, 1)
 show_behind_parent = true
+scale = Vector2(0.5, 0.5)
 collision_layer = 0
 collision_mask = 10
 
 [node name="Movement" type="Node" parent="."]
 script = ExtResource("10_ld4ds")
 speed = 180.0
-max_speed = 300.0
+max_speed = 280.0
 
 [node name="IA_StateMachine" parent="." node_paths=PackedStringArray("initial_state") instance=ExtResource("12_pww30")]
 script = ExtResource("14_hcnm4")
@@ -383,7 +385,7 @@ initial_state = NodePath("WanderingIdle")
 [node name="WanderingIdle" type="Node" parent="IA_StateMachine" node_paths=PackedStringArray("object")]
 script = ExtResource("13_gd583")
 object = NodePath("../..")
-move_speed = 400.0
+move_speed = 200.0
 
 [node name="EnemyFollow" type="Node" parent="IA_StateMachine" node_paths=PackedStringArray("enemy")]
 script = ExtResource("15_bjrxe")

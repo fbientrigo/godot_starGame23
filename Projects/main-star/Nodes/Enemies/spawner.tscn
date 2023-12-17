@@ -7,3 +7,14 @@
 [node name="spawner" type="Marker2D"]
 script = ExtResource("1_p0kk7")
 mob_scene = Array[PackedScene]([ExtResource("2_mdlie"), ExtResource("3_uupms")])
+
+[node name="evolution_time" type="Timer" parent="."]
+wait_time = 37.0
+autostart = true
+
+[node name="spawn_time" type="Timer" parent="."]
+wait_time = 5.0
+autostart = true
+
+[connection signal="timeout" from="evolution_time" to="." method="_on_evolution_time_timeout"]
+[connection signal="timeout" from="spawn_time" to="." method="_on_spawn_time_timeout"]

@@ -82,6 +82,14 @@ func _on_sensor_area_exited(_area):
 	# Restablece el área del jugador cuando sale del sensor.
 	player_area = null
 
+
+func evolve_stats(multiplier : float):
+	if movement != null:
+		movement.speed = movement.speed * multiplier
+		print("printed evolved enemy within Enemy class")
+
+
+
 # Función llamada cuando el componente de salud del enemigo alcanza una salud de 0.
 # Puede implementar acciones adicionales aquí, como cambiar la animación y eliminar al enemigo.
 

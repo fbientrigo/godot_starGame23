@@ -7,6 +7,7 @@ class_name StarTurret
 @export var tiempo_vida : float = 0
 @export var rotacion :  float = 0
 @export var top_masa : bool = false
+
 # Conexión con otros nodos
 
 @onready var statemachine : StateMachine = $StateMachine
@@ -31,7 +32,7 @@ func _ready():
 	
 	
 
-@export var multiplicador_crecimiento : float
+@export var multiplicador_crecimiento : float = 0.3
 func set_star_size_by_mass(tipo_estrella):
 	var star_data = STAR_DATA.get(tipo_estrella, {})
 	
@@ -42,7 +43,7 @@ func set_star_size_by_mass(tipo_estrella):
 		if mass_surplus > 0:
 			# esto es un % de crecimiento, el 1.5 da un plus visual
 			var new_scale = 0 #1.5 * mass_surplus / star_data["masa"]
-			new_scale = log(1 + mass_surplus) * multiplicador_crecimiento
+			new_scale = log(1 + 1.5 * mass_surplus) * multiplicador_crecimiento
 			self.scale = Vector2(1+new_scale,1+new_scale)
 #
 #func change_size_collisioner(factor = 0.9):
