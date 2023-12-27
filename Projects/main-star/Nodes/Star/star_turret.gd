@@ -228,13 +228,14 @@ func get_star_data(star_type: String) -> Dictionary:
 
 func cambiar_estrella(_tipo_estrella):
 	# Cambiar estrella ocurre cada vez que existe un cambio en los if
-	animation.play("Star_anim/star_evolve")
-	
-	masa = STAR_DATA[_tipo_estrella]["masa"]
-	timer_vida.wait_time = STAR_DATA[_tipo_estrella]["tiempo_vida"]
-	timer_vida.start()
+	# animation.play("Star_anim/star_evolve") # animacion no implementada
 	var new_state = statemachine.get_node(_tipo_estrella)
 	statemachine.set_initial_state(new_state)
+	
+	masa = STAR_DATA[_tipo_estrella]["masa"]
+	if timer_vida:
+		timer_vida.wait_time = STAR_DATA[_tipo_estrella]["tiempo_vida"]
+		timer_vida.start()
 	# no deberia resetear la rotacion visual
 	#$Animaciones.speed_scale = 1 # reinicia la rotación visual
 	

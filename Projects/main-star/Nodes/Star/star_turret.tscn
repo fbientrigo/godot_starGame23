@@ -29,14 +29,14 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qi8go"]
 
 [sub_resource type="Gradient" id="Gradient_m6jjy"]
-offsets = PackedFloat32Array(0, 0.69697, 0.828283)
+offsets = PackedFloat32Array(0, 0.283582, 0.828283)
 colors = PackedColorArray(0.797659, 0.797658, 0.797659, 1, 0.429222, 0.429222, 0.429222, 1, 0, 0, 0, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_cl45u"]
 gradient = SubResource("Gradient_m6jjy")
 fill = 1
 fill_from = Vector2(0.5, 0.5)
-fill_to = Vector2(0.501424, 0.014245)
+fill_to = Vector2(0.501424, 0.0655271)
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_k4vyd"]
 

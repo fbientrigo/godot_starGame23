@@ -28,20 +28,24 @@ func _ready():
 
 
 func collect():
+	var returnable_data
 	if statemachine.initial_state.has_method("collect"):
 		print("stateMachine_collect")
-		statemachine.initial_state.collect()
-	
+		returnable_data = statemachine.initial_state.collect()
 	sound.play()
 	collision.call_deferred("set","disabled",true)
 	animation.visible = false
 	queue_free() #temporal
 	
-	# este codigo provoca que solo la experience entregue nivel
-	if tipo_obj == "Exp":
-		return experience
+	if returnable_data: # catch de errores para collects sin return data
+		return returnable_data
 	else:
 		return 0
+	# este codigo provoca que solo la experience entregue nivel
+	#if tipo_obj == "Exp": # pasado al state machine
+		#return experience
+	#else:
+		#return 0
 
 
 func _physics_process(delta):

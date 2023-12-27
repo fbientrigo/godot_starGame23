@@ -151,6 +151,12 @@ func add_star(type):
 	#add_child(estrella)
 	call_deferred("add_child", estrella)
 	
+	## Premio a la mejor linea del año
+	# conocer el await me habría salvado quizas unas 40 horas
+	# experimental diciembre 27
+	await estrella.ready # pausa el codigo hasta cargar la estrella
+	
+	estrella.cambiar_estrella(type)
 	estrellas = self.get_children()
 	set_top_masa(estrellas)
 	
@@ -160,6 +166,6 @@ func add_star(type):
 		estrella.velocity = Vector2(2*(randf()-0.5)*randf_range(min_initial_speed,max_initial_speed),2*(randf()-0.5)* randf_range(min_initial_speed,max_initial_speed))
 	else:
 		estrella.position = Vector2(0,0) # define el orgien para la top masa
-
+	
 	
 

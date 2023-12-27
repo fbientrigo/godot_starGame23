@@ -5,10 +5,17 @@ extends State
 @export var animacion : AnimatedSprite2D
 @export var sound : AudioStreamPlayer2D
 
+@export var experience = 1
+
+func collect():
+	return experience
 
 # Método llamado al entrar en este estado.
 func Enter():
-	animacion.play("exp_anim")
+	if experience > 5:
+		animacion.play("big_exp_anim")
+	else:
+		animacion.play("exp_anim")
 
 # Método llamado al salir de este estado.
 func Exit():
@@ -23,3 +30,6 @@ func Update(_delta: float):
 # Parámetro "_delta" representa la cantidad de tiempo transcurrido desde el último fotograma.
 func Physics_Update(_delta: float):
 	pass
+
+
+
