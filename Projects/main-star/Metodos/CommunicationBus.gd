@@ -1,5 +1,11 @@
 extends Node
 
+@onready var buildmodule = get_tree().get_first_node_in_group("BuildModule")
+
+func catch_star_build(type): # type of star
+	print("catch star build of type: ", type)
+	buildmodule.add_star(type)
+
 ## Define signals
 #signal upgradeStars(type:String, amount:int)
 #signal upgradeEnemies(type:String, amount:int)
@@ -8,7 +14,7 @@ extends Node
 #func _ready():
 #	# Connect the signals to the handle_signal function
 #	upgradeStars.connect(_onUpgradeStars)
-#
+
 
 # Funcion de upgrade, utiliza varios if para asi extraer las mejoas
 func catch_upgrade_call(upgrade):
@@ -34,8 +40,22 @@ func catch_upgrade_call(upgrade):
 		var player = get_tree().get_nodes_in_group("player_root") # busca el nood
 		if upgrade == "dash":
 			player[0].upgrade_dash()
-	
-#
+
+
+
+# TODO ---------------- 231213:11am
+# communication bus debe de hablar con Build Module para agregar nuevas estrellas
+# build module ha de tener una función o mecanismo para agregarlas
+
+
+#add_star(type)
+
+
+
+
+
+
+
 #func _onUpgradeStars(type, amount):
 #	var star_nodes = get_nodes_from_type("Star")
 #	print("ComBus")
@@ -54,9 +74,7 @@ func catch_upgrade_call(upgrade):
 #	var nodes = get_tree().get_nodes_in_group(type)
 #	return nodes
 
-# TODO ---------------- 231213:11am
-# communication bus debe de hablar con Build Module para agregar nuevas estrellas
-# build module ha de tener una función o mecanismo para agregarlas
+
 
 
 # TODO ----------------- 231213

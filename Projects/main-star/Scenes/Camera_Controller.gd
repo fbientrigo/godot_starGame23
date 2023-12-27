@@ -3,11 +3,10 @@ extends Node2D
 
 @export var player_path: NodePath
 @onready var player :Node2D = get_node(player_path)
-var mira_path : NodePath = ^"%Crosshair_onShip"
-var mira : Node2D 
+@onready var mira : Node2D =  %Crosshair_onShip
 
 func _ready():
-	mira = get_node(mira_path)
+	pass
 #	print("camera controller, crosshair:")
 #	print(mira_path)
 #	print(mira)

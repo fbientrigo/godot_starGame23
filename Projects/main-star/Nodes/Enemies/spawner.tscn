@@ -9,7 +9,7 @@ script = ExtResource("1_p0kk7")
 mob_scene = Array[PackedScene]([ExtResource("2_mdlie"), ExtResource("3_uupms")])
 
 [node name="evolution_time" type="Timer" parent="."]
-wait_time = 37.0
+wait_time = 20.0
 autostart = true
 
 [node name="spawn_time" type="Timer" parent="."]

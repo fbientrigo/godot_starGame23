@@ -2,5 +2,5 @@
 
 [ext_resource type="Script" path="res://Metodos/BuiildModule.gd" id="1_pw14i"]
 
-[node name="BuiildModule" type="Node2D"]
+[node name="BuildModule" type="Node2D" groups=["BuildModule"]]
 script = ExtResource("1_pw14i")

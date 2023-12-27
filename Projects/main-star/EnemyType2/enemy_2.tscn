@@ -1,4 +1,4 @@
-[gd_scene load_steps=82 format=3 uid="uid://dsm8p7ex0tdrg"]
+[gd_scene load_steps=83 format=3 uid="uid://dsm8p7ex0tdrg"]
 
 [ext_resource type="Script" path="res://Nodes/Objects/experience_gem.gd" id="1_84udy"]
 [ext_resource type="Texture2D" uid="uid://dptbbu6alo4gg" path="res://Assets/Pickups/Hydrogen/hydrogen_gas.png" id="1_vv038"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://Metodos/States/StateMachine.gd" id="2_wpkbn"]
 [ext_resource type="Script" path="res://Nodes/Objects/Pickable.gd" id="4_xvht5"]
 [ext_resource type="Script" path="res://Nodes/Objects/StarSeed.gd" id="5_aoxmg"]
+[ext_resource type="Script" path="res://EnemyType2/Exp.gd" id="5_efq31"]
 [ext_resource type="Script" path="res://Nodes/Objects/Default.gd" id="6_ghbxs"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_j6una"]
@@ -519,8 +520,13 @@ animations = [{
 "texture": SubResource("AtlasTexture_wdxdn")
 }],
 "loop": true,
-"name": &"default",
+"name": &"exp",
 "speed": 30.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"starseed",
+"speed": 5.0
 }]
 
 [node name="Object" type="Area2D"]
@@ -536,11 +542,16 @@ volume_db = -11.177
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_a1une")
-frame = 30
-frame_progress = 0.593967
+animation = &"starseed"
 
 [node name="StateMachine" type="Node2D" parent="."]
+process_priority = -1
 script = ExtResource("2_wpkbn")
+
+[node name="Exp" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("animacion", "sound")]
+script = ExtResource("5_efq31")
+animacion = NodePath("../../AnimatedSprite2D")
+sound = NodePath("../../AudioStreamPlayer2D")
 
 [node name="Pickable" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("animacion", "sound")]
 script = ExtResource("4_xvht5")

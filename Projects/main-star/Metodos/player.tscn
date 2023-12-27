@@ -96,6 +96,8 @@ text = "FPS: 60"
 script = ExtResource("6_obniw")
 
 [node name="Camera2D" type="Camera2D" parent="."]
+process_priority = 4
+process_physics_priority = 4
 position = Vector2(0, -28)
 zoom = Vector2(1.7, 1.7)
 position_smoothing_enabled = true

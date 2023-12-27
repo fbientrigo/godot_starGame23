@@ -24,7 +24,7 @@ extends RigidBody2D
 @export var crosshair : Node2D
 
 # combinar con el health component
-@onready var _animated_sprite = get_node(animation_damage_sprites)
+# @onready var _animated_sprite = get_node(animation_damage_sprites)
 @onready var sound_thursters : AudioStreamPlayer2D = $Sounds/Thursters
 @onready var sound_dash : AudioStreamPlayer2D = $Sounds/Dash2
 
@@ -61,8 +61,6 @@ func _on_dash_timeout():
 	cooldown_dash.start()
 func _on_can_dash_timeout():
 	can_dash = true
-
-
 
 
 # codigo sin testear, me falta implementar funcionalidad
@@ -113,7 +111,6 @@ func _integrate_forces(_state):
 func _on_grabber_area_entered(area):
 	if area.is_in_group("Loot"):
 		area.target = self
-		
 
 signal got_exp(exp_recb)
 

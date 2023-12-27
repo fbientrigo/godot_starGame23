@@ -1,0 +1,29 @@
+[gd_scene load_steps=2 format=3 uid="uid://cwnud7nnr4wp3"]
+
+[ext_resource type="PackedScene" uid="uid://dsm8p7ex0tdrg" path="res://EnemyType2/enemy_2.tscn" id="1_fulsf"]
+
+[node name="ObjectsPickableGarden" type="Node2D"]
+
+[node name="Object" parent="." instance=ExtResource("1_fulsf")]
+position = Vector2(270, 261)
+
+[node name="Object2" parent="." instance=ExtResource("1_fulsf")]
+position = Vector2(159, 123)
+
+[node name="Object3" parent="." instance=ExtResource("1_fulsf")]
+position = Vector2(139, 346)
+
+[node name="Object4" parent="." instance=ExtResource("1_fulsf")]
+position = Vector2(457, 138)
+
+[node name="Object5" parent="." instance=ExtResource("1_fulsf")]
+position = Vector2(469, 376)
+
+[node name="Object6" parent="." instance=ExtResource("1_fulsf")]
+position = Vector2(643, 211)
+
+[node name="Object7" parent="." instance=ExtResource("1_fulsf")]
+position = Vector2(748, 459)
+
+[node name="Object8" parent="." instance=ExtResource("1_fulsf")]
+position = Vector2(-53, 355)

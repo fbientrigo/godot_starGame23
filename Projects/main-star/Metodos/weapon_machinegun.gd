@@ -10,7 +10,7 @@ func _ready():
 	change_bullet_type(bullet9mm)
 
 	
-func fire(rotation,direction, phase=0.0,type='direction',hardpoint=self):
+func fire(rotation,direction, phase=0.0,_type='direction',_hardpoint=self):
 	if last_shot < cooldown: 
 		return
 	else:

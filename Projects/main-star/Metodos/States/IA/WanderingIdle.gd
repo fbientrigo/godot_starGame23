@@ -24,9 +24,9 @@ func Enter():
 	
 	# randomize_wander()
 	
-func Update(delta:float):
+func Update(_delta:float):
 	move_direction = - object.global_position.normalized()
 
-func Physics_Update(delta:float):
+func Physics_Update(_delta:float):
 	if object and is_instance_valid(movement):
 		movement.move(move_direction, move_speed)

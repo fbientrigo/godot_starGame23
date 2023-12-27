@@ -7,7 +7,7 @@ extends State
 
 # Método llamado al entrar en este estado.
 func Enter():
-	animacion.play("default")
+	animacion.play("exp_anim")
 
 # Método llamado al salir de este estado.
 func Exit():

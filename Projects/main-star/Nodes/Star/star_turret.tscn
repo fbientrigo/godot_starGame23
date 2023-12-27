@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://bqab1a0i6m4h7"]
+[gd_scene load_steps=38 format=3 uid="uid://bqab1a0i6m4h7"]
 
 [ext_resource type="Script" path="res://Nodes/Star/star_turret.gd" id="1_kdyaq"]
 [ext_resource type="Shape2D" uid="uid://cukhexpuxpiny" path="res://Nodes/Star/collision_G.tres" id="5_j260d"]
@@ -21,6 +21,8 @@
 [ext_resource type="Script" path="res://Nodes/Star/TipoBD.gd" id="18_6kmvi"]
 [ext_resource type="Script" path="res://Nodes/Star/CommunicationBus.gd" id="20_8vmcm"]
 [ext_resource type="PackedScene" uid="uid://km12pyk2lnw8" path="res://Nodes/Guns/basic_weapon_state_machine.tscn" id="21_cpoek"]
+[ext_resource type="Script" path="res://Nodes/Star/timer_vida_sprite.gd" id="23_dbphj"]
+[ext_resource type="Texture2D" uid="uid://cnpogb23ono8c" path="res://Assets/UI/All.png" id="23_kbdva"]
 [ext_resource type="AnimationLibrary" uid="uid://d4aaj8hbatr0y" path="res://Assets/Animations/Star_anim.res" id="24_7nocl"]
 [ext_resource type="Texture2D" uid="uid://dw5mqdat8mwar" path="res://Assets/FXHit/particles/Explosion_Sheet.png" id="24_x7yw8"]
 
@@ -95,6 +97,7 @@ motion_mode = 1
 floor_stop_on_slope = false
 floor_block_on_wall = false
 script = ExtResource("1_kdyaq")
+tipo_estrella = "TipoA"
 
 [node name="NotIUsedCollision" type="CollisionShape2D" parent="."]
 visible = false
@@ -112,11 +115,11 @@ collision_mask = 6
 
 [node name="Animaciones" parent="." instance=ExtResource("7_qfwb1")]
 scale = Vector2(1.01644, 1.01644)
-animation = &"G"
 speed_scale = 2.0
 
 [node name="HealthComponent" parent="." instance=ExtResource("7_pfqkg")]
 unique_name_in_owner = true
+visible = false
 collision_layer = 8
 collision_mask = 4
 DeadType = 1
@@ -203,6 +206,7 @@ statemachine = NodePath("..")
 script = ExtResource("20_8vmcm")
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
+visible = false
 
 [node name="BasicWeaponStateMachine" parent="." instance=ExtResource("21_cpoek")]
 position = Vector2(0, 2)
@@ -219,12 +223,13 @@ max_recoil = 0.11
 cooldown = 90.0
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
-position = Vector2(13, 20)
-scale = Vector2(60, 60)
+scale = Vector2(40, 40)
 energy = 0.9
 texture = SubResource("GradientTexture2D_cl45u")
 
 [node name="Timer_Vida" type="Timer" parent="."]
+process_priority = 8
+process_physics_priority = 8
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -244,6 +249,22 @@ preprocess = 0.2
 explosiveness = 0.8
 randomness = 0.15
 fixed_fps = 20
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Sprite_TimerVida" type="Sprite2D" parent="."]
+modulate = Color(0, 1, 0.352941, 1)
+self_modulate = Color(1, 1, 1, 0.576471)
+z_index = 8
+texture = ExtResource("23_kbdva")
+hframes = 9
+region_enabled = true
+region_rect = Rect2(1168, 0, 144, 16)
+script = ExtResource("23_dbphj")
 
 [connection signal="area_entered" from="Sensor" to="." method="_on_sensor_area_entered"]
 [connection signal="area_exited" from="Sensor" to="." method="_on_sensor_area_exited"]

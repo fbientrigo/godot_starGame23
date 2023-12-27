@@ -30,7 +30,7 @@ var collected_experience = 0 # constant flush
 @export var crosshair : Node2D
 
 # combinar con el health component
-@onready var _animated_sprite = get_node(animation_damage_sprites)
+# @onready var _animated_sprite = get_node(animation_damage_sprites)
 
 # upgrades
 @export var levelPanel : Panel
@@ -38,6 +38,16 @@ var collected_experience = 0 # constant flush
 @export var sndLevelUp : AudioStreamPlayer
 @onready var itemOptions = preload("res://Metodos/item_option.tscn")
 @onready var camera : Camera2D = $Camera2D
+
+
+# busca al commmunication bus
+@onready var bus = get_tree().get_first_node_in_group("ComBusGroup")
+
+
+# signal build_star(star)
+#
+# 	connect("selected_upgrade",  Callable(bus, "catch_upgrade_call"))
+
 
 var collected_upgrades = [] # se guardan las mejoras del player
 var upgrade_options = [] # upgrades en oferta
@@ -60,7 +70,7 @@ func _ready():
 
 
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	# Listen for extra input
 	# This input is for debugging
 	if Input.is_action_just_pressed("levelupgod"):
@@ -196,7 +206,7 @@ func clear_mouse_over(tarjetas_array):
 			t.mouse_over = false
 
 
-func _process(delta):
+func _process(_delta):
 	if len(Input.get_connected_joypads())>0:
 		if Input.is_joy_known(Input.get_connected_joypads()[0]):
 			if levelPanel.visible: #modo level

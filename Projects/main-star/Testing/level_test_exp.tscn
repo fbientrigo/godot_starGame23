@@ -1,0 +1,149 @@
+[gd_scene load_steps=6 format=3 uid="uid://b0t62rnhq0fdy"]
+
+[ext_resource type="PackedScene" uid="uid://me0wanq6rcss" path="res://Metodos/player.tscn" id="1_p7m0j"]
+[ext_resource type="PackedScene" uid="uid://cafwk803csaae" path="res://Scenes/build_module.tscn" id="1_x0m4h"]
+[ext_resource type="PackedScene" uid="uid://ucfco31tegc1" path="res://Nodes/Objects/Object.tscn" id="2_gf4ud"]
+[ext_resource type="PackedScene" uid="uid://csc6cyvaojn3c" path="res://Scenes/entorno.tscn" id="3_on75g"]
+[ext_resource type="PackedScene" uid="uid://c4drybq7dx5x3" path="res://Metodos/CommunicationBus.tscn" id="4_ojrkq"]
+
+[node name="Level" type="Node2D" groups=["Level"]]
+
+[node name="BuildModule" parent="." instance=ExtResource("1_x0m4h")]
+
+[node name="CommunicationBus" parent="." instance=ExtResource("4_ojrkq")]
+
+[node name="Player" parent="." instance=ExtResource("1_p7m0j")]
+position = Vector2(0, 138)
+
+[node name="Exp" parent="." instance=ExtResource("2_gf4ud")]
+position = Vector2(572, 475)
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Exp"]
+offset_left = -20.0
+offset_top = -64.0
+offset_right = 20.0
+offset_bottom = -24.0
+text = "exp"
+
+[node name="StarSeed" parent="." instance=ExtResource("2_gf4ud")]
+position = Vector2(729, 473)
+tipo_obj = "StarSeed"
+
+[node name="RichTextLabel" type="RichTextLabel" parent="StarSeed"]
+offset_left = -34.0
+offset_top = -50.0
+offset_right = 46.0
+offset_bottom = -10.0
+rotation = -0.013353
+text = "StarSeed"
+scroll_active = false
+
+[node name="Piclkablle AMMO" parent="." instance=ExtResource("2_gf4ud")]
+position = Vector2(859, 472)
+tipo_obj = "StarSeed"
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Piclkablle AMMO"]
+offset_left = -22.0
+offset_top = -59.0
+offset_right = 46.0
+offset_bottom = -19.0
+text = "Ammo
+"
+
+[node name="default" parent="." instance=ExtResource("2_gf4ud")]
+position = Vector2(997, 470)
+tipo_obj = "Default"
+
+[node name="RichTextLabel" type="RichTextLabel" parent="default"]
+offset_left = -37.0
+offset_top = -42.0
+offset_right = 27.0
+offset_bottom = -2.0
+text = "Default"
+
+[node name="Object4" parent="." instance=ExtResource("2_gf4ud")]
+position = Vector2(728, 574)
+tipo_obj = "StarSeed"
+
+[node name="Object7" parent="." instance=ExtResource("2_gf4ud")]
+position = Vector2(724, 692)
+tipo_obj = "StarSeed"
+
+[node name="Object8" parent="." instance=ExtResource("2_gf4ud")]
+position = Vector2(729, 808)
+tipo_obj = "StarSeed"
+
+[node name="Object9" parent="." instance=ExtResource("2_gf4ud")]
+position = Vector2(-181, 373)
+
+[node name="Object10" parent="." instance=ExtResource("2_gf4ud")]
+position = Vector2(-30, 161)
+
+[node name="Object11" parent="." instance=ExtResource("2_gf4ud")]
+position = Vector2(-444, 191)
+
+[node name="Object12" parent="." instance=ExtResource("2_gf4ud")]
+position = Vector2(-180, 431)
+
+[node name="Object13" parent="." instance=ExtResource("2_gf4ud")]
+position = Vector2(177, 532)
+
+[node name="Object14" parent="." instance=ExtResource("2_gf4ud")]
+position = Vector2(-352, 344)
+
+[node name="Object15" parent="." instance=ExtResource("2_gf4ud")]
+position = Vector2(-201, 132)
+
+[node name="Object16" parent="." instance=ExtResource("2_gf4ud")]
+position = Vector2(194, 399)
+
+[node name="Object17" parent="." instance=ExtResource("2_gf4ud")]
+position = Vector2(-113, -102)
+
+[node name="Object18" parent="." instance=ExtResource("2_gf4ud")]
+position = Vector2(-252, 190)
+
+[node name="Object19" parent="." instance=ExtResource("2_gf4ud")]
+position = Vector2(-285, -189)
+
+[node name="Object20" parent="." instance=ExtResource("2_gf4ud")]
+position = Vector2(-630, -210)
+
+[node name="Object21" parent="." instance=ExtResource("2_gf4ud")]
+position = Vector2(-1044, -180)
+
+[node name="Object22" parent="." instance=ExtResource("2_gf4ud")]
+position = Vector2(757, -375)
+
+[node name="Object23" parent="." instance=ExtResource("2_gf4ud")]
+position = Vector2(1114, -274)
+
+[node name="Object24" parent="." instance=ExtResource("2_gf4ud")]
+position = Vector2(585, -462)
+
+[node name="Object25" parent="." instance=ExtResource("2_gf4ud")]
+position = Vector2(736, -674)
+
+[node name="Object26" parent="." instance=ExtResource("2_gf4ud")]
+position = Vector2(322, -644)
+
+[node name="Object27" parent="." instance=ExtResource("2_gf4ud")]
+position = Vector2(-377, -395)
+
+[node name="Object28" parent="." instance=ExtResource("2_gf4ud")]
+position = Vector2(-20, -294)
+
+[node name="Object29" parent="." instance=ExtResource("2_gf4ud")]
+position = Vector2(-549, -482)
+
+[node name="Object30" parent="." instance=ExtResource("2_gf4ud")]
+position = Vector2(-398, -694)
+
+[node name="Object31" parent="." instance=ExtResource("2_gf4ud")]
+position = Vector2(-812, -664)
+
+[node name="Object5" parent="." instance=ExtResource("2_gf4ud")]
+position = Vector2(-322, 32)
+
+[node name="Entorno" parent="." instance=ExtResource("3_on75g")]
+position = Vector2(-9, 3)

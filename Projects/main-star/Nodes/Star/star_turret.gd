@@ -53,10 +53,10 @@ func set_star_size_by_mass(tipo_estrella):
 #	character_collision.shape.radius = healthcomponent_collision.shape.radius * factor
 #	print("colision de estrella: ", character_collision.shape.radius)
 
-func set_star_type(tipo_estrella):
+func set_star_type(tipo_estrella_):
 	# Corre popr primera vez el setup
 	# Sección de busquedo usando enum =============
-	var nodo_hijo = statemachine.get_node(tipo_estrella)
+	var nodo_hijo = statemachine.get_node(tipo_estrella_)
 	#print(nodo_hijo)
 	if nodo_hijo:
 		#print("nodo hijo encontrado")
@@ -66,7 +66,7 @@ func set_star_type(tipo_estrella):
 	else:
 		print("Nodo hijo no encontrado.")
 		
-	var star_data = STAR_DATA.get(tipo_estrella, {})
+	var star_data = STAR_DATA.get(tipo_estrella_, {})
 	masa = star_data["masa"]
 	timer_vida.wait_time = star_data["tiempo_vida"]
 	timer_vida.start(star_data["tiempo_vida"])
@@ -104,7 +104,8 @@ var tipo_estrella:String = "TipoGas"
 # Upgrades de las estrellas
 
 
-
+# esta data es la que posee priopridad a dia presente
+# 24 diciembre 2023
 const STAR_DATA = {
 	"TipoO": {
 		"type": "O",
@@ -113,7 +114,7 @@ const STAR_DATA = {
 		"radio": 10,
 		"temperatura": 40000,
 		"abundancia": 0.00001,
-		"tiempo_vida": 10
+		"tiempo_vida": 20
 	},
 	"TipoB": {
 		"type": "B",
@@ -131,7 +132,7 @@ const STAR_DATA = {
 		"radio": 1.7,
 		"temperatura": 8500,
 		"abundancia": 0.7,
-		"tiempo_vida": 1000 / 10
+		"tiempo_vida": 12
 	},
 	"TipoF": {
 		"type": "F",
@@ -140,7 +141,7 @@ const STAR_DATA = {
 		"radio": 1.3,
 		"temperatura": 6500,
 		"abundancia": 2,
-		"tiempo_vida": 3000 / 10
+		"tiempo_vida": 320
 	},
 	"TipoG": {
 		"type": "G",
@@ -150,7 +151,7 @@ const STAR_DATA = {
 		"temperatura": 5700,
 		"abundancia": 3.5,
 		#"tiempo_vida": 10000
-		"tiempo_vida": 10000/100
+		"tiempo_vida": 180
 	},
 	"TipoK": {
 		"type": "K",
@@ -159,7 +160,7 @@ const STAR_DATA = {
 		"radio": 0.8,
 		"temperatura": 4500,
 		"abundancia": 8,
-		"tiempo_vida": 50000 / 100
+		"tiempo_vida": 580
 	},
 	"TipoM": {
 		"type": "M",
@@ -168,7 +169,7 @@ const STAR_DATA = {
 		"radio": 0.3,
 		"temperatura": 3200,
 		"abundancia": 80,
-		"tiempo_vida": 20000 / 100
+		"tiempo_vida": 120
 	},
 	"TipoWD": {
 		"type": "WhiteDwarf",
@@ -177,7 +178,7 @@ const STAR_DATA = {
 		"radio": 0.001,
 		"temperatura": 70000,
 		"abundancia": 5,
-		"tiempo_vida": 99999 
+		"tiempo_vida": 99999
 	},
 	"TipoRG": {
 		"type": "GiganteRojaK",
@@ -186,16 +187,16 @@ const STAR_DATA = {
 		"radio": 50,
 		"temperatura": 10000,
 		"abundancia": 0.4,
-		"tiempo_vida": 1000 /10
+		"tiempo_vida": 150
 	},
 	"TipoSRG": {
 		"type": "GiganteRoja",
 		"node_path": "TipoSRG",
-		"masa": 500,
+		"masa": 100,
 		"radio": 500,
 		"temperatura": 40000,
 		"abundancia": 0.0001,
-		"tiempo_vida": 20
+		"tiempo_vida": 28
 	},
 	"TipoGas": {
 		"type": "Gas",
@@ -204,7 +205,7 @@ const STAR_DATA = {
 		"radio": 0.5,
 		"temperatura": 0,
 		"abundancia": 99999,
-		"tiempo_vida": 50
+		"tiempo_vida": 61
 	},
 	"TipoGas2": {
 		"type": "Gas2",
@@ -213,7 +214,7 @@ const STAR_DATA = {
 		"radio": 0.5,
 		"temperatura": 0,
 		"abundancia": 99999,
-		"tiempo_vida": 50
+		"tiempo_vida": 61
 	}
 }
 
@@ -247,7 +248,7 @@ func shooting_rambo():
 	if enemies != []:
 		
 		if can_shoot:
-			var fase_temp = 0
+			#var fase_temp = 0
 			for disparador_i in disparadores_grupo:
 				current_enemy = enemies.pick_random()
 				#fase_temp += fase_temp
@@ -306,8 +307,6 @@ func _on_health_component_hurt(damage):
 		queue_free()
 
 
-
-
 func _on_health_component_on_dead():
 	# spawnear restos para subir de nivel
 	var gem = exp_gem.instantiate()  # C	rea una instancia del objeto de experiencia.
@@ -318,7 +317,7 @@ func _on_health_component_on_dead():
 	get_tree().get_root().call_deferred("add_child", gem)
 	queue_free()
 
-func _on_area_2d_area_entered(area):
+func _on_area_2d_area_entered(_area):
 	pass
 
 # ====== Leveling Up Variables ============================

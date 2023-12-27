@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://ce8bfmrsk33n" path="res://Nodes/Enemies/spawner.tscn" id="6_6mp7b"]
 [ext_resource type="PackedScene" uid="uid://bqab1a0i6m4h7" path="res://Nodes/Star/star_turret.tscn" id="6_504rg"]
 [ext_resource type="PackedScene" uid="uid://c4drybq7dx5x3" path="res://Metodos/CommunicationBus.tscn" id="7_0ypak"]
-[ext_resource type="PackedScene" uid="uid://cafwk803csaae" path="res://Scenes/buiild_module.tscn" id="7_b4vwi"]
+[ext_resource type="PackedScene" uid="uid://cafwk803csaae" path="res://Scenes/build_module.tscn" id="7_b4vwi"]
 
 [node name="Level" type="Node2D" groups=["Level"]]
 texture_repeat = 2
@@ -13,10 +13,10 @@ texture_repeat = 2
 [node name="Entorno" parent="." instance=ExtResource("2_5ijhr")]
 
 [node name="BuiildModule" parent="." instance=ExtResource("7_b4vwi")]
+process_priority = -2
 
 [node name="StarTurret" parent="BuiildModule" instance=ExtResource("6_504rg")]
 position = Vector2(-7, 10)
-tipo_estrella = "TipoA"
 
 [node name="StarTurret2" parent="BuiildModule" instance=ExtResource("6_504rg")]
 position = Vector2(16, 6)
@@ -31,26 +31,18 @@ teleport_limits = Vector2(3200, 3400)
 blend_mode = 1
 
 [node name="CommunicationBus" parent="." instance=ExtResource("7_0ypak")]
+process_priority = -1
 
 [node name="spawner_regular" parent="." instance=ExtResource("6_6mp7b")]
-position = Vector2(660, -738)
-spawn_interval_min = 1.0
-spawn_interval_max = 4.0
-spawn_radius = 500.0
+position = Vector2(635, -272)
 
 [node name="spawner_regular2" parent="." instance=ExtResource("6_6mp7b")]
-position = Vector2(-773, 800)
-spawn_interval_max = 3.0
-spawn_radius = 500.0
+position = Vector2(-680, 240)
 
 [node name="spawner_regular3" parent="." instance=ExtResource("6_6mp7b")]
-position = Vector2(-835, -672)
-spawn_interval_max = 3.0
-spawn_radius = 500.0
+position = Vector2(-360, -604)
 
 [node name="spawner_regular4" parent="." instance=ExtResource("6_6mp7b")]
-position = Vector2(816, 704)
-spawn_interval_max = 3.0
-spawn_radius = 500.0
+position = Vector2(358, 416)
 
 [editable path="BuiildModule"]
