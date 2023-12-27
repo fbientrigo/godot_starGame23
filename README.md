@@ -4,6 +4,8 @@
 Asegurate de seguir las convenciones de codigo:
 https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/gdscript_styleguide.html
 
+Para cargar el proyecto de Godot con 4.0, este se encuentra en Projects/main-star/
+
 
 
 # Folders
