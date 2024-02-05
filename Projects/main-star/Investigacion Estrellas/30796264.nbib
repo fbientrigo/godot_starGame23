@@ -1,0 +1,77 @@
+PMID- 30796264
+OWN - NLM
+STAT- MEDLINE
+DCOM- 20200910
+LR  - 20200910
+IS  - 2045-2322 (Electronic)
+IS  - 2045-2322 (Linking)
+VI  - 9
+IP  - 1
+DP  - 2019 Feb 22
+TI  - Eigenvalues of the covariance matrix as early warning signals for critical 
+      transitions in ecological systems.
+PG  - 2572
+LID - 10.1038/s41598-019-38961-5 [doi]
+LID - 2572
+AB  - Many ecological systems are subject critical transitions, which are abrupt 
+      changes to contrasting states triggered by small changes in some key component of 
+      the system. Temporal early warning signals such as the variance of a time series, 
+      and spatial early warning signals such as the spatial correlation in a snapshot 
+      of the system's state, have been proposed to forecast critical transitions. 
+      However, temporal early warning signals do not take the spatial pattern into 
+      account, and past spatial indicators only examine one snapshot at a time. In this 
+      study, we propose the use of eigenvalues of the covariance matrix of multiple 
+      time series as early warning signals. We first show theoretically why these 
+      indicators may increase as the system moves closer to the critical transition. 
+      Then, we apply the method to simulated data from several spatial ecological 
+      models to demonstrate the method's applicability. This method has the advantage 
+      that it takes into account only the fluctuations of the system about its 
+      equilibrium, thus eliminating the effects of any change in equilibrium values. 
+      The eigenvector associated with the largest eigenvalue of the covariance matrix 
+      is helpful for identifying the regions that are most vulnerable to the critical 
+      transition.
+FAU - Chen, Shiyang
+AU  - Chen S
+AD  - Department of Mechanical Engineering, University of Michigan, Ann Arbor, 
+      Michigan, USA.
+FAU - O'Dea, Eamon B
+AU  - O'Dea EB
+AD  - Odum School of Ecology, University of Georgia, Athens, Georgia, USA.
+AD  - Center for the Ecology of Infectious Diseases, University of Georgia, Athens, 
+      Georgia, USA.
+FAU - Drake, John M
+AU  - Drake JM
+AD  - Odum School of Ecology, University of Georgia, Athens, Georgia, USA.
+AD  - Center for the Ecology of Infectious Diseases, University of Georgia, Athens, 
+      Georgia, USA.
+FAU - Epureanu, Bogdan I
+AU  - Epureanu BI
+AD  - Department of Mechanical Engineering, University of Michigan, Ann Arbor, 
+      Michigan, USA. epureanu@umich.edu.
+LA  - eng
+GR  - U01 GM110744/GM/NIGMS NIH HHS/United States
+PT  - Journal Article
+PT  - Research Support, N.I.H., Extramural
+DEP - 20190222
+PL  - England
+TA  - Sci Rep
+JT  - Scientific reports
+JID - 101563288
+SB  - IM
+MH  - *Ecosystem
+MH  - *Models, Biological
+PMC - PMC6385210
+COIS- The authors declare no competing interests.
+EDAT- 2019/02/24 06:00
+MHDA- 2020/09/12 06:00
+CRDT- 2019/02/24 06:00
+PHST- 2017/12/01 00:00 [received]
+PHST- 2018/12/27 00:00 [accepted]
+PHST- 2019/02/24 06:00 [entrez]
+PHST- 2019/02/24 06:00 [pubmed]
+PHST- 2020/09/12 06:00 [medline]
+AID - 10.1038/s41598-019-38961-5 [pii]
+AID - 38961 [pii]
+AID - 10.1038/s41598-019-38961-5 [doi]
+PST - epublish
+SO  - Sci Rep. 2019 Feb 22;9(1):2572. doi: 10.1038/s41598-019-38961-5.

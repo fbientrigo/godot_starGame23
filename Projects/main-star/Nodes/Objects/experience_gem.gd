@@ -15,6 +15,7 @@ var speed = -0.1
 @export_enum("Exp","Pickable","StarSeed","Default") var tipo_obj:String = "Exp"
 # Este nodo contiene las bases para
 func _ready():
+	await statemachine
 	# Sección de busquedo usando enum =============
 	var nodo_hijo = statemachine.get_node(tipo_obj)
 	#print(nodo_hijo)
@@ -25,7 +26,9 @@ func _ready():
 	else:
 		print("Nodo hijo no encontrado.")
 
-
+func set_type(tipo_obj):
+	var nodo_hijo = statemachine.get_node(tipo_obj)
+	statemachine.set_initial_state(nodo_hijo)
 
 func collect():
 	var returnable_data

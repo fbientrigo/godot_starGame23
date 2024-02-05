@@ -94,16 +94,22 @@ func evolve_stats(multiplier : float):
 # Puede implementar acciones adicionales aquí, como cambiar la animación y eliminar al enemigo.
 
 func spawn_gem_exp():
-	var gem = exp_gem.instantiate()  # C	rea una instancia del objeto de experiencia.
-	gem.global_position = self.global_position  # Coloca el objeto de experiencia en la posición del enemigo.
+	var gem = exp_gem.instantiate()  # Crea una instancia del objeto de experiencia.
+	# temporal usar StarSeed, en un futuro los jefes soltaran starseeds
+	if randf() <= 0.05:
+		gem.tipo_obj = "StarSeed"
+	else:
+		gem.tipo_obj = "Exp"
+	#gem.tipo_obj = "Exp"
+	gem.global_position = self.global_position  # Coloca el objeto de experiencia en la posición del enemigo.	
 	get_tree().get_root().call_deferred("add_child", gem)
+	# await gem.ready # 1228, la besto linea de codigo para evitar bugs
+	
 
 
 
 func _on_health_component_on_dead():
 	spawn_gem_exp()
-
-
 
 var times_damaged = 0
 func _on_health_component_hurt(_damage):

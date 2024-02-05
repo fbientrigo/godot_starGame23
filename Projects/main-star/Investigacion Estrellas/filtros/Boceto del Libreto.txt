@@ -1,0 +1,9 @@
+Maybe if you photograph the same object with different filters, in astronomy it's common to use filters with a narrow passband to only allow frequencies that you need
+
+ - Ultraviolet (u)
+ - Opticals (b,g,r)
+ - Near Infrarred (i)
+ - Infrarred (z)
+
+With this information you are adding dimensions to your image, it becomes a matrix with 3 dimension; 
+in first 2 axis you construct an standalone image b&w image, with ultraviolet brightness; with blue, green, red in the next ones and so on.

@@ -49,14 +49,24 @@ func spawn_something(multiplier):
 	#var basic_enemy_tsc = preload("res://Nodes/Enemies/Enemy.tscn")
 	var basic_enemy_tsc = mob_scene.pick_random()
 	var new_enemy = basic_enemy_tsc.instantiate()
+	
 	# spawn en un circulo al rededor del origen
-	var theta = 2 * PI *  randf()
+	var theta = 2 * PI * randf()
+	spawn_radius = global_position.length()
 	var spawn_position = Vector2(spawn_radius * cos(theta), spawn_radius * sin(theta))
 	new_enemy.global_position = spawn_position
-	new_enemy.velocity = - spawn_position
-	new_enemy.evolve_stats(multiplier)
+	new_enemy.velocity = - spawn_position.normalized()
+	
+	#get_tree().get_first_node_in_group("Level").call_deferred("add_child",new_enemy)
 	add_child(new_enemy)
-	print("enemy spawned: ", new_enemy)
+	await new_enemy.ready
+	
+
+	new_enemy.evolve_stats(multiplier)
+	
+	#get_tree().call_deferred("add_child",new_enemy)
+	
+	
 	
 	
 	# crea un timer para saber cuando hacer spawn
